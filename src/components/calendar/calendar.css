@@ -1,0 +1,36 @@
+.eventList {
+    padding: 5px 0px 10px;
+    border-bottom: 2px solid #70a1ff;
+    text-align: left;
+}
+.eventsContent {
+    margin: 0 0 15px;
+}
+.name {
+    font-size: 25px; 
+    font-weight: bold;
+}
+.date {
+    font-size: 20px;
+
+}
+.time {
+    font-size: 15px;
+    padding: 4px 0 0; 
+}
+.location {
+    padding: 4px 0 0; 
+}
+.icons {
+    float: left;
+    padding: 0 10px 0 0;
+}
+
+.locationIcon {
+    float: left;
+    padding: 0 10px 0 0;
+    margin: 0 0 20px;
+}
+.details {
+    padding: 4px 0;
+}

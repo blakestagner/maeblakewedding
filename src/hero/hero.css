@@ -1,0 +1,29 @@
+.heroContainer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.heroImg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/downtown-tacoma.jpg");
+  height: 65vh;
+}
+.loggedinImg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/loggedIn.jpg");
+  height: 20vh;
+}
+.heroText {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: white;
+    margin-top: 50px;
+    transform: translate(0%, 20vh);
+}
+  .heroText h1 {
+    font-size: 50px;
+    margin-bottom: 5px;
+}
+  .heroText h2 {
+    font-size: 30px;
+}

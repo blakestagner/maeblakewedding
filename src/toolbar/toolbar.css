@@ -1,0 +1,90 @@
+.navBar {
+    background-color: transparent;
+    color: #fff !important;
+    padding: 0px 25px 0px 25px;
+    margin: 0px -8px 0px -8px;
+    position: fixed;
+    width: 100%;
+    z-index: 30;
+  }
+  .scrollBar {
+    background-color: #fff;
+    color: #000 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .white li  a{
+    color: #fff!important;
+  }
+  .black li a{
+    color: #000;
+  }
+  .navBarContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navBarTitle {
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: 1rem;
+    font-size: 1.75rem;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+
+  .navBar ul {
+    flex-direction: row;
+    display: flex;
+    flex-basis: auto;
+    margin-left: auto;
+    padding-right: 25px;
+  }
+  .navBar ul li {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .navList {
+    text-decoration: none;
+  }
+
+  #mobileMenu {
+    background-color: #fff;
+    color: #000;
+    position: fixed;
+    height: 100vh;
+    width: 40vw;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  
+  .mobileNavBarList {
+    flex-direction: column !important;
+    display: flex;
+    list-style: none;
+    text-align: left;
+    font-size: 25px;
+  }
+  .mobileNavBarList li {
+    margin-bottom: 20px;
+  }
+  .mmClosed {
+    left: 110vw;
+    margin-left: 10px;
+  }
+  .mmOpen {
+    left: 60vw;
+  }
+  @media only screen and (max-width: 600px) { 
+    .menuList {
+      display: none !important;
+    }
+}
+@media only screen and (min-width: 600px) {
+  #navManuIcon {
+    display: none;
+  }
+  #mobileMenu {
+    display: none;
+  }
+}
