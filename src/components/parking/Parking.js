@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getUserInfo, getParking, updatePakring, updateParking } from '../../autho/Repository';
+import { isAuthenticated, getUserInfo, getParking, updateParking } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 import './parking.css';
 

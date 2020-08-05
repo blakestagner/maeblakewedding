@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter as  Router, Switch, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import './grid/grid.css';
 import Toolbar from './toolbar/Toolbar';
 import Hero from './hero/Hero';
 import Landing from './home/Landing';
 import Home from './autho/Home'
-import Register from './register/Register';
+import UserLogin from './register/UserLogin';
 import Profile from './components/profile/Profile';
 import Regular from './autho/Regular'
 import Footer from './footer/Footer';
@@ -33,12 +32,12 @@ class App extends React.Component {
             <React.Fragment>
               <div  className="main" id="main">
                 <Route exact path="/" component={ Landing } />
-                <Route path="/register" component={ Register } />
+                <Route path="/login" component={ UserLogin } />
                 <Route path="/calendar" component={ Calendar } />
                 <Route path="/parking" component={ ParkingHome } />
                 <Route path="/profile" component={ Profile } />
                 <Route path="/RSVP" component={ RSVP } />
-                <Route path="/autho/home" component={ Home } />
+                <Route path="/home" component={ Home } />
                 <Route path="/autho/regular" component={ Regular } />
                 <Route path="/autho/login" component={ Login } />
               </div>

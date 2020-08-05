@@ -3,11 +3,20 @@ import Profile from './Profile'
 import RSVP from '../RSVP/RSVP'
 
 export default class ProfileHome extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    constructor() {
+        super();
+        this.state = { 
+            auth: true };
         }
+       
+componentDidMount() {
+    if( isAuthenticated() )
+    return;
+    else {
+        alert('User Not Authenticated');
+        this.setState({auth: false})
     }
+}
     render() {
         return  (
             <div className="container">

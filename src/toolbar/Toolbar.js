@@ -66,19 +66,14 @@ export default class Toolbar extends React.Component {
                         }
                         {(isAuthenticated() ) ? 
                             <li className="menuList">
-                                <Link to="rsvp">RSVP</Link>
+                                <Link to="/rsvp">RSVP</Link>
                             </li>
                             : ''
                         }
                         {( isAuthenticated() ) ? (   
                             <li className="menuList">
                                 <Link className="navList" to="/profile" >Profile</Link>
-                            </li>) : 
-                        ( 
-                            <li className="menuList">
-                                <Link className="navList" to="/register" >Register</Link>
-                            </li>
-                        )
+                            </li>) : ''
                         }
                         {( isAuthenticated() ) ? (   
                             <li className="menuList" onClick={this.logOut}>
@@ -86,12 +81,12 @@ export default class Toolbar extends React.Component {
                             </li>) : 
                         ( 
                             <li className="menuList">
-                                <Link to="/register">Log in</Link>
+                                <Link to="/login">Log in</Link>
                             </li>
                         )
                         }
                         <li>
-                            <img id='navManuIcon' src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
+                            <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
                         </li>
                     </ul>
                 </div>
@@ -120,7 +115,7 @@ class MobileMenu extends React.Component {
                     }
                     {(isAuthenticated() ) ? 
                         <li>
-                            <Link to="rsvp">RSVP</Link>
+                            <Link to="/rsvp">RSVP</Link>
                         </li>
                         : ''
                     }

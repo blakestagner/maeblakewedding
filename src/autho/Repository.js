@@ -68,7 +68,7 @@ export function calendarInfo() {
         .then(response => response.data)
         .catch(err => Promise.reject('Request Not Authenticated!'));
 }
-
+//Parking
 export function getParking () {
     return axios.get(`${BASE_URL}/api/getParkingData`, {
         params: { 'x-access-token': localStorage.getItem('x-access-token')}
@@ -85,7 +85,7 @@ export function updateParking (data) {
         .then((res) => res.data)
         .catch((err) => Promise.reject('Request Not Authorized!'))
 }
-
+//RSVP
 export function getRSVP () {
     return axios.get(`${BASE_URL}/api/getRSVP`, {
         params: { 'x-access-token': localStorage.getItem('x-access-token')}
@@ -97,6 +97,31 @@ export function getRSVP () {
 export function updateRSVP (data) {
     return axios.post(`${BASE_URL}/api/updateRSVP`, {
         'RSVP': data, 
+        'x-access-token': localStorage.getItem('x-access-token')
+        })
+        .then((res) => res.data)
+        .catch((err) => Promise.reject('Request Not Authorized!'))
+}
+//Plusone
+export function checkPlusone () {
+    return axios.get(`${BASE_URL}/api/checkPlusone`, {
+        params: { 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+
+export function getPlusone () {
+    return axios.get(`${BASE_URL}/api/getPlusone`, {
+        params: { 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+
+export function updatePlusone (data) {
+    return axios.post(`${BASE_URL}/api/updatePlusone`, {
+        'plusone': data, 
         'x-access-token': localStorage.getItem('x-access-token')
         })
         .then((res) => res.data)

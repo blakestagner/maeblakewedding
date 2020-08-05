@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getUserInfo, getRSVP, updateRSVP } from '../../autho/Repository';
+import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone } from '../../autho/Repository';
 
 export default class RSVP extends React.Component {
     constructor() {
@@ -7,9 +7,10 @@ export default class RSVP extends React.Component {
         this.state = { 
             userDetails: [], 
             auth: true,
-            rsvp: ''
+            rsvp: '',
+            hasPlusone: '',
+            plusone: ''
         };
-        this.onChange = this.onChange.bind(this);
     }
     componentDidMount() {
         if(isAuthenticated())
@@ -18,6 +19,8 @@ export default class RSVP extends React.Component {
                 this.setState({userDetails: userDetails})
             })
             .then(this.getRSVPInfo())
+            .then(this.checkHasPlusone())
+        //    .then(this.getPlusoneInfo())
             .catch(err => {
                 alert('You Need to Login to view this page');
                 this.setState({
@@ -32,18 +35,52 @@ export default class RSVP extends React.Component {
     getRSVPInfo() {
         getRSVP()
         .then(res => {
-            console.log(res[0])
             this.setState({rsvp: res[0].RSVP})
         })
         .catch(err => {
             console.log(err)
         })
     }
-    onChange(e) {
+    changeRSVP(e) {
         e.preventDefault()
         updateRSVP(e.target.value)
         .then(res => {
             this.getRSVPInfo()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    checkHasPlusone() {
+        checkPlusone()
+        .then(res => {
+            this.setState({hasPlusone: res[0].hasPlusone})
+        })
+
+        .catch(err => {
+            console.log(err)
+        })
+        .then(() => {         
+            if(this.state.hasPlusone ? 'Yes' : 'No')  {
+                this.getPlusoneInfo()
+            } else ; 
+        })
+    }
+    getPlusoneInfo() {
+        getPlusone()
+        .then(res => {
+            this.setState({plusone: res[0].plusone})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    changePlusone(e) {
+        e.preventDefault()
+        updatePlusone(e.target.value)
+        .then(res => {
+            this.getPlusoneInfo()
         })
         .catch(err => {
             console.log(err)
@@ -57,14 +94,31 @@ export default class RSVP extends React.Component {
                         RSVP to the Wedding
                     </div>
                     <div className="cardMain">
-                        <select value={this.value} defaultValue="Default" onChange={this.onChange.bind(this) }>
+                        Will you be Attending the Wedding?
+                        <select value={this.value} defaultValue="Default" onChange={this.changeRSVP.bind(this) }>
                             <option value="Default" disabled hidden>Select</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
+                        Response: {this.state.rsvp}
+                        <br />
+                        <br />
+                        {(this.state.hasPlusone == "Yes") ? 
+                            (
+                            <div>
+                                Are you bringing a Plus One?
+                                <select value={this.value} defaultValue="Default" onChange={this.changePlusone.bind(this) }>
+                                    <option value="Default" disabled hidden>Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                Response:{this.state.plusone}
+                            </div>        
+                            ) : ''
+                        }
                     </div>
                     <div className="cardFooter">
-                        {this.state.rsvp}
+                        Does this person have a Plus One? {this.state.hasPlusone}
                     </div>
                 </div>
             </div>

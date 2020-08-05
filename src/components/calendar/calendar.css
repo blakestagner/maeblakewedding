@@ -16,7 +16,11 @@
 }
 .time {
     font-size: 15px;
-    padding: 4px 0 0; 
+    padding: 10px 0 0; 
+}
+.timeIcon {
+    float: left;
+    padding: 5px 10px 0 0; 
 }
 .location {
     padding: 4px 0 0; 
@@ -25,12 +29,23 @@
     float: left;
     padding: 0 10px 0 0;
 }
-
+.add {
+    float: right;
+    cursor: pointer;
+}
 .locationIcon {
     float: left;
     padding: 0 10px 0 0;
-    margin: 0 0 20px;
+    margin: 0 0 40px;
 }
 .details {
     padding: 4px 0;
+}
+.closed {
+    background-color: #E0E0E0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin: 5px -5px;
+    padding: 0 5px 0;
 }

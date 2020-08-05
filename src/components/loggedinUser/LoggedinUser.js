@@ -1,6 +1,5 @@
 import React from 'react';
 import { isAuthenticated, getUserInfo} from '../../autho/Repository';
-import { Redirect } from 'react-router-dom';
 
 export default class loggedinUser extends React.Component {
     constructor() {
@@ -28,7 +27,7 @@ componentDidMount() {
     }
 }
     render() {
-        const { fname, lname, email, wparty,} = this.state.userDetails
+        const { fname, lname, email} = this.state.userDetails
         return (
             <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="card">
