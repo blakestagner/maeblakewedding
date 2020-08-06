@@ -71,11 +71,6 @@ export default class Toolbar extends React.Component {
                             : ''
                         }
                         {( isAuthenticated() ) ? (   
-                            <li className="menuList">
-                                <Link className="navList" to="/profile" >Profile</Link>
-                            </li>) : ''
-                        }
-                        {( isAuthenticated() ) ? (   
                             <li className="menuList" onClick={this.logOut}>
                                 <a href="/">Log out</a> 
                             </li>) : 
@@ -118,16 +113,6 @@ class MobileMenu extends React.Component {
                             <Link to="/rsvp">RSVP</Link>
                         </li>
                         : ''
-                    }
-                    {( isAuthenticated() ) ? (   
-                        <li>
-                            <Link className="navList" to="/profile" >Profile</Link>
-                        </li>) : 
-                    ( 
-                        <li>
-                            <Link className="navList" to="/register" >Register</Link>
-                        </li>
-                    )
                     }
                     {( isAuthenticated() ) ? (   
                         <li onClick={this.logOut}>
