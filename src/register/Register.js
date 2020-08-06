@@ -1,5 +1,5 @@
 import React from 'react';
-import './register.scss';
+import './register.css';
 import { login, register } from '../autho/Repository'
 
 class Register extends React.Component {
