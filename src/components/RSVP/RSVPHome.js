@@ -1,5 +1,7 @@
 import React from 'react';
 import RSVP from './RSVP';
+import '../../home/home.css'
+import graphic from '../../img/pics/Mae.JPG';
 
 export default class RSVPHome extends React.Component {
     constructor(props) {
@@ -10,9 +12,11 @@ export default class RSVPHome extends React.Component {
     }
     render() {
         return (
-            <div className="container">
-                <h1>RSVP</h1>
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className="row">
+                <img src={graphic} className="imgLeft firstImg"/>
+                <div className="imgLeftMobile firstImg"></div>
+                <div className="homeText ">
+                    <h2>RSVP to the Wedding</h2>
                     <RSVP />
                 </div>
             </div>

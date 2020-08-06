@@ -57,15 +57,20 @@ export function getUserInfo() {
     return axios.get(`${BASE_URL}/user/data`, { 
         params: { 'x-access-token': localStorage.getItem('x-access-token')} 
        })
-       .then(response => response.data)
+       .then(res => res.data)
        .catch(err => Promise.reject('Request Not Authenticated!'));
     }
-
+//Calender
 export function calendarInfo() {
     return axios.get(`${BASE_URL}/api/calendar`, {
         params: { 'x-access-token': localStorage.getItem('x-access-token')} 
         })
-        .then(response => response.data)
+        .then(res => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'));
+}
+export function calendarPublic() {
+    return axios.get(`${BASE_URL}/api/calendarPublic`)
+        .then(res => res.data)
         .catch(err => Promise.reject('Request Not Authenticated!'));
 }
 //Parking
@@ -149,9 +154,10 @@ export function getCoupleRSVP (data) {
         .then((res) => res.data)
         .catch(err => Promise.reject('Request Not Authenticated!'))
     }
-export function updateCoupleRSVP (data) {
+export function updateCoupleRSVP (x, y) {
     return axios.post(`${BASE_URL}/api/updateCoupleRSVP`, {
-        'RSVP': data, 
+        'RSVP': x, 
+        'id': y,
         'x-access-token': localStorage.getItem('x-access-token')
         })
         .then((res) => res.data)

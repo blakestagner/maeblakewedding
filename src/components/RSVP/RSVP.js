@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP } from '../../autho/Repository';
+import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
 
 export default class RSVP extends React.Component {
     constructor() {
@@ -47,12 +47,12 @@ export default class RSVP extends React.Component {
         updateRSVP(e.target.value)
         .then(res => {
             this.getRSVPInfo()
+            this.successHandle('successMsg1')
         })
         .catch(err => {
             console.log(err)
         })
     }
-
     checkHasPlusone() {
         checkPlusone()
         .then(res => {
@@ -82,6 +82,7 @@ export default class RSVP extends React.Component {
         updatePlusone(e.target.value)
         .then(res => {
             this.getPlusoneInfo()
+            this.successHandle('successMsg2')
         })
         .catch(err => {
             console.log(err)
@@ -96,44 +97,44 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
+    successHandle(e) {
+        let successMsg = document.getElementById(e)
+        successMsg.innerHTML = 'Response Updated';
+        setTimeout(() => successMsg.innerHTML = '', 2000);
+    }
     render() {
         return (
             <div className="row">
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="card">
-                        <div className="cardHeader">
-                            RSVP to the Wedding
-                        </div>
-                        <div className="cardMain">
-                            Will you be Attending the Wedding?
-                            <select value={this.value} defaultValue="Default" onChange={this.changeRSVP.bind(this) }>
-                                <option value="Default" disabled hidden>Select</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                            <br />
-                            Current Response: {this.state.rsvp}
-                            <br />
-                            <br />
-                            {(this.state.hasPlusone == "Yes") ? 
-                                (
-                                <div>
-                                    Are you bringing a Plus One?
-                                    <select value={this.value} defaultValue="Default" onChange={this.changePlusone.bind(this) }>
-                                        <option value="Default" disabled hidden>Select</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                    Response:{this.state.plusone}
-                                </div>        
-                                ) : ''
-                            }
-                        </div>
-                        <div className="cardFooter">
-                            Does this person have a Plus One? {this.state.hasPlusone}
-                        </div>
+                Will you be Attending the Wedding?
+                <select value={this.value} 
+                        defaultValue="Default" 
+                        onChange={this.changeRSVP.bind(this) }>
+                    <option value="Default" disabled hidden>Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <br />
+                Current Response: {this.state.rsvp}
+                <p id="successMsg1" className="successMsg" ></p> 
+                <br />
+                <br />
+                {(this.state.hasPlusone == "Yes") ? 
+                    (
+                    <div>
+                        Are you bringing a Plus One?
+                        <select value={this.value} 
+                                defaultValue="Default" 
+                                onChange={this.changePlusone.bind(this) }>
+                            <option value="Default" disabled hidden>Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        Response:{this.state.plusone}
+                        <p id="successMsg2" className="successMsg" ></p> 
                     </div>
-                </div>
+                           
+                    ) : ''
+                }
                 {(this.state.coupleId > 0) ? 
                     (
                         <CoupleInfo coupleId={ this.state.coupleId }/>
@@ -154,7 +155,7 @@ class CoupleInfo extends React.Component {
     }
     componentDidMount() {
         this.setState({id: this.props.coupleId})
-        getCoupleInfo(29)
+        getCoupleInfo(this.props.coupleId)
         .then(res => {
             this.setState({name: res[0].fname})
             getCoupleRSVP(this.state.id)
@@ -167,32 +168,42 @@ class CoupleInfo extends React.Component {
             console.log(err)
         })
     }
-    updateCouple() {
-        console.log('hi')
+    changeCoupleRSVP(e) {
+        e.preventDefault()
+        updateCoupleRSVP(e.target.value, this.props.coupleId)
+        .then(res => {
+            getCoupleRSVP(this.state.id)
+            .then(res => {
+                this.setState({rsvp: res[0].RSVP})
+                this.successHandle('successMsg3')
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    successHandle(e) {
+        let successMsg = document.getElementById(e)
+        successMsg.innerHTML = 'Response Updated';
+        setTimeout(() => successMsg.innerHTML = '', 2000);
     }
     render() {
         return (
-            <div className="col-lg-6 col-md-6 col-sm-12" >
-                <div className="card">
-                    <div className="cardHeader">
-                        RSVP to the Wedding for you Other Half: {this.state.name}
-                    </div>
-                    <div className="cardMain">
-                        Will {this.state.name} Be Joining You?
-                        <select value={this.value} defaultValue="Default" onChange={this.updateCouple.bind(this) }>
-                            <option value="Default" disabled hidden>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                        <br />
-                        Current Response: {this.state.rsvp}
-                        <br />
-                        <br />
-                    </div>
-                    <div className="cardFooter">
-                        
-                    </div>
-                </div>
+            <div >
+                RSVP to the Wedding for you Other Half: {this.state.name}
+                <br />
+                Will {this.state.name} Be Joining You?
+                <select value={this.value} defaultValue="Default" onChange={this.changeCoupleRSVP.bind(this) }>
+                    <option value="Default" disabled hidden>Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <br />
+                Current Response: {this.state.rsvp}
+                <p id="successMsg3" className="successMsg"> </p>
+                <br />
+                <br />
             </div>
         )
     }

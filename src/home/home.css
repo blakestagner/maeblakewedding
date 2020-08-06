@@ -1,3 +1,54 @@
-.home h1 {
-    color: black;
+.home {
+    
+}
+.firstImg {
+    margin-top: -25px;
+}
+.imgLeft {
+    float: left;
+    width: 40vw;
+}
+.imgLeftMobile {
+    display: none;
+}
+.imgRight {
+    float: right;
+    margin-top: 0px;
+    width: 40vw;
+}
+.imgRightMobile {
+    display: none;
+}
+@media only screen and (max-width: 600px) { 
+    .imgLeft {
+        display: none;
+    }
+    .imgLeftMobile {
+        background-image: url(../img/pics/Mae.JPG);
+        display: block;
+        width: 100vw;
+        height: 20vh;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    .imgRight {
+        display: none;
+    }
+    .imgRightMobile {
+        background-image: url(../img/pics/Mae.JPG);
+        display: block;
+        width: 100vw;
+        height: 20vh;
+        
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+}
+.homeText {
+    align-content: center;
+    margin-top: 50px;
 }
