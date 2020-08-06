@@ -127,3 +127,33 @@ export function updatePlusone (data) {
         .then((res) => res.data)
         .catch((err) => Promise.reject('Request Not Authorized!'))
 }
+//Couple 
+export function coupleId () {
+    return axios.get(`${BASE_URL}/api/getCoupleId`, {
+        params: { 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+export function getCoupleInfo (data) {
+    return axios.get(`${BASE_URL}/api/getCoupleInfo`, {
+        params: { 'id': data, 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+export function getCoupleRSVP (data) {
+    return axios.get(`${BASE_URL}/api/getCoupleRSVP`, {
+        params: { 'id': data,'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+export function updateCoupleRSVP (data) {
+    return axios.post(`${BASE_URL}/api/updateCoupleRSVP`, {
+        'RSVP': data, 
+        'x-access-token': localStorage.getItem('x-access-token')
+        })
+        .then((res) => res.data)
+        .catch((err) => Promise.reject('Request Not Authorized!'))
+}
