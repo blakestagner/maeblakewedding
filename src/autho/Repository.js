@@ -1,19 +1,6 @@
 import axios from 'axios';
-//const BASE_URL = 'http://73.109.125.191:3100';
-const BASE_URL = 'http://localhost:3100';
-
-export function getRegularTips () {
- return axios.get(`${BASE_URL}/api/tips/regular`)
- .then(response => response.data);
- }
-
-export function getSpecialTips () {
- return axios.get(`${BASE_URL}/api/tips/special`, { 
-     params: { 'x-access-token': localStorage.getItem('x-access-token')} 
-    })
-    .then(response => response.data)
-    .catch(err => Promise.reject('Request Not Authenticated!'));
- }
+const BASE_URL = 'http://73.109.125.191:3100';
+//const BASE_URL = 'http://localhost:3100';
 
 export function login (data) {
     const lgnMsg = document.getElementById('loginMessage')
