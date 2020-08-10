@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSpecialTips, isAuthenticated } from './Repository';
+import { isAuthenticated } from './Repository';
 import { Redirect } from 'react-router-dom';
 import './Home.css'
 import Parking from '../components/parking/Parking';

@@ -8,7 +8,6 @@ import Landing from './home/Landing';
 import Responses from './autho/Responses'
 import UserLogin from './register/UserLogin';
 import Profile from './components/profile/Profile';
-import Regular from './autho/Regular'
 import Footer from './footer/Footer';
 import Login from './autho/login';
 import Calendar from './components/calendar/Calendar';
@@ -38,7 +37,6 @@ class App extends React.Component {
                 <Route path="/profile" component={ Profile } />
                 <Route path="/RSVP" component={ RSVP } />
                 <Route path="/home" component={ Responses } />
-                <Route path="/autho/regular" component={ Regular } />
                 <Route path="/autho/login" component={ Login } />
               </div>
             </React.Fragment>
