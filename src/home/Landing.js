@@ -9,16 +9,21 @@ function Home() {
     return (
         <div className="home">
             <div className="row">
-                <img src={graphic} className="imgLeft firstImg"/>
-                <div className="imgLeftMobile firstImg"></div>
-                <div className="homeText ">
-                    <h3>Title</h3>
-                    <p>Some More text</p>
-                    <CalenderContainer 
-                            categoryName="Events For Wedding Party"
-                            wparty="n"/>
+                <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                    <img src={graphic} className="imgLeft firstImg"/>
+                    <div className="imgLeftMobile firstImg"></div>
+                </div>
+                <div className="col-xs-11 col-sm-6 col-md-6 col-lg-6 container">
+                    <div className="homeText ">
+                        <h1>Calendar</h1>
+                        <CalenderContainer 
+                                wparty="n"/>
+                    </div>
                 </div>
             </div>
+
+
+
 
             <div className="row homeRow2">
                 <img src={graphic} className="imgRight"/>

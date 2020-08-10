@@ -12,7 +12,6 @@ export default class ParkingHome extends React.Component {
         this.state = { 
             auth: true };
         }
-       
 componentDidMount() {
     if( !isAuthenticated() ) {
         alert('User Not Authenticated');

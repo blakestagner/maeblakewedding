@@ -51,7 +51,7 @@ export default class Parking extends React.Component {
     render() {
 
         return (
-            <div className="col-lg-6 col-md-6 col-sm-12">   
+            <div>   
                 <select value={this.value} defaultValue="Default" onChange={this.onChange.bind(this) }>
                     <option value="Default" disabled hidden>Select</option>
                     <option value="Yes">Yes</option>

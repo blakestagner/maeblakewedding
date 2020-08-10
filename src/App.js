@@ -5,7 +5,7 @@ import './grid/grid.css';
 import Toolbar from './toolbar/Toolbar';
 import Hero from './hero/Hero';
 import Landing from './home/Landing';
-import Home from './autho/Home'
+import Responses from './autho/Responses'
 import UserLogin from './register/UserLogin';
 import Profile from './components/profile/Profile';
 import Regular from './autho/Regular'
@@ -37,7 +37,7 @@ class App extends React.Component {
                 <Route path="/parking" component={ ParkingHome } />
                 <Route path="/profile" component={ Profile } />
                 <Route path="/RSVP" component={ RSVP } />
-                <Route path="/home" component={ Home } />
+                <Route path="/home" component={ Responses } />
                 <Route path="/autho/regular" component={ Regular } />
                 <Route path="/autho/login" component={ Login } />
               </div>

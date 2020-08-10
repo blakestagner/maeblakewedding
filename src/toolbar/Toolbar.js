@@ -51,8 +51,13 @@ export default class Toolbar extends React.Component {
                         <h1><Link to="/">Mae & Blake</Link></h1>
                     </div>
                     <ul id="mainMenuList">
-                        {
-                            ( isAuthenticated() ) ? 
+                        {( isAuthenticated() ) ?
+                            <li className="menuList">
+                                <Link to="/home">Responses</Link>
+                            </li> 
+                            : ''
+                        }
+                        {( isAuthenticated() ) ? 
                             <li className="menuList">
                                 <Link to="/calendar">Calendar</Link>
                             </li>
@@ -89,14 +94,19 @@ export default class Toolbar extends React.Component {
             </div>
         )
     }
-} 
+}
 class MobileMenu extends React.Component {
     render() {
         return (
             <div id="mobileMenu" className="mmClosed">
                 <ul className="mobileNavBarList" onClick={this.props.onClick}>
-                    {
-                        ( isAuthenticated() ) ? 
+                    {( isAuthenticated() ) ?
+                            <li>
+                                <Link to="/home">Responses</Link>
+                            </li> 
+                            : ''
+                        }
+                    {( isAuthenticated() ) ? 
                         <li>
                             <Link to="/calendar" >Calendar</Link>
                         </li>

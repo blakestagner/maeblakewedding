@@ -61,35 +61,27 @@ export default class CalenderContainer extends React.Component {
         }
     render() {
         return (
-            <div className="col-lg-6 col-md-6">
-                <div className="card">
-                    <div className="cardHeader">
-                        {this.props.categoryName}
-                    </div>
-                    <div className="cardMain">
-                        {this.state.eventList.filter(eventCat => eventCat.wparty == this.props.wparty).map((eventCat) => (
-                        <div className="eventList" key={eventCat.id}>
-                        <img className="icons" src={flag} alt="flag" />
-                        <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.expandPanel(`panel-${eventCat.id}`, e)}} />
-                        <p className="name eventsContent">{eventCat.name}</p>
-                        <img className="icons" src={date} alt="date" />
-                        <p className="date eventsContent">{eventCat.date.split('T')[0]}</p>
-                            <div className="closed" id={`panel-${eventCat.id}`}>
-                                <img className="timeIcon" src={clock} alt="clock" />
-                                <p className="time eventsContent">{eventCat.time}</p>
-                                <img className="icons" src={details} alt="details"/>
-                                <p className="details eventsContent">{eventCat.details}</p>
-                                <img className="locationIcon" src={location} alt="location" />
-                                <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
-                                <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
-                            </div>
-                    </div>
-                        ))
-                        }
-                    </div>
-                    <div className="cardFooter">
-
-                    </div>
+            <div>
+                <div className="cardMain">
+                    {this.state.eventList.filter(eventCat => eventCat.wparty == this.props.wparty).map((eventCat) => (
+                    <div className="eventList" key={eventCat.id}>
+                    <img className="icons" src={flag} alt="flag" />
+                    <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.expandPanel(`panel-${eventCat.id}`, e)}} />
+                    <p className="name eventsContent">{eventCat.name}</p>
+                    <img className="icons" src={date} alt="date" />
+                    <p className="date eventsContent">{eventCat.date.split('T')[0]}</p>
+                        <div className="closed" id={`panel-${eventCat.id}`}>
+                            <img className="timeIcon" src={clock} alt="clock" />
+                            <p className="time eventsContent">{eventCat.time}</p>
+                            <img className="icons" src={details} alt="details"/>
+                            <p className="details eventsContent">{eventCat.details}</p>
+                            <img className="locationIcon" src={location} alt="location" />
+                            <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
+                            <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
+                        </div>
+                </div>
+                    ))
+                    }
                 </div>
             </div>
         )

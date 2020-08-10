@@ -1,6 +1,3 @@
-.home {
-    
-}
 .firstImg {
     margin-top: -25px;
 }
@@ -19,7 +16,7 @@
 .imgRightMobile {
     display: none;
 }
-@media only screen and (max-width: 600px) { 
+@media only screen and (max-width: 768px) { 
     .imgLeft {
         display: none;
     }
@@ -50,5 +47,10 @@
 }
 .homeText {
     align-content: center;
-    margin-top: 50px;
+
+}
+.homeText h1 {
+    font-size: 50px;
+    font-family: 'Playlist Script';
+    font-weight: normal;
 }
