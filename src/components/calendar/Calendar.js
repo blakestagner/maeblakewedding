@@ -61,8 +61,8 @@ export default class Calendar extends React.Component {
             <div className="container">
                 {(this.state.auth) ? '' : <Redirect to="/" />}
                 <h1>Calendar</h1>
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div className="row">
+                <div className="row-no-gutters">
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <CalenderContainer 
                             expandPanel={this.expandPanel}
                             eventList={this.state.eventList}
@@ -74,7 +74,9 @@ export default class Calendar extends React.Component {
                             categoryName="Events For Wedding Party"
                             wparty="y"/>
                     </div>
-                    <div className="row">
+                </div>
+                <div className="row-no-gutters">
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <CalenderContainer 
                             expandPanel={this.expandPanel}
                             eventList={this.state.eventList}
@@ -94,7 +96,7 @@ export default class Calendar extends React.Component {
 class CalenderContainer extends React.Component {
     render() {
         return (
-            <div className="col-lg-6 col-md-6">
+            <div className="col-lg-6 col-md-6 col-lg-6">
                 <div className="card">
                     <div className="cardHeader">
                         {this.props.categoryName}

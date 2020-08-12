@@ -12,7 +12,7 @@ export default class RSVPHome extends React.Component {
     }
     render() {
         return (
-            <div className="row">
+            <div className="row-no-gutter">
                 <img src={graphic} className="imgLeft firstImg"/>
                 <div className="imgLeftMobile firstImg"></div>
                 <div className="homeText ">

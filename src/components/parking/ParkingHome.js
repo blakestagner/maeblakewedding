@@ -20,11 +20,11 @@ componentDidMount() {
 }
     render() {
         return (
-            <div className="row">
+            <div className="row-no-gutter">
                 {(this.state.auth) ? '' : <Redirect to="/" />} 
                 <img src={graphic} className="imgLeft firstImg"/>
                 <div className="imgLeftMobile firstImg"></div>
-                <div className="homeText ">
+                <div className="homeText row">
                     <h2>Do you need a prepaid Parking Spot?</h2>
                     <Parking />
                 </div>

@@ -47,7 +47,7 @@ export default class Toolbar extends React.Component {
         return (
         <div className="navBar" id="mainNav">
                 <div className='navBarContainer'>
-                    <div className='navBarTtitle'>
+                    <div className='navBarTitle'>
                         <h1><Link to="/">Mae & Blake</Link></h1>
                     </div>
                     <ul id="mainMenuList">

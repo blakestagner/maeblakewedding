@@ -23,7 +23,7 @@
     .imgLeftMobile {
         background-image: url(../img/pics/Mae.JPG);
         display: block;
-        width: 100vw;
+
         height: 20vh;
         background-position: center top;
         background-repeat: no-repeat;
@@ -36,7 +36,7 @@
     .imgRightMobile {
         background-image: url(../img/pics/Mae.JPG);
         display: block;
-        width: 100vw;
+
         height: 20vh;
         
         background-position: center top;
