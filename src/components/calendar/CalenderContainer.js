@@ -1,11 +1,11 @@
 import React from 'react';
 import { isAuthenticated, getUserInfo, calendarInfo, calendarPublic } from '../../autho/Repository';
 import './calendar.css';
-import clock from '../../img/icons/clock.svg';
+import clock from '../../img/icons/clock-white.svg';
 import date from '../../img/icons/date.svg';
-import location from '../../img/icons/location.svg';
+import location from '../../img/icons/location-white.svg';
 import flag from '../../img/icons/flag.svg';
-import details from '../../img/icons/details.svg';
+import details from '../../img/icons/details-white.svg';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
 
@@ -59,6 +59,34 @@ export default class CalenderContainer extends React.Component {
             e.target.src = remove
             }
         }
+        getMonthName(e) {
+            switch(e) {
+                case '01':
+                return 'Jan';
+                case '02':
+                return 'Feb';
+                case '03':
+                return 'Mar';
+                case '04':
+                return 'Apr';
+                case '05':
+                return 'May';
+                case '06':
+                return 'Jun';
+                case '07':
+                return 'Jul';
+                case '08':
+                return 'Aug';
+                case '09':
+                return 'Sept';
+                case '10':
+                return 'Oct';
+                case '11':
+                return 'Nov';
+                case '12':
+                return 'Dec';
+            }
+        }
     render() {
         return (
             <div>
@@ -70,10 +98,18 @@ export default class CalenderContainer extends React.Component {
                     <p className="name eventsContent">{eventCat.name}</p>
                     <img className="icons" src={date} alt="date" />
                     <p className="date eventsContent">{eventCat.date.split('T')[0]}</p>
+                    <div className="calendarIconContainer">
+                        <div className="calendarTop calendarInner">
+                            <p>{this.getMonthName(eventCat.date.split('-')[1])}</p>
+                        </div>
+                        <div className="calendarBottom calendarInner">
+                            <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
+                        </div>
+                    </div>
                         <div className="closed" id={`panel-${eventCat.id}`}>
                             <img className="timeIcon" src={clock} alt="clock" />
                             <p className="time eventsContent">{eventCat.time}</p>
-                            <img className="icons" src={details} alt="details"/>
+                            <img className="detailsIcon" src={details} alt="details"/>
                             <p className="details eventsContent">{eventCat.details}</p>
                             <img className="locationIcon" src={location} alt="location" />
                             <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>

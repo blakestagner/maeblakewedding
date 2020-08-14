@@ -94,6 +94,34 @@ export default class Calendar extends React.Component {
     }
 }
 class CalenderContainer extends React.Component {
+    getMonthName(e) {
+        switch(e) {
+            case '01':
+            return 'Jan';
+            case '02':
+            return 'Feb';
+            case '03':
+            return 'Mar';
+            case '04':
+            return 'Apr';
+            case '05':
+            return 'May';
+            case '06':
+            return 'Jun';
+            case '07':
+            return 'Jul';
+            case '08':
+            return 'Aug';
+            case '09':
+            return 'Sept';
+            case '10':
+            return 'Oct';
+            case '11':
+            return 'Nov';
+            case '12':
+            return 'Dec';
+        }
+    }
     render() {
         return (
             <div className="col-lg-6 col-md-6 col-lg-6">
@@ -109,6 +137,14 @@ class CalenderContainer extends React.Component {
                         <p className="name eventsContent">{eventCat.name}</p>
                         <img className="icons" src={date} alt="date" />
                         <p className="date eventsContent">{eventCat.date.split('T')[0]}</p>
+                        <div className="calendarIconContainer">
+                            <div className="calendarTop calendarInner">
+                                <p>{this.getMonthName(eventCat.date.split('-')[1])}</p>
+                            </div>
+                            <div className="calendarBottom calendarInner">
+                                <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
+                            </div>
+                        </div>
                             <div className="closed" id={`panel-${eventCat.id}`}>
                                 <img className="timeIcon" src={clock} alt="clock" />
                                 <p className="time eventsContent">{eventCat.time}</p>
