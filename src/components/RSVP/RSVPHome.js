@@ -16,7 +16,6 @@ export default class RSVPHome extends React.Component {
                 <img src={graphic} className="imgLeft firstImg"/>
                 <div className="imgLeftMobile firstImg"></div>
                 <div className="homeText ">
-                    <h2>RSVP to the Wedding</h2>
                     <RSVP />
                 </div>
             </div>

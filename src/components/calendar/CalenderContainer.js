@@ -92,30 +92,32 @@ export default class CalenderContainer extends React.Component {
             <div>
                 <div className="cardMain">
                     {this.state.eventList.filter(eventCat => eventCat.wparty == this.props.wparty).map((eventCat) => (
-                    <div className="eventList" key={eventCat.id}>
-                    <img className="icons" src={flag} alt="flag" />
-                    <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.expandPanel(`panel-${eventCat.id}`, e)}} />
-                    <p className="name eventsContent">{eventCat.name}</p>
-                    <img className="icons" src={date} alt="date" />
-                    <p className="date eventsContent">{eventCat.date.split('T')[0]}</p>
-                    <div className="calendarIconContainer">
-                        <div className="calendarTop calendarInner">
-                            <p>{this.getMonthName(eventCat.date.split('-')[1])}</p>
+                    <div className="eventList" key={eventCat.id}>    
+                        <div className="calendarMain">
+                            <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.expandPanel(`panel-${eventCat.id}`, e)}} />
+                            <div className="calendarIconContainer">
+                                <div className="calendarTop calendarInner">
+                                    <p>{this.getMonthName(eventCat.date.split('-')[1])}</p>
+                                </div>
+                                <div className="calendarBottom calendarInner">
+                                    <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
+                                </div>
+                            </div>
+                            <p className="name eventsContent">{eventCat.name}</p>
+                            <p className="time eventsContent">{eventCat.time}</p>
                         </div>
-                        <div className="calendarBottom calendarInner">
-                            <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
+                        <div className="closed" id={`panel-${eventCat.id}`}>
+                            <div className="row">
+                                <img className="detailsIcon" src={details} alt="details"/>
+                                <p className="details eventsContent">{eventCat.details}</p>
+                            </div>
+                            <div className="row">
+                                <img className="locationIcon" src={location} alt="location" />
+                                <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
+                                <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
+                            </div>
                         </div>
                     </div>
-                        <div className="closed" id={`panel-${eventCat.id}`}>
-                            <img className="timeIcon" src={clock} alt="clock" />
-                            <p className="time eventsContent">{eventCat.time}</p>
-                            <img className="detailsIcon" src={details} alt="details"/>
-                            <p className="details eventsContent">{eventCat.details}</p>
-                            <img className="locationIcon" src={location} alt="location" />
-                            <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
-                            <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
-                        </div>
-                </div>
                     ))
                     }
                 </div>

@@ -4,7 +4,7 @@
     text-align: left;
 }
 .eventsContent {
-    margin: 0 0 15px;
+    margin: 2px 0 0;
 }
 .name {
     font-size: 25px; 
@@ -16,10 +16,10 @@
 }
 .time {
     font-size: 15px;
-    padding: 15px 0 0; 
+    padding: 0px; 
 }
 .location {
-    padding: 15px 0 0; 
+    padding: 10px 0 0; 
 }
 .timeIcon {
     float: left;
@@ -33,7 +33,7 @@
 }
 .detailsIcon {
     float: left;
-    margin: 5px 10px 0 0; 
+    margin: 5px 10px 20px 0; 
     padding: 4px 5px 6px;
     background-color: #33556e;
     border-radius: 50%;
@@ -43,7 +43,7 @@
 }
 .locationIcon {
     float: left;
-    margin: 4px 10px 20px 0;
+    margin: 4px 10px 45px 0;
     padding: 5px;
     background-color: #33556e;
     border-radius: 50%;
@@ -69,16 +69,22 @@
 }
 .closed {
     max-height: 0;
+    width: 100%;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     margin: 5px -5px;
     padding: 0 5px 0;
 }
+.calendarMain {
+    padding: 10px 0px 20px;
+}
 .calendarIconContainer {
+    float:left;
     height: 60px;
     width: 60px;
     border-radius: 15%;
     overflow: hidden;
+    margin: 0 10px 10px 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .calendarInner {
@@ -98,4 +104,32 @@
 .calendarInner p {
     margin: 0px;
     padding-top:4px;
+}
+.calendarToolbar h1{
+    font-size: 50px;
+    font-family: 'Playlist Script';
+    font-weight: normal;
+    margin: 0 0 5px; 
+}
+.calendarToolbar > .calendarBox {
+    margin: 0 auto;
+    text-align: center
+}
+.calendarToolbar > .calendarBox > .calendarItems {
+    padding: 0 5px 15px;
+    cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+    .calendarToolbar > .calendarBox {
+        flex-direction: row;
+        display: flex;
+        flex-basis: auto;
+        margin-left: auto;
+        flex-flow: wrap;
+    }
+    .calendarToolbar > .calendarBox > .calendarItems {
+        display: flex;
+        margin: 0 10px 0;
+        cursor: pointer;
+    }
 }

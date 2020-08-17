@@ -37,11 +37,10 @@ componentDidMount() {
                 {(this.state.auth) ? '' : <Redirect to="/" />}
                 <img src={graphic} className="imgLeft firstImg"/>
                     <div className="imgLeftMobile firstImg"></div>
-                    <div className="homeText row">
+                    <div className="homeText">
                     <h1>{this.state.userDetails.fname} Your Responses</h1>
-                        <h2>RSVP to the Wedding</h2>
-                        <Parking />
                         <RSVP />
+                        <Parking />
                     </div>
             </div>
         )

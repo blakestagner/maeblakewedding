@@ -2,6 +2,8 @@ import React from 'react';
 import { getUserInfo, getParking, updateParking } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 import './parking.css';
+import checkboxBlank from '../../img/icons/check_box_outline_blank-black.svg';
+import checkboxCheck from '../../img/icons/check_box-black.svg';
 
 export default class Parking extends React.Component {
     constructor() {
@@ -10,7 +12,7 @@ export default class Parking extends React.Component {
             userDetails: [], 
             parking: ''
         };
-        this.onChange = this.onChange.bind(this);
+        this.onCheck = this.onCheck.bind(this);
     }
     componentDidMount() {
         getUserInfo()
@@ -32,9 +34,13 @@ export default class Parking extends React.Component {
             
         })
     }
-    onChange(e) {
-        e.preventDefault()
-        updateParking(e.target.value)
+    successHandle(e) {
+        let successMsg = document.getElementById(e)
+        successMsg.innerHTML = 'Response Updated';
+        setTimeout(() => successMsg.innerHTML = '', 2000);
+    }
+    onCheck(e) {
+        updateParking(e)
         .then(res => {
             this.getParkingInfo()
             this.successHandle('successMsg')
@@ -43,22 +49,27 @@ export default class Parking extends React.Component {
             console.log(err)
         })
     }
-    successHandle(e) {
-        let successMsg = document.getElementById(e)
-        successMsg.innerHTML = 'Response Updated';
-        setTimeout(() => successMsg.innerHTML = '', 2000);
-    }
     render() {
 
         return (
-            <div>   
-                <select value={this.value} defaultValue="Default" onChange={this.onChange.bind(this) }>
-                    <option value="Default" disabled hidden>Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+            <div className="col-xs-12 col-sm-7 col-md-7 col-lg-5 col-lg-push-1">
+                <h2>Do you need a Prepaid Parking Spot?</h2>
+                <div className="checkBoxContainer">
+                    <div className="checkBoxImg">
+                        <p>Yes:</p>
+                        <div onClick={() => {this.onCheck('Yes')}}>
+                            <img className="checkBox" alt="checkbox"src={this.state.parking == 'Yes' ? checkboxCheck : checkboxBlank } />    
+                        </div> 
+                    </div>
+                    <div className="checkBoxImg">
+                        <p>No: </p>  
+                        <div onClick={() => {this.onCheck('No')}}>
+                            <img className="checkBox" alt="checkbox"src={this.state.parking == 'No' ? checkboxCheck : checkboxBlank } />    
+                        </div>
+                    </div>
+                </div>
                 <p>You Responded {this.state.parking}</p>
-                <p id="successMsg" className="successMsg"></p>
+                <p id="successMsg" className="successMsg"></p> 
             </div> 
         )
     }

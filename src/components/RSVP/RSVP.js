@@ -1,5 +1,7 @@
 import React from 'react';
 import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
+import checkboxBlank from '../../img/icons/check_box_outline_blank-black.svg';
+import checkboxCheck from '../../img/icons/check_box-black.svg';
 
 export default class RSVP extends React.Component {
     constructor() {
@@ -42,9 +44,8 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
-    changeRSVP(e) {
-        e.preventDefault()
-        updateRSVP(e.target.value)
+    onCheckRSVP(e) {
+        updateRSVP(e)
         .then(res => {
             this.getRSVPInfo()
             this.successHandle('successMsg1')
@@ -77,9 +78,8 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
-    changePlusone(e) {
-        e.preventDefault()
-        updatePlusone(e.target.value)
+    onCheckPlusone(e) {
+        updatePlusone(e)
         .then(res => {
             this.getPlusoneInfo()
             this.successHandle('successMsg2')
@@ -104,43 +104,59 @@ export default class RSVP extends React.Component {
     }
     render() {
         return (
-            <div className="row">
-                Will you be Attending the Wedding?
-                <select value={this.value} 
-                        defaultValue="Default" 
-                        onChange={this.changeRSVP.bind(this) }>
-                    <option value="Default" disabled hidden>Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-                <br />
-                Current Response: {this.state.rsvp}
-                <p id="successMsg1" className="successMsg" ></p> 
-                <br />
-                <br />
-                {(this.state.hasPlusone == "Yes") ? 
-                    (
-                    <div>
-                        Are you bringing a Plus One?
-                        <select value={this.value} 
-                                defaultValue="Default" 
-                                onChange={this.changePlusone.bind(this) }>
-                            <option value="Default" disabled hidden>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                        Response:{this.state.plusone}
-                        <p id="successMsg2" className="successMsg" ></p> 
+                <div className="col-xs-12 col-sm-7 col-md-7 col-lg-5 col-lg-push-1">
+                <h2>RSVP to the Wedding</h2>
+                    Will you be Attending the Wedding?
+                    <div className="checkBoxContainer">
+                        <div className="checkBoxImg">
+                            <p>Yes:</p>
+                            <div onClick={() => {this.onCheckRSVP('Yes')}}>
+                                <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'Yes' ? checkboxCheck : checkboxBlank } />    
+                            </div> 
+                        </div>
+                        <div className="checkBoxImg">
+                            <p>No: </p>  
+                            <div onClick={() => {this.onCheckRSVP('No')}}>
+                                <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'No' ? checkboxCheck : checkboxBlank } />    
+                            </div>
+                        </div>
                     </div>
-                           
-                    ) : ''
-                }
-                {(this.state.coupleId > 0) ? 
-                    (
-                        <CoupleInfo coupleId={ this.state.coupleId }/>
-                    ) : ''
-                }
-            </div>
+                    <br />
+                    Current Response: {this.state.rsvp}
+                    <p id="successMsg1" className="successMsg" ></p> 
+                    <br />
+                    <br />
+                    {(this.state.hasPlusone == "Yes") ? 
+                        (
+                        <div>
+                            Are you bringing a Plus One?
+                            <div className="checkBoxContainer">
+                                <div className="checkBoxImg">
+                                    <p>Yes:</p>
+                                    <div onClick={() => {this.onCheckPlusone('Yes')}}>
+                                        <img className="checkBox" alt="checkbox"src={this.state.plusone == 'Yes' ? checkboxCheck : checkboxBlank } />    
+                                    </div> 
+                                </div>
+                                <div className="checkBoxImg">
+                                    <p>No: </p>  
+                                    <div onClick={() => {this.onCheckPlusone('No')}}>
+                                        <img className="checkBox" alt="checkbox"src={this.state.plusone == 'No' ? checkboxCheck : checkboxBlank } />    
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            Response:{this.state.plusone}
+                            <p id="successMsg2" className="successMsg" ></p> 
+                        </div>
+                            
+                        ) : ''
+                    }
+                    {(this.state.coupleId > 0) ? 
+                        (
+                            <CoupleInfo coupleId={ this.state.coupleId }/>
+                        ) : ''
+                    }
+                </div>
         )
     }
 }
@@ -183,6 +199,20 @@ class CoupleInfo extends React.Component {
             console.log(err)
         })
     }
+    checkCoupleRSVP(e) {
+        updateCoupleRSVP(e, this.props.coupleId)
+        .then(res => {
+            getCoupleRSVP(this.state.id)
+            .then(res => {
+                this.setState({rsvp: res[0].RSVP})
+                this.successHandle('successMsg3')
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
     successHandle(e) {
         let successMsg = document.getElementById(e)
         successMsg.innerHTML = 'Response Updated';
@@ -194,11 +224,20 @@ class CoupleInfo extends React.Component {
                 RSVP to the Wedding for you Other Half: {this.state.name}
                 <br />
                 Will {this.state.name} Be Joining You?
-                <select value={this.value} defaultValue="Default" onChange={this.changeCoupleRSVP.bind(this) }>
-                    <option value="Default" disabled hidden>Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+                <div className="checkBoxContainer">
+                    <div className="checkBoxImg">
+                        <p>Yes:</p>
+                        <div onClick={() => {this.checkCoupleRSVP('Yes')}}>
+                            <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'Yes' ? checkboxCheck : checkboxBlank } />    
+                        </div> 
+                    </div>
+                    <div className="checkBoxImg">
+                        <p>No: </p>  
+                        <div onClick={() => {this.checkCoupleRSVP('No')}}>
+                            <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'No' ? checkboxCheck : checkboxBlank } />    
+                        </div>
+                    </div>
+                </div>
                 <br />
                 Current Response: {this.state.rsvp}
                 <p id="successMsg3" className="successMsg"> </p>
