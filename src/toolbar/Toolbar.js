@@ -21,19 +21,30 @@ export default class Toolbar extends React.Component {
         const mobileNav = document.querySelector('#mobileMenu')
         const contentElement = document.querySelector('#root')
         if (mobileNav.classList == 'mmClosed') {
-            this.handleClickBeyondSidebar(contentElement, mobileNav.classList)
+            this.handleClickBeyondSidebar(contentElement, mobileNav)
             mobileNav.classList = 'mmOpen'
         } else { 
-            this.handleClickBeyondSidebar(contentElement, mobileNav.classList) 
+            this.handleClickBeyondSidebar(contentElement, mobileNav) 
             mobileNav.classList = 'mmClosed'
         }
     }  
     handleClickBeyondSidebar(x, y) {
-        if(y.value === 'mmOpen') {
+        var child = document.querySelector('#mobileNavBarList').childNodes
+        if(y.classList.value === 'mmOpen') {
             x.removeEventListener("click", this.mobileMenuToggle)
+            for (let i = 0; i < child.length; i++) {
+                child[i].firstChild.removeEventListener("click", this.closeMobileMenu)
+            }
         } else {
             x.addEventListener('click', this.mobileMenuToggle)
+            for (let i = 0; i < child.length; i++) {
+                child[i].firstChild.addEventListener("click", this.closeMobileMenu)
+                
+            }
         }
+    }
+    closeMobileMenu() {
+        document.querySelector('#mobileMenu').classList = 'mmClosed'
     }
     render() {
         window.onscroll = () => {
@@ -103,7 +114,7 @@ class MobileMenu extends React.Component {
     render() {
         return (
             <div id="mobileMenu" className="mmClosed">
-                <ul className="mobileNavBarList" onClick={this.props.onClick}>
+                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={this.props.onClick}>
                     {( isAuthenticated() ) ?
                             <li>
                                 <Link to="/home">Responses</Link>
@@ -134,7 +145,7 @@ class MobileMenu extends React.Component {
                         </li>) : 
                     ( 
                         <li>
-                            <Link to="/register">Log in</Link>
+                            <Link to="/login">Log in</Link>
                         </li>
                     )
                     }
