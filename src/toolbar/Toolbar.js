@@ -39,7 +39,6 @@ export default class Toolbar extends React.Component {
             x.addEventListener('click', this.mobileMenuToggle)
             for (let i = 0; i < child.length; i++) {
                 child[i].firstChild.addEventListener("click", this.closeMobileMenu)
-                
             }
         }
     }
