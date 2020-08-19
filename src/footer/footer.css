@@ -23,12 +23,9 @@ footer h2 {
 footer p {
     font-weight: bold;
 }
-* {
-    font-family: Arial, Helvetica, serif;
-}
 @font-face {
     font-family: 'Playlist Script';
     font-style: normal;
     font-weight: normal;
     src: local('Playlist_Script'), url('Playlist_Script.woff') format('woff');
-    }
+}

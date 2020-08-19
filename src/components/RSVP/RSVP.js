@@ -1,7 +1,7 @@
 import React from 'react';
 import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
-import checkboxBlank from '../../img/icons/check_box_outline_blank-black.svg';
-import checkboxCheck from '../../img/icons/check_box-black.svg';
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 export default class RSVP extends React.Component {
     constructor() {
@@ -104,45 +104,63 @@ export default class RSVP extends React.Component {
     }
     render() {
         return (
-                <div className="col-xs-12 col-sm-7 col-md-7 col-lg-5 col-lg-push-1">
+                <div>
                 <h2>RSVP to the Wedding</h2>
                     Will you be Attending the Wedding?
-                    <div className="checkBoxContainer">
-                        <div className="checkBoxImg">
-                            <p>Yes:</p>
-                            <div onClick={() => {this.onCheckRSVP('Yes')}}>
-                                <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'Yes' ? checkboxCheck : checkboxBlank } />    
-                            </div> 
-                        </div>
-                        <div className="checkBoxImg">
-                            <p>No: </p>  
-                            <div onClick={() => {this.onCheckRSVP('No')}}>
-                                <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'No' ? checkboxCheck : checkboxBlank } />    
-                            </div>
-                        </div>
-                    </div>
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="Yes"
+                            control={
+                                    <Checkbox 
+                                        checked={this.state.rsvp === 'Yes' ? true : false} 
+                                        color='secondary'
+                                        onClick={() => {this.onCheckRSVP('Yes')}} />}
+                            label="Yes"
+                            labelPlacement="start"
+                        />
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="No"
+                            control={
+                                    <Checkbox 
+                                        checked={this.state.rsvp === 'No' ? true : false} 
+                                        color='secondary'
+                                        onClick={() => {this.onCheckRSVP('No')}} />}
+                            label="No"
+                            labelPlacement="start"
+                            />
                     <br />
                     Current Response: {this.state.rsvp}
                     <p id="successMsg1" className="successMsg" ></p> 
                     <br />
                     <br />
-                    {(this.state.hasPlusone == "Yes") ? 
+                    {(this.state.hasPlusone === "Yes") ? 
                         (
                         <div>
                             Are you bringing a Plus One?
                             <div className="checkBoxContainer">
-                                <div className="checkBoxImg">
-                                    <p>Yes:</p>
-                                    <div onClick={() => {this.onCheckPlusone('Yes')}}>
-                                        <img className="checkBox" alt="checkbox"src={this.state.plusone == 'Yes' ? checkboxCheck : checkboxBlank } />    
-                                    </div> 
-                                </div>
-                                <div className="checkBoxImg">
-                                    <p>No: </p>  
-                                    <div onClick={() => {this.onCheckPlusone('No')}}>
-                                        <img className="checkBox" alt="checkbox"src={this.state.plusone == 'No' ? checkboxCheck : checkboxBlank } />    
-                                    </div>
-                                </div>
+                                <FormControlLabel
+                                    classes={{label: 'checkBoxLabel'}}
+                                    value="Yes"
+                                    control={
+                                            <Checkbox 
+                                                checked={this.state.plusone === 'Yes' ? true : false} 
+                                                color='secondary'
+                                                onClick={() => {this.onCheckPlusone('Yes')}} />}
+                                    label="Yes"
+                                    labelPlacement="start"
+                                />
+                                <FormControlLabel
+                                    classes={{label: 'checkBoxLabel'}}
+                                    value="No"
+                                    control={
+                                            <Checkbox 
+                                                checked={this.state.plusone === 'No' ? true : false} 
+                                                color='secondary'
+                                                onClick={() => {this.onCheckPlusone('No')}} />}
+                                    label="No"
+                                    labelPlacement="start"
+                                    />
                             </div>
                             <br />
                             Response:{this.state.plusone}
@@ -224,20 +242,28 @@ class CoupleInfo extends React.Component {
                 RSVP to the Wedding for you Other Half: {this.state.name}
                 <br />
                 Will {this.state.name} Be Joining You?
-                <div className="checkBoxContainer">
-                    <div className="checkBoxImg">
-                        <p>Yes:</p>
-                        <div onClick={() => {this.checkCoupleRSVP('Yes')}}>
-                            <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'Yes' ? checkboxCheck : checkboxBlank } />    
-                        </div> 
-                    </div>
-                    <div className="checkBoxImg">
-                        <p>No: </p>  
-                        <div onClick={() => {this.checkCoupleRSVP('No')}}>
-                            <img className="checkBox" alt="checkbox"src={this.state.rsvp == 'No' ? checkboxCheck : checkboxBlank } />    
-                        </div>
-                    </div>
-                </div>
+                    <FormControlLabel
+                        classes={{label: 'checkBoxLabel'}}
+                        value="Yes"
+                        control={
+                                <Checkbox 
+                                    checked={this.state.rsvp === 'Yes' ? true : false} 
+                                    color='secondary'
+                                    onClick={() => {this.checkCoupleRSVP('Yes')}} />}
+                        label="Yes"
+                        labelPlacement="start"
+                        />
+                    <FormControlLabel
+                        classes={{label: 'checkBoxLabel'}}
+                        value="No"
+                        control={
+                                <Checkbox 
+                                    checked={this.state.rsvp === 'No' ? true : false} 
+                                    color='secondary'
+                                    onClick={() => {this.checkCoupleRSVP('No')}} />}
+                        label="No"
+                        labelPlacement="start"
+                        />
                 <br />
                 Current Response: {this.state.rsvp}
                 <p id="successMsg3" className="successMsg"> </p>

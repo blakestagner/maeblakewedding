@@ -1,9 +1,8 @@
 import React from 'react';
 import { getUserInfo, getParking, updateParking } from '../../autho/Repository';
-import { Redirect } from 'react-router-dom';
 import './parking.css';
-import checkboxBlank from '../../img/icons/check_box_outline_blank-black.svg';
-import checkboxCheck from '../../img/icons/check_box-black.svg';
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 export default class Parking extends React.Component {
     constructor() {
@@ -36,13 +35,15 @@ export default class Parking extends React.Component {
     }
     successHandle(e) {
         let successMsg = document.getElementById(e)
-        successMsg.innerHTML = 'Response Updated';
-        setTimeout(() => successMsg.innerHTML = '', 2000);
+        successMsg.innerHTML = 'Updated';
+        const timer = setTimeout(() => successMsg.innerHTML = '', 1000);
     }
     onCheck(e) {
         updateParking(e)
-        .then(res => {
+        .then(() => {
             this.getParkingInfo()
+        })
+        .then(() => {
             this.successHandle('successMsg')
         })
         .catch(err => {
@@ -52,22 +53,30 @@ export default class Parking extends React.Component {
     render() {
 
         return (
-            <div className="col-xs-12 col-sm-7 col-md-7 col-lg-5 col-lg-push-1">
+            <div>
                 <h2>Do you need a Prepaid Parking Spot?</h2>
-                <div className="checkBoxContainer">
-                    <div className="checkBoxImg">
-                        <p>Yes:</p>
-                        <div onClick={() => {this.onCheck('Yes')}}>
-                            <img className="checkBox" alt="checkbox"src={this.state.parking == 'Yes' ? checkboxCheck : checkboxBlank } />    
-                        </div> 
-                    </div>
-                    <div className="checkBoxImg">
-                        <p>No: </p>  
-                        <div onClick={() => {this.onCheck('No')}}>
-                            <img className="checkBox" alt="checkbox"src={this.state.parking == 'No' ? checkboxCheck : checkboxBlank } />    
-                        </div>
-                    </div>
-                </div>
+                    <FormControlLabel
+                        classes={{label: 'checkBoxLabel'}}
+                        value="start"
+                        control={
+                                <Checkbox 
+                                    checked={this.state.parking === 'Yes' ? true : false} 
+                                    color="primary" 
+                                    onClick={() => {this.onCheck('Yes')}} />}
+                        label="Yes"
+                        labelPlacement="start"
+                    />
+                    <FormControlLabel
+                        classes={{label: 'checkBoxLabel'}}
+                        value="No"
+                        control={
+                                <Checkbox 
+                                    checked={this.state.parking === 'No' ? true : false} 
+                                    color='secondary'
+                                    onClick={() => {this.onCheck('No')}} />}
+                        label="No"
+                        labelPlacement="start"
+                    />
                 <p>You Responded {this.state.parking}</p>
                 <p id="successMsg" className="successMsg"></p> 
             </div> 

@@ -19,17 +19,21 @@ export default class Toolbar extends React.Component {
         }
     mobileMenuToggle() {
         const mobileNav = document.querySelector('#mobileMenu')
-        const contentElement = document.querySelector('#main')
+        const contentElement = document.querySelector('#root')
         if (mobileNav.classList == 'mmClosed') {
+            this.handleClickBeyondSidebar(contentElement, mobileNav.classList)
             mobileNav.classList = 'mmOpen'
-            this.handleClickBeyondSidebar(contentElement, mobileNav.classList)
-        } else mobileNav.classList = 'mmClosed'
-            this.handleClickBeyondSidebar(contentElement, mobileNav.classList)
+        } else { 
+            this.handleClickBeyondSidebar(contentElement, mobileNav.classList) 
+            mobileNav.classList = 'mmClosed'
+        }
     }  
     handleClickBeyondSidebar(x, y) {
-        if(y == 'mmClosed') {
+        if(y.value === 'mmOpen') {
             x.removeEventListener("click", this.mobileMenuToggle)
-        } else x.addEventListener('click', this.mobileMenuToggle)
+        } else {
+            x.addEventListener('click', this.mobileMenuToggle)
+        }
     }
     render() {
         window.onscroll = () => {
@@ -46,6 +50,7 @@ export default class Toolbar extends React.Component {
             };  
         return (
         <div className="navBar" id="mainNav">
+            <MobileMenu onClick={this.mobileMenuToggle}/>
                 <div className='navBarContainer'>
                     <div className='navBarTitle'>
                         <h1><Link to="/">Mae & Blake</Link></h1>
@@ -90,7 +95,6 @@ export default class Toolbar extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <MobileMenu onClick={this.mobileMenuToggle}/>
             </div>
         )
     }

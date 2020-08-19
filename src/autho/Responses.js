@@ -35,13 +35,19 @@ componentDidMount() {
         return (
             <div className="row-no-gutter">
                 {(this.state.auth) ? '' : <Redirect to="/" />}
-                <img src={graphic} className="imgLeft firstImg"/>
+                <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                    <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>
                     <div className="imgLeftMobile firstImg"></div>
-                    <div className="homeText">
-                    <h1>{this.state.userDetails.fname} Your Responses</h1>
-                        <RSVP />
-                        <Parking />
+                </div>
+                <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                    <div className="row">
+                        <div className="homeText">
+                        <h1>{this.state.userDetails.fname} Your Responses</h1>
+                            <RSVP />
+                            <Parking />
+                        </div>
                     </div>
+                </div>
             </div>
         )
     }

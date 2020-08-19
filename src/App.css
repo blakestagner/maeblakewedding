@@ -8,18 +8,9 @@
 .successMsg {
   color: blue;
 }
-.checkBox {
-  font-size: 20px;
-  fill: blue;
-  stroke: blue;
+.intermediate {
+  outline: '2px auto rgba(19,124,189,.6)';
 }
-.checkBoxContainer {
-  text-align: center;
-  justify-content: center;
-  display: flex;
-}
-.checkBoxImg {
-  display: flex;
-  align-items: center;
-  padding: 0 10px 0px;
+.checkBoxLabel {
+  font-size: 1.5em !important;
 }

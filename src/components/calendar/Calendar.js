@@ -6,7 +6,6 @@ import location from '../../img/icons/location-white.svg';
 import details from '../../img/icons/details-white.svg';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
-import graphic from '../../img/pics/Mae.JPG';
 
 export default class Calendar extends React.Component {
     constructor() {
@@ -84,13 +83,13 @@ export default class Calendar extends React.Component {
                         <div className="calendarItems" onClick={this.showParty.bind(this)}>
                             Wedding Party
                         </div>
-                        {(this.state.userDetails.wparty == 'b' || this.state.userDetails.wparty == 'a') ?
+                        {(this.state.userDetails.wparty === 'b' || this.state.userDetails.wparty === 'a') ?
                         <div className="calendarItems" onClick={this.showGroom.bind(this)}>
                             Groomsmen
                         </div>
                             : null
                         }
-                        {(this.state.userDetails.wpart == 'g' || this.state.userDetails.wparty == 'a') ?
+                        {(this.state.userDetails.wpart === 'g' || this.state.userDetails.wparty === 'a') ?
                         <div className="calendarItems" onClick={this.showBride.bind(this)}>
                             Bridesmaids
                         </div>
@@ -136,29 +135,31 @@ class CalenderContainer extends React.Component {
     getMonthName(e) {
         switch(e) {
             case '01':
-            return 'Jan';
+                return 'Jan';
             case '02':
-            return 'Feb';
+                return 'Feb';
             case '03':
-            return 'Mar';
+                return 'Mar';
             case '04':
-            return 'Apr';
+                return 'Apr';
             case '05':
-            return 'May';
+                return 'May';
             case '06':
-            return 'Jun';
+                return 'Jun';
             case '07':
-            return 'Jul';
+                return 'Jul';
             case '08':
-            return 'Aug';
+                return 'Aug';
             case '09':
-            return 'Sept';
+                return 'Sept';
             case '10':
-            return 'Oct';
+                return 'Oct';
             case '11':
-            return 'Nov';
+                return 'Nov';
             case '12':
-            return 'Dec';
+                return 'Dec';
+            default:  
+                return 'Null';
         }
     }
     render() {
@@ -166,7 +167,7 @@ class CalenderContainer extends React.Component {
             <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-lg-push-1">
                 <h1>{this.props.categoryName}</h1>
                 <div className="cardMain">
-                    {this.props.eventList.filter(eventCat => eventCat.wparty == this.props.wparty).map((eventCat) => (
+                    {this.props.eventList.filter(eventCat => eventCat.wparty === this.props.wparty).map((eventCat) => (
                     <div className="eventList" key={eventCat.id}>    
                         <div className="calendarMain">
                             <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.props.expandPanel(`panel-${eventCat.id}`, e)}} />

@@ -5,6 +5,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  clip-path: ellipse(84% 70% at 71% 30%);
+}
+@media only screen and (max-width: 768px) { 
+  .heroImg {
+  clip-path: none;
+  }
 }
 .loggedinImg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/loggedIn.jpg");

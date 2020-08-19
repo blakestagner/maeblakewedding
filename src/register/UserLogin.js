@@ -3,9 +3,6 @@ import './register.css';
 import { login } from '../autho/Repository'
 
 export default class UserLogin extends React.Component {
-  constructor(props) {
-      super(props);
-  }
   render() {
       return (
           <div className="container">
