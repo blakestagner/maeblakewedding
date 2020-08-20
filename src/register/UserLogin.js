@@ -62,7 +62,7 @@ class LoginBox extends React.Component {
                   <input 
                     onChange={ this.handleInputChange }
                     className="login-input" 
-                    type="text" 
+                    type="password" 
                     name="password" 
                     placeholder="password"/>
               </div>
