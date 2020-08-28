@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'http://73.109.125.191:3100';
+const BASE_URL = 'http://73.109.125.191:3050';
 //const BASE_URL = 'http://localhost:3100';
 
 
