@@ -10,8 +10,9 @@ export default class ParkingHome extends React.Component {
     constructor() {
         super();
         this.state = { 
-            auth: true };
+            auth: true
         }
+    }
 componentDidMount() {
     if( !isAuthenticated() ) {
         alert('User Not Authenticated');
@@ -29,7 +30,7 @@ componentDidMount() {
                 <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                     <div className="row">
                         <div className="homeText">
-                            <Parking />
+                            <Parking userDetails={this.props.userDetails}/>
                         </div>
                     </div>
                 </div>

@@ -16,24 +16,9 @@ export default class RSVP extends React.Component {
         };
     }
     componentDidMount() {
-        if(isAuthenticated())
-        getUserInfo()
-            .then((userDetails) => {
-                this.setState({userDetails: userDetails})
-            })
-            .then(this.getRSVPInfo())
-            .then(this.checkHasPlusone())
-            .then(this.getCoupleId())
-            .catch(err => {
-                alert('You Need to Login to view this page');
-                this.setState({
-                    auth: false
-                })
-            })
-        else {
-            alert('User Not Authenticated');
-            this.setState({auth: false})
-        }
+        this.getRSVPInfo()
+        this.checkHasPlusone()
+        this.getCoupleId()
     }
     getRSVPInfo() {
         getRSVP()
@@ -103,6 +88,7 @@ export default class RSVP extends React.Component {
         setTimeout(() => successMsg.innerHTML = '', 2000);
     }
     render() {
+        const userDetails = this.props.userDetails
         return (
                 <div>
                 <h2>RSVP to the Wedding</h2>

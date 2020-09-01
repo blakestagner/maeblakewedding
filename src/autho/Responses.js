@@ -14,24 +14,14 @@ export default class Responses extends React.Component {
             userDetails: []
         }
     }
-componentDidMount() {
-    if( isAuthenticated() )
-    getUserInfo()
-        .then((userDetails) => {
-        this.setState({userDetails: userDetails})
-        })
-        .catch(err => {
-            alert('You Need to Login to view this page');
-            this.setState({
-                auth: false
-            })
-        })
-    else {
-        alert('User Not Authenticated');
-        this.setState({auth: false})
+    componentDidMount() {
+        if( !isAuthenticated() ) {
+            alert('User Not Authenticated');
+            this.setState({auth: false})
+        }
     }
-}
     render() {
+        const userDetails = this.props.userDetails
         return (
             <div className="row-no-gutter">
                 {(this.state.auth) ? '' : <Redirect to="/" />}
@@ -42,9 +32,9 @@ componentDidMount() {
                 <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                     <div className="row">
                         <div className="homeText">
-                        <h1>{this.state.userDetails.fname} Your Responses</h1>
-                            <RSVP />
-                            <Parking />
+                        <h1>{userDetails.fname} Your Responses</h1>
+                            <RSVP userDetails={this.props.userDetails}/>
+                            <Parking userDetails={this.props.userDetails}/>
                         </div>
                     </div>
                 </div>

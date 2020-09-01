@@ -28,7 +28,7 @@ componentDidMount() {
                 <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                     <div className="row">
                         <div className="homeText">
-                            <RSVP />
+                            <RSVP userDetails={this.props.userDetails}/>
                         </div>
                     </div>
                 </div>

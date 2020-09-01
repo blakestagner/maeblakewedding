@@ -19,6 +19,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  clip-path: ellipse(79% 68% at 63% 10%);
 }
 .heroText {
     text-align: center;

@@ -7,17 +7,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 export default class Parking extends React.Component {
     constructor() {
         super();
-        this.state = { 
-            userDetails: [], 
+        this.state = {
             parking: ''
         };
         this.onCheck = this.onCheck.bind(this);
     }
     componentDidMount() {
         getUserInfo()
-            .then((userDetails) => {
-                this.setState({userDetails: userDetails})
-            })
             .then(this.getParkingInfo())
             .catch(err => {
                 console.log(err)
@@ -51,10 +47,11 @@ export default class Parking extends React.Component {
         })
     }
     render() {
-
+        let userDetails = this.props.userDetails
         return (
             <div>
                 <h2>Do you need a Prepaid Parking Spot?</h2>
+                
                     <FormControlLabel
                         classes={{label: 'checkBoxLabel'}}
                         value="start"
