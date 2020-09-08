@@ -4,6 +4,7 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import { login } from '../autho/Repository'
 import { isAuthenticated } from '../autho/Repository'
 import {TextField } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 export default class UserLogin extends React.Component {
@@ -17,7 +18,6 @@ componentDidMount() {
     if( isAuthenticated() )
     this.props.history.push("/")
     this.setState({toHome: true})
-    
 }
 handleSuccessfulAuth() {
   window.scrollTo(0,0)
@@ -28,14 +28,14 @@ handleSuccessfulAuth() {
       return <Redirect to='/home' />
     } else;
     return (
-        <div className="container">
-            <div className="box-controller">
-                <div className="controller">
-                    Login
-                </div>
-            </div>
+        <div className="container user-login">
             <div className="box-controller">
               <LoginBox  handleSuccessfulAuth={this.handleSuccessfulAuth}/>
+            </div>
+            <div className="box-controller login-details-container">
+                <div className="controller">
+                  <p className="login-details">Once logged in you will be able to <span className="login-details-bold">RSVP</span> for you and your guest, <span className="login-details-bold">request a reserved parking spot</span>, and access the wedding party (Groomsmen and Briadesmaids) <span className="login-details-bold">calanders</span></p>
+                </div>         
             </div>
         </div> 
     )
@@ -57,29 +57,40 @@ class LoginBox extends React.Component {
           }
        submitLogin(e){
            e.preventDefault();
-           login(this.state)
-           .then(res => 
-             this.props.handleSuccessfulAuth()
-           )
-           .catch(err => 
-              err)
-           }
+           const lgnMsg = document.getElementById('loginMessage')
+           if (this.state.email === '') {
+              lgnMsg.innerHTML = 'You forgot to type in your email'
+           } else if (this.state.password === '') {
+              lgnMsg.innerHTML = 'You forgot to type in your password'
+           } else if (!this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+             lgnMsg.innerHTML = 'You didnt enter a valid email'
+          } else {
+              login(this.state)
+              .then(res => this.props.handleSuccessfulAuth()
+              )
+              .catch(err => err)
+            }
+          }
   render() {
     return (
       <div className="inner-container">
           <div className="header">
             Login
           </div>
-            <div className="row space-under">
+            <div className="">
                 <TextField 
+                  fullWidth="true"
+                  required="true"
                   id="email" 
                   label="email"
                   name="email"
                   onChange={ this.handleInputChange }
                 />
             </div>
-            <div className="row space-under">
+            <div className="">
                 <TextField 
+                fullWidth="true"
+                required="true"
                   id="password" 
                   label="password"
                   name="password"

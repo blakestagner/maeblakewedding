@@ -92,7 +92,7 @@ export default class RSVP extends React.Component {
         return (
                 <div>
                 <h2>RSVP to the Wedding</h2>
-                    Will you be Attending the Wedding?
+                    <p>Will you be Attending the Wedding?</p>
                         <FormControlLabel
                             classes={{label: 'checkBoxLabel'}}
                             value="Yes"

@@ -27,12 +27,12 @@
     .imgLeftMobile {
         background-image: url(../img/pics/Mae.JPG);
         display: block;
-        height: 20vh;
+        height: 30vh;
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
-        clip-path: ellipse(40% 50% at 35% 50%);
+        clip-path: ellipse(40% 50% at 40% 50%);
     }
     .imgRight {
         display: none;
