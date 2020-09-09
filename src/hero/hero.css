@@ -30,8 +30,11 @@
     transform: translate(0%, 20vh);
 }
   .heroText h1 {
-    font-size: 50px;
-    margin-bottom: 5px;
+    font-size: 80px;
+    margin:0 auto 5px;
+    font-family: 'Playlist Script';
+    font-weight: normal;
+
 }
   .heroText h2 {
     font-size: 30px;

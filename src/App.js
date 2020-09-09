@@ -9,30 +9,34 @@ import Responses from './autho/Responses'
 import UserLogin from './register/UserLogin';
 import Profile from './components/profile/Profile';
 import Footer from './footer/Footer';
-import Login from './autho/login';
 import Calendar from './components/calendar/Calendar';
 import ParkingHome from './components/parking/ParkingHome';
 import RSVPHome from './components/RSVP/RSVPHome';
 import { isAuthenticated, getUserInfo } from './autho/Repository'
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
       this.state = {
         isLoggedIn: false,
         userDetails: [],
       }
+      this.handleLogin = this.handleLogin.bind(this)
   }
   componentDidMount() {
     this.checkLoggedinStatus();
   }
-
+  handleLogin(data) {
+    this.setState({isLoggedIn: true, userDetails: data})
+  }
   checkLoggedinStatus() {
     if( isAuthenticated() )
     getUserInfo()
         .then((userDetails) => {
-            this.setState({isLoggedIn: true, userDetails: userDetails})
-            
+            this.setState({
+              isLoggedIn: true, 
+              userDetails: userDetails
+            })
         })
         .catch(err => {
             console.log(err);
@@ -56,7 +60,8 @@ class App extends React.Component {
                     <UserLogin 
                       {...props}
                       userDetails={this.state.userDetails} 
-                      isLoggedIn={this.state.isLoggedIn}/>
+                      isLoggedIn={this.state.isLoggedIn}
+                      handleLogin={this.handleLogin}/>
                   )} 
                   />
                 <Route

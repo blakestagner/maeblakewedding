@@ -1,7 +1,7 @@
 import React from 'react';
 import './register.css';
 import { BrowserRouter as Redirect } from 'react-router-dom';
-import { login } from '../autho/Repository'
+import { login, getUserInfo } from '../autho/Repository'
 import { isAuthenticated } from '../autho/Repository'
 import {TextField } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -11,22 +11,20 @@ export default class UserLogin extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        toHome: false
+        
       }
+      this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
     }
 componentDidMount() {
     if( isAuthenticated() )
-    this.props.history.push("/")
-    this.setState({toHome: true})
+    this.props.history.push("/home")
 }
-handleSuccessfulAuth() {
+handleSuccessfulAuth(data) {
+  this.props.handleLogin(data)
   window.scrollTo(0,0)
-  window.location.reload(false)
+  this.props.history.push("/home")
 }
   render() {
-    if (this.state.toHom === true) {
-      return <Redirect to='/home' />
-    } else;
     return (
         <div className="container user-login">
             <div className="box-controller">
@@ -66,7 +64,14 @@ class LoginBox extends React.Component {
              lgnMsg.innerHTML = 'You didnt enter a valid email'
           } else {
               login(this.state)
-              .then(res => this.props.handleSuccessfulAuth()
+              .then(res =>
+                getUserInfo()
+                  .then(res=> {
+                    this.props.handleSuccessfulAuth(res)
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  })
               )
               .catch(err => err)
             }

@@ -4,6 +4,7 @@ import '../../home/home.css'
 import graphic from '../../img/pics/Mae.JPG';
 import { isAuthenticated } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
+import Loading from '../Loading'
 
 export default class RSVPHome extends React.Component {
     constructor() {
@@ -15,9 +16,13 @@ componentDidMount() {
     if( !isAuthenticated() ) {
         alert('User Not Authenticated');
         this.setState({auth: false})
+        this.props.loadStatus()
     }
 }
     render() {
+        if (this.props.loading === 0) {
+            return <Loading />
+        }
         return (
             <div className="row-no-gutter">
                 {(this.state.auth) ? '' : <Redirect to="/" />}

@@ -23,7 +23,7 @@ class LandingHero extends React.Component {
         return (
             <div className="heroImg">
                 <div className="heroText">
-
+                <h1>Straight doing it since 2018</h1>
                 </div>
             </div>
         )
@@ -34,7 +34,6 @@ class LoggedinHero extends React.Component {
         return (
             <div className="loggedinImg">
                 <div className="heroText">
-
                 </div>
             </div>
         )
