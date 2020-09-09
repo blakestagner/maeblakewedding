@@ -82,7 +82,7 @@ class LoginBox extends React.Component {
           <div className="header">
             Login
           </div>
-            <div className="">
+            <div className="space-below">
                 <TextField 
                   fullWidth="true"
                   required="true"
@@ -92,7 +92,7 @@ class LoginBox extends React.Component {
                   onChange={ this.handleInputChange }
                 />
             </div>
-            <div className="">
+            <div className="space-below">
                 <TextField 
                 fullWidth="true"
                 required="true"

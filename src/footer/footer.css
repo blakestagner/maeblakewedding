@@ -2,11 +2,12 @@ footer {
     background-color: #7380a8;
     color: #fff;
     width: auto;
-    height: auto;
+    height: min-content;
     text-align: center;
     clear: both;
     padding: 30px 10px;
     position: relative;
+    margin: 200px 0 0;
 }
 footer h1 {
     font-size: 60px;

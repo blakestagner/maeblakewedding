@@ -115,23 +115,9 @@
     flex: 1;
     visibility: hidden;
 }
-
-.pwd-weak {
-    background-color: #e74c3c;
-}
-
-.pwd-medium {
-    background-color: #3498db;
-}
-
-.pwd-strong {
-    background-color: #2ecc71;
-}
-
 .show {
     visibility: visible;
 }
-
 #loginMessage {
     color: red
 }
@@ -156,4 +142,7 @@
     .user-login {
         top: 100px;
     }
+}
+.space-below {
+    margin-bottom: 20px;
 }
