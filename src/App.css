@@ -4,6 +4,7 @@
 .main {
   color: black;
   margin: 0 0 150px;
+  min-height: 100px;
 }
 .successMsg {
   color: blue;

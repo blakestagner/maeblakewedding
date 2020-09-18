@@ -23,14 +23,14 @@ export function ParkingHome(props) {
                 <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>
                 <div className="imgLeftMobile firstImg"></div>
             </div>
-            <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-offset-1">
+            <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                 <div className="row">
                     <div className="homeText">
                         <Parking userDetails={props.userDetails}/>
                     </div>
                 </div>
             </div>
-            <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-offset-1">
+            <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                 <div className="row">
                     <div className="homeText">
                         <ParkingInfo isLoggedIn={props.isLoggedIn}/>
