@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.css';
-import graphic from '../img/pics/Mae.jpg';
+import graphic from '../img/pics/side_img.jpg';
 import { CalenderContainer } from '../components/calendar/CalenderContainer'
 import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
 

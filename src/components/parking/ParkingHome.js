@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Parking } from './Parking';
 import { ParkingInfo, ParkingOther } from './ParkingInfo'
 import '../../home/home.css'
-import graphic from '../../img/pics/Mae.jpg';
+import graphic from '../../img/pics/side_img.jpg';
 import { isAuthenticated } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 

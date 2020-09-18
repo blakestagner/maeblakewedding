@@ -3,7 +3,7 @@ import { isAuthenticated } from './Repository';
 import { Redirect } from 'react-router-dom';
 import Parking from '../components/parking/Parking';
 import RSVP from '../components/RSVP/RSVP';
-import graphic from '../img/pics/Mae.jpg';
+import graphic from '../img/pics/side_img.jpg';
 
 export function Responses(props) {
     const [authenticated, setAuthenticated] = useState(true)
