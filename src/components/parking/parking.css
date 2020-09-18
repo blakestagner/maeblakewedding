@@ -1,8 +1,60 @@
-.homeText h2 {
-    font-size: 2em;
+.pdf-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
 }
-@media only screen and (max-width: 768px) {
-    .homeText h2 {
-        font-size: 1.5em;
-    }
+.other-parking-container {
+    width: fit-content;
+    width: -moz-fit-content;
+    border-radius: 25px;
+    padding: 10px 30px;
+    margin: 0 auto 150px;
+    box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #FFFFFF;
 }
+.other-parking-container > .parking-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button {
+    position: relative;
+    cursor: pointer;
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    border-radius: 20px;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 0 auto;
+    display: flex;
+    width: fit-content;
+    transition-duration: 0.4s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.button:hover  {
+    background-color: #fff;
+    background-image: none;
+    color: #000;
+}
+.button:after {
+    content: "";
+    background: #fff;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  .button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+  .button:focus {
+      outline: none;
+  }

@@ -1,82 +1,78 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { getUserInfo, getParking, updateParking } from '../../autho/Repository';
-import './parking.css';
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-export default class Parking extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            parking: ''
-        };
-        this.onCheck = this.onCheck.bind(this);
-    }
-    componentDidMount() {
+export function Parking() {
+    const [parking, setParking] = useState()
+    const [updateStatus, setUpdate ] = useState(false)
+    useEffect(() => {
         getUserInfo()
-            .then(this.getParkingInfo())
+            .then(getParkingInfo())
             .catch(err => {
                 console.log(err)
             })
-    }
-    getParkingInfo() {
+    }, [])
+    const getParkingInfo = () => {
         getParking()
-        .then(res => {
-            this.setState({parking: res[0].parking})
-        })
-        .catch(err => {
-            console.log(err)
-            
-        })
-    }
-    successHandle(e) {
-        let successMsg = document.getElementById(e)
-        successMsg.innerHTML = 'Updated';
-        const timer = setTimeout(() => successMsg.innerHTML = '', 1000);
-    }
-    onCheck(e) {
+            .then(res => {
+                setParking(res[0].parking)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    const onCheck = (e) => {
         updateParking(e)
         .then(() => {
-            this.getParkingInfo()
+            getParkingInfo()
         })
         .then(() => {
-            this.successHandle('successMsg')
+            updateAnimate()
         })
         .catch(err => {
             console.log(err)
         })
     }
-    render() {
-        let userDetails = this.props.userDetails
-        return (
-            <div>
-                <h2>Do you need a Prepaid Parking Spot?</h2>
-                
-                    <FormControlLabel
-                        classes={{label: 'checkBoxLabel'}}
-                        value="start"
-                        control={
-                                <Checkbox 
-                                    checked={this.state.parking === 'Yes' ? true : false} 
-                                    color="primary" 
-                                    onClick={() => {this.onCheck('Yes')}} />}
-                        label="Yes"
-                        labelPlacement="start"
-                    />
-                    <FormControlLabel
-                        classes={{label: 'checkBoxLabel'}}
-                        value="No"
-                        control={
-                                <Checkbox 
-                                    checked={this.state.parking === 'No' ? true : false} 
-                                    color='secondary'
-                                    onClick={() => {this.onCheck('No')}} />}
-                        label="No"
-                        labelPlacement="start"
-                    />
-                <p>You Responded {this.state.parking}</p>
-                <p id="successMsg" className="successMsg"></p> 
-            </div> 
-        )
+    const updateAnimate = () => {
+        setUpdate(true)
+        const timer = setTimeout(() => setUpdate(false), 800 )
     }
+    return (
+        <div>
+            <h2>Parking</h2>
+            <h3>Do you need a prepaid parking spot?</h3>
+            <div className={!updateStatus ? "form-container" : "form-container-updated"}>
+                {!updateStatus ?
+                    <div>
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="start"
+                            control={
+                                <Checkbox 
+                                    checked={parking === 'Yes' ? true : false} 
+                                    color="primary" 
+                                    onClick={() => {onCheck('Yes')}} />}
+                            label="Yes"
+                            labelPlacement="start"
+                        />
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="No"
+                            control={
+                                <Checkbox 
+                                    checked={parking === 'No' ? true : false} 
+                                    color='primary'
+                                    onClick={() => {onCheck('No')}} />}
+                            label="No"
+                            labelPlacement="start"
+                        />
+                    </div>
+                : 
+                <p className="update-message">Updated</p>
+                }
+            </div>
+        </div> 
+    )
 }
+export default Parking;

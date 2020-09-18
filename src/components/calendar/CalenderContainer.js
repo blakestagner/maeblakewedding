@@ -6,47 +6,31 @@ import details from '../../img/icons/details-white.svg';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
 
-export default class CalenderContainer extends React.Component {
-    constructor() {
-        super();
-        this.state = { 
-            userDetails: [], 
-            calendarEvents: [],
-            eventList: []
-            }
-        this.expandPanel = this.expandPanel.bind(this);
-        }
-    componentDidMount() {
-        if(isAuthenticated())
-        getUserInfo()
-            .then((userDetails) => {
-                this.setState({userDetails: userDetails})
-            })
-            .then( calendarInfo()   
-                .then((eventList) => {
-                    this.setState({eventList: eventList})
+export function CalenderContainer(props){
+    const [events, setEvents] = React.useState({
+        eventList: []
+    })
+    React.useEffect(() => {
+        if( isAuthenticated() )
+            calendarInfo()   
+                .then(res => {
+                    setEvents({...events, eventList: res})
                 })
                 .catch(err => {
                     console.log('error')
                 }) 
-            )
-            .catch(err => {
-                alert('You Need to Login to view this page');
-                this.setState({
-                    auth: false
-                })
-            })
         else {
             calendarPublic()   
                 .then((eventList) => {
-                    this.setState({eventList: eventList})
+                    setEvents({eventList: eventList})
                 })
                 .catch(err => {
                     console.log('error')
                 })
         }
-    }
-    expandPanel(x, e) {
+    }, [])
+    
+    const expandPanel = (x, e) => {
         let panel = document.getElementById(x)
         if (panel.style.maxHeight) {
             panel.style.maxHeight = null
@@ -56,7 +40,7 @@ export default class CalenderContainer extends React.Component {
             e.target.src = remove
             }
         }
-        getMonthName(e) {
+    const getMonthName = (e) => {
             switch(e) {
                 case '01':
                     return 'Jan';
@@ -86,41 +70,41 @@ export default class CalenderContainer extends React.Component {
                     return 'Null';
             }
         }
-    render() {
-        return (
-            <div>
-                <div className="cardMain">
-                    {this.state.eventList.filter(eventCat => eventCat.wparty == this.props.wparty).map((eventCat) => (
-                    <div className="eventList" key={eventCat.id}>    
-                        <div className="calendarMain">
-                            <img src={ add } className="add" alt="plus-minus" onClick={(e) => {this.expandPanel(`panel-${eventCat.id}`, e)}} />
-                            <div className="calendarIconContainer">
-                                <div className="calendarTop calendarInner">
-                                    <p>{this.getMonthName(eventCat.date.split('-')[1])}</p>
-                                </div>
-                                <div className="calendarBottom calendarInner">
-                                    <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
-                                </div>
+    return (
+        <div>
+            <h1>{props.categoryName}</h1>
+            <div className="cardMain">
+                {events.eventList.filter(eventCat => eventCat.wparty == props.wparty).map((eventCat) => (
+                <div className="eventList" key={eventCat.id}>    
+                    <div className="calendarMain">
+                        <img src={ add } className="add" alt="plus-minus" onClick={(e) => {expandPanel(`panel-${eventCat.id}`, e)}} />
+                        <div className="calendarIconContainer">
+                            <div className="calendarTop calendarInner">
+                                <p>{getMonthName(eventCat.date.split('-')[1])}</p>
                             </div>
-                            <p className="name eventsContent">{eventCat.name}</p>
-                            <p className="time eventsContent">{eventCat.time}</p>
+                            <div className="calendarBottom calendarInner">
+                                <p>{eventCat.date.split('-')[2].split('T')[0]}</p>
+                            </div>
                         </div>
-                        <div className="closed" id={`panel-${eventCat.id}`}>
-                            <div className="row">
-                                <img className="detailsIcon" src={details} alt="details"/>
-                                <p className="details eventsContent">{eventCat.details}</p>
-                            </div>
-                            <div className="row">
-                                <img className="locationIcon" src={location} alt="location" />
-                                <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
-                                <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
-                            </div>
+                        <p className="name eventsContent">{eventCat.name}</p>
+                        <p className="time eventsContent">{eventCat.time}</p>
+                    </div>
+                    <div className="closed" id={`panel-${eventCat.id}`}>
+                        <div className="row">
+                            <img className="detailsIcon" src={details} alt="details"/>
+                            <p className="details eventsContent">{eventCat.details}</p>
+                        </div>
+                        <div className="row">
+                            <img className="locationIcon" src={location} alt="location" />
+                            <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
+                            <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
                         </div>
                     </div>
-                    ))
-                    }
                 </div>
+                ))
+                }
             </div>
-        )
-    }
+        </div>
+    )
+    
 }

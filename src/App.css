@@ -3,7 +3,7 @@
 }
 .main {
   color: black;
-  margin: 25px 0px;
+  margin: 0 0 150px;
 }
 .successMsg {
   color: blue;
@@ -13,4 +13,33 @@
 }
 .checkBoxLabel {
   font-size: 1.5em !important;
+}
+.hr {
+  background-color: blue;
+  width: 300px;
+  margin: 50px auto 50px;
+}
+.update-message {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 1.5em;
+  margin: 0px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+.form-container-updated {
+  border-radius: 25px;
+  width: 165px;
+  height: 42px;
+  padding: 5px 56px 5px 40px;
+  margin: 0 auto;
+  background: #228b22;
+  box-shadow: inset 5px 5px 7px #1d761d, 
+            inset -5px -5px 7px #27a027;
+  /*box-shadow: inset 5px 5px 7px #165c16, inset -5px -5px 7px #2eba2e;*/
+}
+.fomr-row {
+  display: flex;
 }

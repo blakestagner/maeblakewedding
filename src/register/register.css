@@ -1,5 +1,4 @@
 .box-controller {
-    visibility: visible;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -20,10 +19,6 @@
     margin: auto;
     width: 75%
 }
-
-.inner-container.show {
-    visibility: visible;
-}
 .header {
     color: #000;
     text-align: center;
@@ -33,13 +28,6 @@
     font-size: 30px;
     border-bottom: 2px solid #70a1ff;
 }
-
-.box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .input-group {
     display: flex;
     flex-direction: column;
@@ -99,7 +87,6 @@
     background-color: #417cef;
     color: white;
 }
-
 .danger-error {
     color: #e74c3c;
     font-size: 16px;
@@ -109,14 +96,10 @@
     flex-direction: row;
     margin-top: 20px;
 }
-
 .pwd {
     height: 6px;
     flex: 1;
     visibility: hidden;
-}
-.show {
-    visibility: visible;
 }
 #loginMessage {
     color: red
@@ -135,8 +118,8 @@
 .user-login {
     position: absolute;
     top: 200px;
-    width:  -webkit-fill-available;
-    width: -moz-available;
+    left: 0px;
+    right: 0px;
 }
 @media only screen and (max-width: 768px) {
     .user-login {

@@ -12,7 +12,8 @@ export default class RSVP extends React.Component {
             rsvp: '',
             hasPlusone: '',
             plusone: '',
-            coupleId: ''
+            coupleId: '',
+            updated: 'none'
         };
     }
     componentDidMount() {
@@ -29,11 +30,11 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
-    onCheckRSVP(e) {
+    onCheckRSVP(e, x) {
         updateRSVP(e)
         .then(res => {
             this.getRSVPInfo()
-            this.successHandle('successMsg1')
+            this.updateAnimate(x)
         })
         .catch(err => {
             console.log(err)
@@ -63,11 +64,11 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
-    onCheckPlusone(e) {
+    onCheckPlusone(e, x) {
         updatePlusone(e)
         .then(res => {
             this.getPlusoneInfo()
-            this.successHandle('successMsg2')
+            this.updateAnimate(x)
         })
         .catch(err => {
             console.log(err)
@@ -82,25 +83,29 @@ export default class RSVP extends React.Component {
             console.log(err)
         })
     }
-    successHandle(e) {
-        let successMsg = document.getElementById(e)
-        successMsg.innerHTML = 'Response Updated';
-        setTimeout(() => successMsg.innerHTML = '', 2000);
+    updateAnimate(e) {
+        this.setState({updated: e})
+        const timer = setTimeout(() => this.setState({updated: 'none'}), 800 )
     }
     render() {
         const userDetails = this.props.userDetails
         return (
                 <div>
                 <h2>RSVP to the Wedding</h2>
-                    <p>Will you be Attending the Wedding?</p>
+                <h3>Will you be Attending the Wedding?</h3>
+                <div className={this.state.updated === '1' ? 'form-container-updated' : 'form-container'}>
+                {this.state.updated === '1' ? 
+                    <p className="update-message">Updated</p>
+                :
+                    <div>
                         <FormControlLabel
                             classes={{label: 'checkBoxLabel'}}
                             value="Yes"
                             control={
                                     <Checkbox 
                                         checked={this.state.rsvp === 'Yes' ? true : false} 
-                                        color='secondary'
-                                        onClick={() => {this.onCheckRSVP('Yes')}} />}
+                                        color='primary'
+                                        onClick={() => {this.onCheckRSVP('Yes', '1')}} />}
                             label="Yes"
                             labelPlacement="start"
                         />
@@ -110,152 +115,135 @@ export default class RSVP extends React.Component {
                             control={
                                     <Checkbox 
                                         checked={this.state.rsvp === 'No' ? true : false} 
-                                        color='secondary'
-                                        onClick={() => {this.onCheckRSVP('No')}} />}
+                                        color='primary'
+                                        onClick={() => {this.onCheckRSVP('No', '1')}} />}
                             label="No"
                             labelPlacement="start"
-                            />
-                    <br />
-                    Current Response: {this.state.rsvp}
-                    <p id="successMsg1" className="successMsg" ></p> 
-                    <br />
-                    <br />
-                    {(this.state.hasPlusone === "Yes") ? 
-                        (
-                        <div>
-                            Are you bringing a Plus One?
-                            <div className="checkBoxContainer">
-                                <FormControlLabel
-                                    classes={{label: 'checkBoxLabel'}}
-                                    value="Yes"
-                                    control={
-                                            <Checkbox 
-                                                checked={this.state.plusone === 'Yes' ? true : false} 
-                                                color='secondary'
-                                                onClick={() => {this.onCheckPlusone('Yes')}} />}
-                                    label="Yes"
-                                    labelPlacement="start"
-                                />
-                                <FormControlLabel
-                                    classes={{label: 'checkBoxLabel'}}
-                                    value="No"
-                                    control={
-                                            <Checkbox 
-                                                checked={this.state.plusone === 'No' ? true : false} 
-                                                color='secondary'
-                                                onClick={() => {this.onCheckPlusone('No')}} />}
-                                    label="No"
-                                    labelPlacement="start"
-                                    />
-                            </div>
-                            <br />
-                            Response:{this.state.plusone}
-                            <p id="successMsg2" className="successMsg" ></p> 
-                        </div>
-                            
-                        ) : ''
-                    }
-                    {(this.state.coupleId > 0) ? 
-                        (
-                            <CoupleInfo coupleId={ this.state.coupleId }/>
-                        ) : ''
-                    }
+                        />
+                    </div>
+                }
                 </div>
+            <br />
+            {(this.state.hasPlusone === "Yes") ? 
+            <div>
+                <h3>Are you bringing a Plus One?</h3>
+                <div className={this.state.updated === '2' ? 'form-container-updated' : 'form-container'}>
+                {this.state.updated === '2' ? 
+                    <p className="update-message">Updated</p>
+                :
+                    <div>
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="Yes"
+                            control={
+                                <Checkbox 
+                                    checked={this.state.plusone === 'Yes' ? true : false} 
+                                    color='primary'
+                                    onClick={() => {this.onCheckPlusone('Yes', '2')}} />}
+                            label="Yes"
+                            labelPlacement="start"
+                        />
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="No"
+                            control={
+                                <Checkbox 
+                                    checked={this.state.plusone === 'No' ? true : false} 
+                                    color='primary'
+                                    onClick={() => {this.onCheckPlusone('No', '2')}} />}
+                            label="No"
+                            labelPlacement="start"
+                        />
+                    </div>
+                }
+                </div>
+                <br />
+            </div>
+            : ''
+            }
+            {(this.state.coupleId > 0) ? 
+            <CoupleInfo coupleId={ this.state.coupleId }/>
+            : ''
+            }
+        </div>
         )
     }
 }
-class CoupleInfo extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            id: '',
-            name: '',
-            rsvp: ''
-        }
-    }
-    componentDidMount() {
-        this.setState({id: this.props.coupleId})
-        getCoupleInfo(this.props.coupleId)
+export function CoupleInfo(props){
+    const [coupleState, setCoupleState] = React.useState({
+        id: props.coupleId,
+        name: '',
+        rsvp: '',
+        updated: 'none'
+    })
+    const [updated, setUpdate] = React.useState(false)
+    React.useEffect(() => {
+        getCoupleInfo(props.coupleId)
         .then(res => {
-            this.setState({name: res[0].fname})
-            getCoupleRSVP(this.state.id)
-            .then(res => {
-                this.setState({rsvp: res[0].RSVP})
-            })
-            .catch(err => console.log(err))
+            setCoupleState({...coupleState, name: res[0].fname, rsvp: res[0].RSVP})
         })
         .catch(err => {
             console.log(err)
         })
-    }
-    changeCoupleRSVP(e) {
-        e.preventDefault()
-        updateCoupleRSVP(e.target.value, this.props.coupleId)
+    }, [])
+    const handleChange = (e, x) => {
+        updateCoupleRSVP(e, props.coupleId)
         .then(res => {
-            getCoupleRSVP(this.state.id)
+            getCoupleRSVP(coupleState.id)
             .then(res => {
-                this.setState({rsvp: res[0].RSVP})
-                this.successHandle('successMsg3')
+                setCoupleState({...coupleState, rsvp: res[0].RSVP})
+                updateAnimate()
             })
             .catch(err => console.log(err))
         })
+        
         .catch(err => {
             console.log(err)
         })
     }
-    checkCoupleRSVP(e) {
-        updateCoupleRSVP(e, this.props.coupleId)
-        .then(res => {
-            getCoupleRSVP(this.state.id)
-            .then(res => {
-                this.setState({rsvp: res[0].RSVP})
-                this.successHandle('successMsg3')
-            })
-            .catch(err => console.log(err))
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    const updateAnimate = () => {
+        setUpdate(true)
+        const timer = setTimeout(() => setUpdate(false), 800 )
     }
-    successHandle(e) {
-        let successMsg = document.getElementById(e)
-        successMsg.innerHTML = 'Response Updated';
-        setTimeout(() => successMsg.innerHTML = '', 2000);
-    }
-    render() {
         return (
             <div >
-                RSVP to the Wedding for you Other Half: {this.state.name}
+                <h2>RSVP for {coupleState.name}</h2>
                 <br />
-                Will {this.state.name} Be Joining You?
-                    <FormControlLabel
-                        classes={{label: 'checkBoxLabel'}}
-                        value="Yes"
-                        control={
+                {String(updated)}
+                <h3>Will {coupleState.name} Be Joining You? </h3>
+                <div  className={updated ? 'form-container-updated' : 'form-container'}>
+                {updated ? 
+                    <p className="update-message">Updated</p>
+                :
+                    <div>
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="Yes"
+                            control={
                                 <Checkbox 
-                                    checked={this.state.rsvp === 'Yes' ? true : false} 
+                                    checked={coupleState.rsvp === 'Yes' ? true : false} 
                                     color='secondary'
-                                    onClick={() => {this.checkCoupleRSVP('Yes')}} />}
-                        label="Yes"
-                        labelPlacement="start"
-                        />
-                    <FormControlLabel
-                        classes={{label: 'checkBoxLabel'}}
-                        value="No"
-                        control={
+                                    onClick={() => handleChange('Yes', '1')} />}
+                            label="Yes"
+                            labelPlacement="start"
+                            />
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="No"
+                            control={
                                 <Checkbox 
-                                    checked={this.state.rsvp === 'No' ? true : false} 
+                                    checked={coupleState.rsvp === 'No' ? true : false} 
                                     color='secondary'
-                                    onClick={() => {this.checkCoupleRSVP('No')}} />}
-                        label="No"
-                        labelPlacement="start"
+                                    onClick={() => handleChange('No', '1')} />}
+                            label="No"
+                            labelPlacement="start"
                         />
+                    </div>
+                    }
+                </div>
                 <br />
-                Current Response: {this.state.rsvp}
-                <p id="successMsg3" className="successMsg"> </p>
                 <br />
                 <br />
             </div>
         )
-    }
 }

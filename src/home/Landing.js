@@ -1,25 +1,39 @@
 import React from 'react';
 import './home.css';
 import graphic from '../img/pics/Mae.JPG';
-import CalenderContainer from '../components/calendar/CalenderContainer'
+import { CalenderContainer } from '../components/calendar/CalenderContainer'
+import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
+import Parking from '../components/parking/Parking';
 
 
-function Home() {
+function Home(props) {
     
     return (
-        <div className="home">
-            <div className="row-no-gutters">
-                <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
-                    <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>
-                    <div className="imgLeftMobile firstImg"></div>
-                </div>
-                <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
-                    <div className="row">
-                        <div className="homeText ">
+        <div className="landing-container">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div className="row-no-gutters">
+                    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                        <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>
+                        <div className="imgLeftMobile firstImg"></div>
+                    </div>
+                    <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
+                        <div className="row HomeText">
                             <h1>Calendar</h1>
-                            <CalenderContainer 
+                            <CalenderContainer
                                     wparty="n"/>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <hr className="hr"/>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5 homeText">
+                        <ParkingOther />
+                    </div>
+                    <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1 homeText">
+                        <ParkingInfo
+                            isLoggedIn={props.isLoggedIn}/>
                     </div>
                 </div>
             </div>

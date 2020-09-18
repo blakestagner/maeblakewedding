@@ -26,7 +26,7 @@ handleSuccessfulAuth(data) {
 }
   render() {
     return (
-        <div className="container user-login">
+        <div className="user-login">
             <div className="box-controller">
               <LoginBox  handleSuccessfulAuth={this.handleSuccessfulAuth}/>
             </div>
@@ -84,8 +84,8 @@ class LoginBox extends React.Component {
           </div>
             <div className="space-below">
                 <TextField 
-                  fullWidth="true"
-                  required="true"
+                  fullWidth={true}
+                  required={true}
                   id="email" 
                   label="email"
                   name="email"
@@ -94,8 +94,8 @@ class LoginBox extends React.Component {
             </div>
             <div className="space-below">
                 <TextField 
-                fullWidth="true"
-                required="true"
+                fullWidth={true}
+                required={true}
                   id="password" 
                   label="password"
                   name="password"

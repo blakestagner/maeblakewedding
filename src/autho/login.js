@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
  import { login } from './Repository';
- import './Home.css'
 
 class Login extends Component {
  constructor() {
@@ -24,7 +23,7 @@ class Login extends Component {
         }
     render() {
         return (
-        <div className="container">
+        <div>
             <hr/>
             <div className="col-sm-8 col-sm-offset-2">
                 <div className="panel panel-primary">

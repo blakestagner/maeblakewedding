@@ -33,6 +33,9 @@
   margin-right: 0;
   margin-left: 0;
 }
+.row-margin-auto {
+  margin: 0 auto;
+}
 .row-no-gutters [class*="col-"] {
   padding-right: 0;
   padding-left: 0;

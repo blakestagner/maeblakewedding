@@ -5,14 +5,15 @@ import './grid/grid.css';
 import Toolbar from './toolbar/Toolbar';
 import Hero from './hero/Hero';
 import Landing from './home/Landing';
-import Responses from './autho/Responses'
+import { Responses } from './autho/Responses'
 import UserLogin from './register/UserLogin';
 import Profile from './components/profile/Profile';
 import Footer from './footer/Footer';
-import Calendar from './components/calendar/Calendar';
-import ParkingHome from './components/parking/ParkingHome';
+import { Calendar } from './components/calendar/Calendar';
+import { ParkingHome } from './components/parking/ParkingHome';
 import RSVPHome from './components/RSVP/RSVPHome';
 import { isAuthenticated, getUserInfo } from './autho/Repository'
+import ScrollToTop from './components/ScrollToTop'
 
 class App extends React.Component {
   constructor(){
@@ -46,7 +47,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Router> 
+        <Router>
+          <ScrollToTop />
           <Toolbar />
           <Hero />
           <Switch>

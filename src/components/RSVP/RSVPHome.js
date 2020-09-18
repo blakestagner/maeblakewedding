@@ -16,13 +16,9 @@ componentDidMount() {
     if( !isAuthenticated() ) {
         alert('User Not Authenticated');
         this.setState({auth: false})
-        this.props.loadStatus()
     }
 }
     render() {
-        if (this.props.loading === 0) {
-            return <Loading />
-        }
         return (
             <div className="row-no-gutter">
                 {(this.state.auth) ? '' : <Redirect to="/" />}
