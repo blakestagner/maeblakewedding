@@ -27,6 +27,10 @@ export function Responses(props) {
                     <h1>{props.userDetails.fname}, Your Responses</h1>
                         <RSVP userDetails={props.userDetails}/>
                         <Parking userDetails={props.userDetails}/>
+                        <br/>
+                        <br/>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
