@@ -3,7 +3,7 @@ import { isAuthenticated } from './Repository';
 import { Redirect } from 'react-router-dom';
 import Parking from '../components/parking/Parking';
 import RSVP from '../components/RSVP/RSVP';
-import graphic from '../img/pics/Mae.JPG';
+import graphic from '../img/pics/Mae.jpg';
 
 export function Responses(props) {
     const [authenticated, setAuthenticated] = useState(true)
@@ -27,10 +27,6 @@ export function Responses(props) {
                     <h1>{props.userDetails.fname}, Your Responses</h1>
                         <RSVP userDetails={props.userDetails}/>
                         <Parking userDetails={props.userDetails}/>
-                        <br/>
-                        <br/>
-                        <br />
-                        <br />
                     </div>
                 </div>
             </div>

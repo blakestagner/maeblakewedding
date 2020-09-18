@@ -1,7 +1,7 @@
 import React from 'react';
 import RSVP from './RSVP';
 import '../../home/home.css'
-import graphic from '../../img/pics/Mae.JPG';
+import graphic from '../../img/pics/Mae.jpg';
 import { isAuthenticated } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 import Loading from '../Loading'

@@ -30,7 +30,7 @@
         display: none;
     }
     .imgLeftMobile {
-        background-image: url(../img/pics/Mae.JPG);
+        background-image: url(../img/pics/Mae.jpg);
         display: block;
         height: 30vh;
         background-position: center top;
@@ -43,7 +43,7 @@
         display: none;
     }
     .imgRightMobile {
-        background-image: url(../img/pics/Mae.JPG);
+        background-image: url(../img/pics/Mae.jpg);
         display: block;
         height: 20vh;
         background-position: center top;

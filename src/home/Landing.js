@@ -1,9 +1,8 @@
 import React from 'react';
 import './home.css';
-import graphic from '../img/pics/Mae.JPG';
+import graphic from '../img/pics/Mae.jpg';
 import { CalenderContainer } from '../components/calendar/CalenderContainer'
 import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
-import Parking from '../components/parking/Parking';
 
 
 function Home(props) {

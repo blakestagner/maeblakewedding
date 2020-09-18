@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Parking } from './Parking';
 import { ParkingInfo, ParkingOther } from './ParkingInfo'
 import '../../home/home.css'
-import graphic from '../../img/pics/Mae.JPG';
+import graphic from '../../img/pics/Mae.jpg';
 import { isAuthenticated } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 
@@ -31,6 +31,7 @@ export function ParkingHome(props) {
                 </div>
             </div>
             <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <hr className="hr" />
                 <div className="row">
                     <div className="homeText">
                         <ParkingInfo isLoggedIn={props.isLoggedIn}/>
