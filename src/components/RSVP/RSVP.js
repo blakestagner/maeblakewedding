@@ -93,39 +93,40 @@ export default class RSVP extends React.Component {
                 <div>
                 <h2>RSVP to the Wedding</h2>
                 <h3>Will you be Attending the Wedding?</h3>
-                <div className={this.state.updated === '1' ? 'form-container-updated' : 'form-container'}>
-                {this.state.updated === '1' ? 
-                    <p className="update-message">Updated</p>
-                :
-                    <div>
-                        <FormControlLabel
-                            classes={{label: 'checkBoxLabel'}}
-                            value="Yes"
-                            control={
-                                    <Checkbox 
-                                        checked={this.state.rsvp === 'Yes' ? true : false} 
-                                        color='primary'
-                                        onClick={() => {this.onCheckRSVP('Yes', '1')}} />}
-                            label="Yes"
-                            labelPlacement="start"
-                        />
-                        <FormControlLabel
-                            classes={{label: 'checkBoxLabel'}}
-                            value="No"
-                            control={
-                                    <Checkbox 
-                                        checked={this.state.rsvp === 'No' ? true : false} 
-                                        color='primary'
-                                        onClick={() => {this.onCheckRSVP('No', '1')}} />}
-                            label="No"
-                            labelPlacement="start"
-                        />
+                <div className="separator">
+                    <div className={this.state.updated === '1' ? 'form-container-updated' : 'form-container separator'}>
+                    {this.state.updated === '1' ? 
+                        <p className="update-message">Updated</p>
+                    :
+                        <div>
+                            <FormControlLabel
+                                classes={{label: 'checkBoxLabel'}}
+                                value="Yes"
+                                control={
+                                        <Checkbox 
+                                            checked={this.state.rsvp === 'Yes' ? true : false} 
+                                            color='primary'
+                                            onClick={() => {this.onCheckRSVP('Yes', '1')}} />}
+                                label="Yes"
+                                labelPlacement="start"
+                            />
+                            <FormControlLabel
+                                classes={{label: 'checkBoxLabel'}}
+                                value="No"
+                                control={
+                                        <Checkbox 
+                                            checked={this.state.rsvp === 'No' ? true : false} 
+                                            color='primary'
+                                            onClick={() => {this.onCheckRSVP('No', '1')}} />}
+                                label="No"
+                                labelPlacement="start"
+                            />
+                        </div>
+                    }
                     </div>
-                }
                 </div>
-            <br />
             {(this.state.hasPlusone === "Yes") ? 
-            <div>
+            <div className="separator">
                 <h3>Are you bringing a Plus One?</h3>
                 <div className={this.state.updated === '2' ? 'form-container-updated' : 'form-container'}>
                 {this.state.updated === '2' ? 
@@ -157,7 +158,6 @@ export default class RSVP extends React.Component {
                     </div>
                 }
                 </div>
-                <br />
             </div>
             : ''
             }
@@ -206,10 +206,8 @@ export function CoupleInfo(props){
         const timer = setTimeout(() => setUpdate(false), 800 )
     }
         return (
-            <div >
+            <div className="separator">
                 <h2>RSVP for {coupleState.name}</h2>
-                <br />
-                {String(updated)}
                 <h3>Will {coupleState.name} Be Joining You? </h3>
                 <div  className={updated ? 'form-container-updated' : 'form-container'}>
                 {updated ? 
@@ -241,9 +239,6 @@ export function CoupleInfo(props){
                     </div>
                     }
                 </div>
-                <br />
-                <br />
-                <br />
             </div>
         )
 }

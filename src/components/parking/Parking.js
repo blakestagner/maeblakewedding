@@ -39,7 +39,7 @@ export function Parking() {
         const timer = setTimeout(() => setUpdate(false), 800 )
     }
     return (
-        <div>
+        <div className="separator">
             <h2>Parking</h2>
             <h3>Do you need a prepaid parking spot?</h3>
             <div className={!updateStatus ? "form-container" : "form-container-updated"}>

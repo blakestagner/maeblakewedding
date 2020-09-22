@@ -1,6 +1,6 @@
 import axios from 'axios';
-const BASE_URL = 'http://73.109.125.191:3050';
-//const BASE_URL = 'http://localhost:3050';
+//const BASE_URL = 'http://73.109.125.191:3050';
+const BASE_URL = 'http://localhost:3050';
 
 
 export function login (data) {
@@ -11,7 +11,7 @@ export function login (data) {
     })
     .then(response => {
         localStorage.setItem('x-access-token', response.data.token);
-        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 1000);
+        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 10000);
         return response.data
     })
     .catch((err) => Promise.reject(

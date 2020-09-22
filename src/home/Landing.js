@@ -16,7 +16,7 @@ function Home(props) {
                         <div className="imgLeftMobile firstImg"></div>
                     </div>
                     <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
-                        <div className="row HomeText">
+                        <div className="row HomeText separator">
                             <h1>Calendar</h1>
                             <CalenderContainer
                                     wparty="n"/>
@@ -24,15 +24,16 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <hr className="hr"/>
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 homeText">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5 homeText">
-                        <ParkingOther />
+                    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5 ">
+                        
                     </div>
-                    <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1 homeText">
+                    <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
                         <ParkingInfo
                             isLoggedIn={props.isLoggedIn}/>
+                        
+                        <ParkingOther />
                     </div>
                 </div>
             </div>

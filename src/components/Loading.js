@@ -1,14 +1,14 @@
 import React, {useEffect, useState } from 'react';
 
 function Loading(props) {
-    const [loading, doneLoading] = useState(0)
+    const [loading, doneLoading] = useState(true)
 
     const loadStatus = () => {
-        doneLoading(1)
+        doneLoading(false)
     }
 
     return (
-        <div style={{backgroundCOlor: '#000', width: '500px', height: '500px'}}>
+        <div style={{backgroundColor: 'blue', width: '500px', height: '500px'}}>
             {loading ? 'LOADING' : ''}</div>
     )
 } 

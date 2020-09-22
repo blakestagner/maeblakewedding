@@ -25,17 +25,15 @@ export function ParkingHome(props) {
             </div>
             <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                 <div className="row">
-                    <div className="homeText">
+                    <div className="homeText separator">
                         <Parking userDetails={props.userDetails}/>
                     </div>
                 </div>
             </div>
             <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-            <hr className="hr" />
                 <div className="row">
                     <div className="homeText">
                         <ParkingInfo isLoggedIn={props.isLoggedIn}/>
-                        <hr className="hr"/>
                         <ParkingOther />
                     </div>
                 </div>
