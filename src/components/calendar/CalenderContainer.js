@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getUserInfo, calendarInfo, calendarPublic } from '../../autho/Repository';
+import { isAuthenticated, calendarInfo, calendarPublic } from '../../autho/Repository';
 import './calendar.css';
 import location from '../../img/icons/location-white.svg';
 import details from '../../img/icons/details-white.svg';
@@ -10,7 +10,7 @@ export function CalenderContainer(props){
     const [events, setEvents] = React.useState({
         eventList: []
     })
-    React.useEffect(() => {
+    React.useEffect((events) => {
         if( isAuthenticated() )
             calendarInfo()   
                 .then(res => {
@@ -74,7 +74,7 @@ export function CalenderContainer(props){
         <div>
             <h1>{props.categoryName}</h1>
             <div className="cardMain">
-                {events.eventList.filter(eventCat => eventCat.wparty == props.wparty).map((eventCat) => (
+                {events.eventList.filter(eventCat => eventCat.wparty === props.wparty).map((eventCat) => (
                 <div className="eventList" key={eventCat.id}>    
                     <div className="calendarMain">
                         <img src={ add } className="add" alt="plus-minus" onClick={(e) => {expandPanel(`panel-${eventCat.id}`, e)}} />

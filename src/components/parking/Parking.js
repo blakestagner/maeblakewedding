@@ -16,7 +16,7 @@ export function Parking() {
     const getParkingInfo = () => {
         getParking()
             .then(res => {
-                setParking(res[0].parking)
+                setParking(parking => (res[0].parking))
             })
             .catch(err => {
                 console.log(err)
@@ -36,7 +36,7 @@ export function Parking() {
     }
     const updateAnimate = () => {
         setUpdate(true)
-        const timer = setTimeout(() => setUpdate(false), 800 )
+        setTimeout(() => setUpdate(false), 800 )
     }
     return (
         <div className="separator">

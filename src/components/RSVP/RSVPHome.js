@@ -4,7 +4,6 @@ import '../../home/home.css'
 import graphic from '../../img/pics/side_img.jpg';
 import { isAuthenticated } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
-import Loading from '../Loading'
 
 export default class RSVPHome extends React.Component {
     constructor() {
@@ -20,7 +19,7 @@ componentDidMount() {
 }
     render() {
         return (
-            <div className="row-no-gutter">
+            <div>
                 {(this.state.auth) ? '' : <Redirect to="/" />}
                 <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
                     <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>

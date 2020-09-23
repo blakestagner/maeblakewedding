@@ -108,7 +108,7 @@
     background-color: #fff;
 }
 .login-details {
-    margin-top: 10px;
+    margin: 10px;
     color: grey;
     font-size: 14px;
 }
@@ -121,6 +121,7 @@
     left: 0px;
     right: 0px;
     z-index: 20;
+    margin: 0 15px;
 }
 @media only screen and (max-width: 768px) {
     .user-login {

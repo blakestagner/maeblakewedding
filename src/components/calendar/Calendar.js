@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { isAuthenticated, getUserInfo, calendarInfo } from '../../autho/Repository';
+import { isAuthenticated, getUserInfo } from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 import './calendar.css';
-import location from '../../img/icons/location-white.svg';
-import details from '../../img/icons/details-white.svg';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
 import { CalenderContainer } from './CalenderContainer' 
@@ -43,7 +41,7 @@ export function Calendar(props) {
         const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
     return (
-        <div className="row-no-gutter">
+        <div>
             {authenticated ? '' : <Redirect to="/" />} 
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
                 <h1>Calendars</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import parking_map from '../../img/venue/PARKING MAP.pdf';
-import pdf from '../../img/icons/pdf.svg'
-import parking from './parking.css'
+import pdf from '../../img/icons/pdf.svg';
+import './parking.css';
 
 export function ParkingInfo(props) {
     
@@ -18,9 +18,8 @@ export function ParkingInfo(props) {
                     height="450" 
                     frameBorder="0" 
                     style={{border: '0'}} 
-                    allowfullscreen="" 
                     aria-hidden="false" 
-                    tabindex="0"
+                    tabIndex="0"
                     title="venue parking"></iframe>
         </div>
     )
@@ -34,7 +33,7 @@ export function ParkingOther() {
             <div className="other-parking-container">
                 <div className="parking-row">
                     <img className="pdf-icon" src={pdf} alt="details"/>
-                    <a href={parking_map} target="_blank">
+                    <a href={parking_map} rel="noopener noreferrer" target="_blank">
                     <div 
                         className="button" 
                         href={parking_map} target='_blank'>Parking locations pdf</div>

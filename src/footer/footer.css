@@ -6,13 +6,13 @@ footer {
     height: min-content;
     text-align: center;
     clear: both;
-    padding: 30px 10px;
+    padding: 0px 10px 30px;
     position: relative;
     margin: 50px 0 0;
 }
 footer h1 {
     font-size: 60px;
-    margin-bottom: 0px;
+    margin-top: 20px;
     font-family:'Playlist Script';
     font-weight:normal;
 }

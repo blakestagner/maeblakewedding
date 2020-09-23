@@ -20,7 +20,7 @@ export default class Toolbar extends React.Component {
     mobileMenuToggle() {
         const mobileNav = document.querySelector('#mobileMenu')
         const contentElement = document.querySelector('#root')
-        if (mobileNav.classList == 'mmClosed') {
+        if (mobileNav.classList.contains('mmClosed')) {
             this.handleClickBeyondSidebar(contentElement, mobileNav)
             mobileNav.classList = 'mmOpen'
         } else { 

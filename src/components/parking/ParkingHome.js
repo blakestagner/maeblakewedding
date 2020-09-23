@@ -17,7 +17,7 @@ export function ParkingHome(props) {
     }, [] )
 
     return (
-        <div className="row-no-gutter">
+        <div>
             {(authenticated) ? '' : <Redirect to="/" />}
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
                 <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getUserInfo, getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
+import { getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -85,10 +85,9 @@ export default class RSVP extends React.Component {
     }
     updateAnimate(e) {
         this.setState({updated: e})
-        const timer = setTimeout(() => this.setState({updated: 'none'}), 800 )
+        setTimeout(() => this.setState({updated: 'none'}), 800 )
     }
     render() {
-        const userDetails = this.props.userDetails
         return (
                 <div>
                 <h2>RSVP to the Wedding</h2>
@@ -171,7 +170,6 @@ export default class RSVP extends React.Component {
 }
 export function CoupleInfo(props){
     const [coupleState, setCoupleState] = React.useState({
-        id: props.coupleId,
         name: '',
         rsvp: '',
         updated: 'none'
@@ -180,18 +178,19 @@ export function CoupleInfo(props){
     React.useEffect(() => {
         getCoupleInfo(props.coupleId)
         .then(res => {
-            setCoupleState({...coupleState, name: res[0].fname, rsvp: res[0].RSVP})
+            setCoupleState(coupleState => ({...coupleState, name: res[0].fname, rsvp: res[0].RSVP}))
         })
         .catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [props.coupleId])
+    
     const handleChange = (e, x) => {
         updateCoupleRSVP(e, props.coupleId)
         .then(res => {
-            getCoupleRSVP(coupleState.id)
+            getCoupleRSVP(props.coupleId)
             .then(res => {
-                setCoupleState({...coupleState, rsvp: res[0].RSVP})
+                setCoupleState(coupleState => ({...coupleState, rsvp: res[0].RSVP}))
                 updateAnimate()
             })
             .catch(err => console.log(err))
@@ -203,7 +202,7 @@ export function CoupleInfo(props){
     }
     const updateAnimate = () => {
         setUpdate(true)
-        const timer = setTimeout(() => setUpdate(false), 800 )
+        setTimeout(() => setUpdate(false), 800 )
     }
         return (
             <div className="separator">
