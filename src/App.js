@@ -14,6 +14,7 @@ import { ParkingHome } from './components/parking/ParkingHome';
 import RSVPHome from './components/RSVP/RSVPHome';
 import { isAuthenticated, getUserInfo } from './autho/Repository'
 import ScrollToTop from './components/ScrollToTop'
+import Dashboard from './components/admin/Dashboard'
 
 class App extends React.Component {
   constructor(){
@@ -49,7 +50,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <ScrollToTop />
-          <Toolbar />
+          <Toolbar userDetails={this.state.userDetails}/>
           <Hero />
           <Switch>
             <React.Fragment>
@@ -95,10 +96,19 @@ class App extends React.Component {
                     />
                   )} 
                   />
-                 <Route  exact 
+                <Route  exact 
                   path="/home" 
                   render={props => (
                     <Responses {...props} 
+                    isLoggedIn={this.state.isLoggedIn}
+                    userDetails={this.state.userDetails} 
+                    />
+                  )} 
+                  />
+                <Route  exact 
+                  path="/dashboard" 
+                  render={props => (
+                    <Dashboard {...props} 
                     isLoggedIn={this.state.isLoggedIn}
                     userDetails={this.state.userDetails} 
                     />

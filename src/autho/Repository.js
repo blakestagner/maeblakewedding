@@ -152,3 +152,10 @@ export function updateCoupleRSVP (x, y) {
         .then((res) => res.data)
         .catch((err) => Promise.reject('Request Not Authorized!'))
 }
+export function getAllUsers (data) {
+    return axios.get(`${BASE_URL}/api/getAllUsers`, {
+        params: { 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }

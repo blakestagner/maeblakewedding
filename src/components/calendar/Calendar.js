@@ -38,7 +38,7 @@ export function Calendar(props) {
             e.target.src = remove
             }
         }
-        const selected = 'calendar-category-button selected'
+    const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
     return (
         <div>

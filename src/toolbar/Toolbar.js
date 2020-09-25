@@ -66,6 +66,12 @@ export default class Toolbar extends React.Component {
                         <h1><Link to="/">Mae & Blake</Link></h1>
                     </div>
                     <ul id="mainMenuList">
+                        {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
+                            <li className="menuList">
+                                <Link to="/dashboard">Dashboard</Link>
+                            </li> 
+                            : ''
+                        }
                         {( isAuthenticated() ) ?
                             <li className="menuList">
                                 <Link to="/home">Responses</Link>
