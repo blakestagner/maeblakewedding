@@ -1,15 +1,17 @@
-import React, {useEffect, useState } from 'react';
+import React, {useState } from 'react';
 
-function Loading(props) {
-    const [loading, doneLoading] = useState(true)
+const Loading =   React.forwardRef((props, ref) => {
+    const [loading, loaded] = useState(false) 
 
-    const loadStatus = () => {
-        doneLoading(false)
-    }
-
-    return (
-        <div style={{backgroundColor: 'blue', width: '500px', height: '500px'}}>
-            {loading ? 'LOADING' : ''}</div>
+    React.useImperativeHandle(ref, () => ({
+        loadingStatus() {
+            loaded(loading => (true))
+        }
+    }));
+     return (
+        <div
+            className={loading ? 'done-loading' : 'map_canvas loading'} >
+        </div>
     )
-} 
+}); 
 export default Loading;
