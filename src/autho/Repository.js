@@ -1,6 +1,6 @@
 import axios from 'axios';
-//const BASE_URL = 'http://73.109.125.191:3050';
-const BASE_URL = 'http://localhost:3050';
+const BASE_URL = 'http://73.109.125.191:3050';
+//const BASE_URL = 'http://localhost:3050';
 
 
 export function login (data) {
