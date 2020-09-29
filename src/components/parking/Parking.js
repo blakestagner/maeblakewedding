@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 export function Parking() {
     const [parking, setParking] = useState()
     const [updateStatus, setUpdate ] = useState(false)
+
     useEffect(() => {
         getUserInfo()
             .then(getParkingInfo())
@@ -43,6 +44,7 @@ export function Parking() {
             <h2>Parking</h2>
             <h3>Do you need a prepaid parking spot?</h3>
             <div className={!updateStatus ? "form-container" : "form-container-updated"}>
+                
                 {!updateStatus ?
                     <div>
                         <FormControlLabel
