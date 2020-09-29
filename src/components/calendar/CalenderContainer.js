@@ -5,11 +5,13 @@ import location from '../../img/icons/location-white.svg';
 import details from '../../img/icons/details-white.svg';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
+import Loading from '../Loading'
 
 export function CalenderContainer(props){
     const [events, setEvents] = React.useState({
         eventList: []
     })
+    const doneLoadingRef = React.useRef()
     React.useEffect((events) => {
         if( isAuthenticated() )
             calendarInfo()   
@@ -28,6 +30,7 @@ export function CalenderContainer(props){
                     console.log('error')
                 })
         }
+        doneLoadingRef.current.loadingStatus()
     }, [])
     
     const expandPanel = (x, e) => {
@@ -73,6 +76,7 @@ export function CalenderContainer(props){
     return (
         <div>
             <h1>{props.categoryName}</h1>
+            <Loading ref={doneLoadingRef}/>
             <div className="cardMain">
                 {events.eventList.filter(eventCat => eventCat.wparty === props.wparty).map((eventCat) => (
                 <div className="eventList" key={eventCat.id}>    

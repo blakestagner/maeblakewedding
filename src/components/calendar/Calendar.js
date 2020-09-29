@@ -38,6 +38,9 @@ export function Calendar(props) {
             e.target.src = remove
             }
         }
+    const test = () => {
+        console.log('done laoding')
+    }
     const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
     return (
@@ -81,7 +84,8 @@ export function Calendar(props) {
             <div className="row">
                 <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-lg-push-1">
                 {openCalendar === 'for all' &&
-                    <CalenderContainer 
+                    <CalenderContainer
+                        onLoad={() => test()} 
                         expandPanel={expandPanel}
                         categoryName="Events For All"
                         wparty="n"/>
