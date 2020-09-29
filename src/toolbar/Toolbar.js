@@ -60,56 +60,51 @@ export default class Toolbar extends React.Component {
             };  
         return (
         <div className="navBar" id="mainNav">
-            <MobileMenu onClick={this.mobileMenuToggle}/>
+            <MobileMenu 
+                userDetails={this.props.userDetails}
+                onClick={this.mobileMenuToggle}/>
                 <div className='navBarContainer'>
                     <div className='navBarTitle'>
                         <h1><Link to="/">Mae & Blake</Link></h1>
                     </div>
-                    <ul id="mainMenuList">
-                        {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
-                            <li className="menuList">
-                                <Link to="/dashboard">Dashboard</Link>
-                            </li> 
-                            : ''
-                        }
-                        {( isAuthenticated() ) ?
+                    {( isAuthenticated() ) ?
+                        <ul id="mainMenuList">
+                            {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
+                                <li className="menuList">
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+                                : ''
+                            }
                             <li className="menuList">
                                 <Link to="/home">Responses</Link>
                             </li> 
-                            : ''
-                        }
-                        {( isAuthenticated() ) ? 
                             <li className="menuList">
                                 <Link to="/calendar">Calendar</Link>
                             </li>
-                            :  ''
-                        }
-                        {(isAuthenticated() ) ?
                             <li className="menuList">
                                 <Link to="/parking">Parking</Link>
-                            </li> 
-                            : ''
-                        }
-                        {(isAuthenticated() ) ? 
+                            </li>
                             <li className="menuList">
                                 <Link to="/rsvp">RSVP</Link>
                             </li>
-                            : ''
-                        }
-                        {( isAuthenticated() ) ? (   
                             <li className="menuList" onClick={this.logOut}>
                                 <a href="/">Log out</a> 
-                            </li>) : 
-                        ( 
+                            </li>
+                            <li>
+                                <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
+                            </li>
+                        </ul>
+                        
+                        : 
+                        <ul id="mainMenuList">
                             <li className="menuList">
                                 <Link to="/login">Log in</Link>
                             </li>
-                        )
-                        }
-                        <li>
-                            <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
-                        </li>
-                    </ul>
+                            <li>
+                                <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         )
@@ -122,42 +117,38 @@ class MobileMenu extends React.Component {
     render() {
         return (
             <div id="mobileMenu" className="mmClosed">
+                
+            {( isAuthenticated() ) ?
                 <ul className="mobileNavBarList" id="mobileNavBarList" onClick={this.props.onClick}>
-                    {( isAuthenticated() ) ?
-                            <li>
-                                <Link to="/home">Responses</Link>
-                            </li> 
-                            : ''
-                        }
-                    {( isAuthenticated() ) ? 
+                    {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
                         <li>
-                            <Link to="/calendar" >Calendar</Link>
-                        </li>
-                        :  ''
-                    }
-                    {(isAuthenticated() ) ?
-                        <li>
-                            <Link to="/parking">Parking</Link>
-                        </li> 
-                        : ''
-                    }
-                    {(isAuthenticated() ) ? 
-                        <li>
-                            <Link to="/rsvp">RSVP</Link>
+                            <Link to="/dashboard">Dashboard</Link>
                         </li>
                         : ''
                     }
-                    {( isAuthenticated() ) ? (   
-                        <li onClick={this.logOut}>
-                            <a href="/">Log out</a> 
-                        </li>) : 
-                    ( 
-                        <li>
-                            <Link to="/login">Log in</Link>
-                        </li>
-                    )
-                    }
+                    <li>
+                        <Link to="/home">Responses</Link>
+                    </li> 
+                    <li>
+                        <Link to="/calendar" >Calendar</Link>
+                    </li>
+                    <li>
+                        <Link to="/parking">Parking</Link>
+                    </li>
+                    <li>
+                        <Link to="/rsvp">RSVP</Link>
+                    </li>
+                    <li onClick={this.logOut}>
+                        <a href="/">Log out</a> 
+                    </li>
                 </ul>
+                : 
+                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={this.props.onClick}>
+                    <li>
+                        <Link to="/login">Log in</Link>
+                    </li>
+                </ul>
+                }
             </div>
         )
     }

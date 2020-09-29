@@ -33,13 +33,12 @@
 }
 .form-container {
   border-radius: 25px;
-  /*background-color:  #2B86C5;*/
-  /*border: 3px solid #2B86C5;*/
   width:  fit-content;
   padding: 5px 56px 5px 40px;
   margin: 0 auto;
   box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #FFFFFF;
   display: flex;
+
 }
 .form-container-updated {
   border-radius: 25px;
