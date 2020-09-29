@@ -99,6 +99,8 @@ export function CalenderContainer(props){
                             <p className="location eventsContent">{eventCat.location.split(',')[0]}</p>
                             <p className="locationBottom">{eventCat.location.split(',')[1]}</p>
                         </div>
+                        <div className="row">
+                        </div>
                     </div>
                 </div>
                 ))
