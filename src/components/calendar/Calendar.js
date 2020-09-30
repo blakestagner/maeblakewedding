@@ -70,7 +70,7 @@ export function Calendar(props) {
                     </div>
                         : null
                     }
-                    {(userDetails.wpart === 'g' || userDetails.wparty === 'a') ?
+                    {(userDetails.wparty === 'g' || userDetails.wparty === 'a') ?
                     <div className="calendarItems">
                         <div
                             onClick={() => setCalendar('bride')} 
@@ -85,7 +85,6 @@ export function Calendar(props) {
                 <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-lg-push-1">
                 {openCalendar === 'for all' &&
                     <CalenderContainer
-                        onLoad={() => test()} 
                         expandPanel={expandPanel}
                         categoryName="Events For All"
                         wparty="n"/>
