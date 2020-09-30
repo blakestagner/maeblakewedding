@@ -58,6 +58,7 @@
 .homeText h1 {
     font-size: 50px;
     font-family: 'Playlist Script';
+    font-display: swap;
     font-weight: normal;
     margin-top: 25px;
 }
