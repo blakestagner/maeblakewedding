@@ -28,6 +28,7 @@ export function Calendar(props) {
             setAuthenticated(false)
         }
     }, [])
+
     const expandPanel = (x, e) => {
         let panel = document.getElementById(x)
         if (panel.style.maxHeight) {
@@ -38,8 +39,10 @@ export function Calendar(props) {
             e.target.src = remove
             }
         }
+
     const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
+
     return (
         <div>
             {authenticated ? '' : <Redirect to="/" />} 

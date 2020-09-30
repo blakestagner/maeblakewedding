@@ -4,7 +4,6 @@ const BASE_URL = 'https://api.blakestagner.com';
 
 
 export function login (data) {
-    const lgnMsg = document.getElementById('loginMessage')
     return axios.post(`${BASE_URL}/api/login`, { 
         email: data.email, 
         password: data.password 
@@ -14,9 +13,7 @@ export function login (data) {
         localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 10000);
         return response.data
     })
-    .catch((err) => Promise.reject(
-        lgnMsg.innerHTML = err.response.data
-    ));
+    .catch((err) => Promise.reject(err.response.data));
 }
 
 export function register (data) {
