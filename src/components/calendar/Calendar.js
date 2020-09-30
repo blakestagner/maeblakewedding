@@ -18,13 +18,11 @@ export function Calendar(props) {
                 setUserDetails(res)
             })
             .catch(err => {
-                alert('You Need to Login to view this page');
                 setUserDetails({
                     auth: false
                 })
             })
         else {
-            alert('User Not Authenticated');
             setAuthenticated(false)
         }
     }, [])

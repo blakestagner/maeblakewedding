@@ -10,7 +10,7 @@ export function login (data) {
     })
     .then(response => {
         localStorage.setItem('x-access-token', response.data.token);
-        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 10000);
+        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 100000);
         return response.data
     })
     .catch((err) => Promise.reject(err.response.data));

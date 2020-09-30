@@ -11,7 +11,6 @@ export function ParkingHome(props) {
 
     useEffect(() => {
         if( !isAuthenticated() ) {
-            alert('Please log in to access this page')
             setAuthenticated(false)
         }
     }, [] )
