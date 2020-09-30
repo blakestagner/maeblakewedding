@@ -3,9 +3,14 @@ import './home.css';
 import graphic from '../img/pics/side_img.jpg';
 import { CalenderContainer } from '../components/calendar/CalenderContainer'
 import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
-
+import Loading from '../components/Loading'
 
 function Home(props) {
+    const doneLoadingRef = React.useRef()
+
+    React.useEffect(() =>{
+        doneLoadingRef.current.loadingStatus()
+    }, [])
     
     return (
         <div className="landing-container">
@@ -18,6 +23,7 @@ function Home(props) {
                     <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
                         <div className="row HomeText separator">
                             <h1>Calendar</h1>
+                            <Loading ref={doneLoadingRef}/>
                             <CalenderContainer
                                     wparty="n"/>
                         </div>
@@ -32,7 +38,6 @@ function Home(props) {
                     <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
                         <ParkingInfo
                             isLoggedIn={props.isLoggedIn}/>
-                        
                         <ParkingOther />
                     </div>
                 </div>

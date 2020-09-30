@@ -43,37 +43,45 @@ class LoginBox extends React.Component {
        this.state = { 
            email: '', 
            password: '',
+           loggingIn: false
        };
        this.handleInputChange =this.handleInputChange.bind(this);
        this.submitLogin =this.submitLogin.bind(this);
        }
    
-       handleInputChange(event) {
-          this.setState({[event.target.name]: event.target.value})
+      handleInputChange(event) {
+        this.setState({[event.target.name]: event.target.value})
+      }
+      submitLogin(e){
+          e.preventDefault();
+          const lgnMsg = document.getElementById('loginMessage')
+          if (this.state.email === '') {
+            lgnMsg.innerHTML = 'You forgot to type in your email'
+          } else if (this.state.password === '') {
+            lgnMsg.innerHTML = 'You forgot to type in your password'
+          } else if (!this.state.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+            lgnMsg.innerHTML = 'You didnt enter a valid email'
+        } else {
+            login(this.state)
+            .then(() => this.logginginMessage())
+            .then(res =>
+              getUserInfo()
+                .then(res=> {
+                  this.props.handleSuccessfulAuth(res)
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            )
+            .catch(err =>  lgnMsg.innerHTML = err)
           }
-       submitLogin(e){
-           e.preventDefault();
-           const lgnMsg = document.getElementById('loginMessage')
-           if (this.state.email === '') {
-              lgnMsg.innerHTML = 'You forgot to type in your email'
-           } else if (this.state.password === '') {
-              lgnMsg.innerHTML = 'You forgot to type in your password'
-           } else if (!this.state.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
-             lgnMsg.innerHTML = 'You didnt enter a valid email'
-          } else {
-              login(this.state)
-              .then(res =>
-                getUserInfo()
-                  .then(res=> {
-                    this.props.handleSuccessfulAuth(res)
-                  })
-                  .catch(err => {
-                    console.log(err)
-                  })
-              )
-              .catch(err => err)
-            }
-          }
+        setTimeout(() => lgnMsg.innerHTML = '', 3000 )
+      }
+      logginginMessage() {
+        this.setState({loggingIn: true})
+        const loginBtn = document.getElementById('login-btn')
+        loginBtn.innerHTML = `Logging In Now`
+      }
   render() {
     return (
       <div className="inner-container">
@@ -103,13 +111,30 @@ class LoginBox extends React.Component {
             </div>
               <p id="loginMessage"></p>
               <button 
-                type="button" 
+                type="button"
+                id="login-btn" 
                 className="login-btn" 
                 onClick={ this
                 .submitLogin
                 .bind(this)}>Login</button>
+              {this.state.loggingIn ? <LoginAnimation /> : ''}
           
       </div>
     )
   }
+}
+const LoginAnimation = () => {
+
+  return (
+    <div className="loader">
+      <div className="duo duo1">
+        <div className="dot dot-a"></div>
+        <div className="dot dot-b"></div>
+      </div>
+      <div className="duo duo2">
+        <div className="dot dot-a"></div>
+        <div className="dot dot-b"></div>
+      </div>
+    </div>
+  )
 }

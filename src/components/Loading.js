@@ -9,8 +9,19 @@ const Loading =   React.forwardRef((props, ref) => {
         }
     }));
      return (
-        <div
-            className={loading ? 'done-loading' : 'map_canvas loading'} >
+        <div className={loading ? 'done-loading' : 'lds-default'}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     )
 }); 

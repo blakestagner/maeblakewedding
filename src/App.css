@@ -35,7 +35,7 @@
   margin: 0 auto;
   box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #FFFFFF;
   display: flex;
-
+  flex-wrap: wrap;
 }
 .form-container-updated {
   border-radius: 25px;

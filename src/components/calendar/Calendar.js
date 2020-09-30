@@ -38,9 +38,6 @@ export function Calendar(props) {
             e.target.src = remove
             }
         }
-    const test = () => {
-        console.log('done laoding')
-    }
     const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
     return (
