@@ -1,9 +1,54 @@
 import React,  {useState, useEffect} from 'react';
-import { getAllUsers } from '../../autho/Repository'
+import { Redirect } from 'react-router-dom';
+import { isAuthenticated, getAllUsers, getTodos, completedTodo } from '../../autho/Repository'
+import './dashboard.css'
 
 export function Dashboard(props) {
-const [allUsers, setAllUsers] = useState([])
+    const [resType, setType] = useState('overview')
+    const [authenticated, setAuthenticated] = useState(true);
+    const selected = 'calendar-category-button selected'
+    const inactive = 'calendar-category-button'
 
+    useEffect(() => {
+        if( !isAuthenticated() ) {
+            setAuthenticated(false)
+        } else {}
+    }, [] )
+
+    return (
+        <div>
+            {authenticated ? '' : <Redirect to="/" />}
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
+                <h1>Mae & Blake Only</h1>
+                <div className="calendarBox">
+                    <div className='calendarItems'>
+                        <div
+                            onClick={() => setType('overview')}
+                            className={resType === 'overview' ? selected : inactive}>
+                            Overview</div>
+                    </div>
+                    <div className='calendarItems'>
+                        <div
+                            onClick={() => setType('todo')}
+                            className={resType === 'todo' ? selected : inactive}>
+                            Todo</div>
+                    </div>
+                </div>
+            </div>
+            {resType === 'overview' ? 
+                <Overview />
+            :
+                <Todo />
+            }
+        </div>
+    )
+}
+
+export default Dashboard;
+
+export function Overview(props) {
+    const [allUsers, setAllUsers] = useState([])
+    
     useEffect(() => {
         getAllUsers()
         .then(res => {
@@ -56,11 +101,8 @@ const [allUsers, setAllUsers] = useState([])
                 </div>
     }
 
-
     return (
-        <div>
-            <DashboardMenu />
-            <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
             <h1>Dashboard</h1>
             <h3>Total RSVP'd: {totalCount()}</h3>
             <div className="form-container dashboard" style={{padding: '5px 50px'}}>
@@ -68,9 +110,9 @@ const [allUsers, setAllUsers] = useState([])
                     <div><b className="dash-title">Parking </b>{getParkingCount()}</div>
                     <div><b className="dash-title">Plusone </b>{getPlusoneCount()}</div>
             </div>
-            <div className='users-container'>
+            <div className='dash-container'>
                 {allUsers.map(users => (
-                    <div className="user-info" key={users.id}>
+                    <div className="dash-info" key={users.id}>
                         <p>{users.fname} {users.lname}</p>
                         <p><b>RSVP:</b> {users.RSVP}</p>
                         <p><b>Parking:</b> {users.parking}</p>
@@ -81,42 +123,101 @@ const [allUsers, setAllUsers] = useState([])
                     </div>
                 ))}
             </div>
-            </div>
         </div>
     )
 }
 
-export default Dashboard;
+export function Todo(props) {
+    const [ourTodos, setTodos] = useState([])
 
-export function DashboardMenu(props) {
-    const [resType, setType] = useState('overview')
+    const todoStatus = (x, y) => {
+        completedTodo(x, y)
+            .then(res => console.log(res))
+            .then(refreshTodo)
+            .catch(err => console.log(err))
+    }
+    const refreshTodo = () => {
+        getTodos()
+            .then(res => setTodos(res))
+            .catch(err => console.log(err))
+    }
+    useEffect(() => {
+        getTodos()
+            .then(res => setTodos(res))
+            .catch(err => console.log(err))
+    }, [])
+    
+    const getMonthName = (e) => {
+        switch(e) {
+            case '01':
+                return 'Jan';
+            case '02':
+                return 'Feb';
+            case '03':
+                return 'Mar';
+            case '04':
+                return 'Apr';
+            case '05':
+                return 'May';
+            case '06':
+                return 'Jun';
+            case '07':
+                return 'Jul';
+            case '08':
+                return 'Aug';
+            case '09':
+                return 'Sept';
+            case '10':
+                return 'Oct';
+            case '11':
+                return 'Nov';
+            case '12':
+                return 'Dec';
+            default:  
+                return 'Null';
+        }
+    }
+    const convertTime = (time) => {
+        let date = time.split('T')[0]
+        let year = date.split('-')[0]
+        let month = date.split('-')[1]
+        let day = date.split('-')[2]
 
+        
+        return `${getMonthName(month)} ${day} ${year}`
+    }
+    
 
-    const selected = 'calendar-category-button selected'
-    const inactive = 'calendar-category-button'
     return (
-        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
-                <h1>Response Types</h1>
-                <div className="calendarBox">
-                    <div className='calendarItems'>
-                        <div
-                            onClick={() => setType('overview')}
-                            className={resType === 'overview' ? selected : inactive}>
-                            Overview</div>
+        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+            <h1>Todo</h1>
+            <h3>Still Todo</h3>
+            <div className='dash-container'>
+                {ourTodos.filter(todo => todo.completed === 0).map(todo => (
+                    <div key={todo.id}>
+                        <div className="dash-info">
+                            <p >{todo.title}</p>
+                            <p><b>By: </b>{convertTime(todo.complete_by)}</p>
+                            <p>{todo.description}</p>
+                        </div>
+                        <div className="todoBtn" onClick={() => todoStatus(1, todo.id)}>Completed</div>
                     </div>
-                    <div className='calendarItems'>
-                        <div
-                            onClick={() => setType('rsvp')}
-                            className={resType === 'rsvp' ? selected : inactive}>
-                            RSVP</div>
-                    </div>
-                    <div className='calendarItems'>
-                        <div
-                            onClick={() => setType('parking')}
-                            className={resType === 'parking' ? selected : inactive}>
-                            Parking</div>
-                    </div>
-                </div>
+                ))}
             </div>
+            <div className="separator"></div>
+            <h3>Completed</h3>
+            <div className='dash-container'>
+                {ourTodos.filter(todo => todo.completed === 1).map(todo => (
+                    <div key={todo.id}>
+                        <div className="dash-info">
+                            <p >{todo.title}</p>
+                            <p><b>By: </b>{convertTime(todo.complete_by)}</p>
+                            <p>{todo.description}</p>
+                        </div>
+                        <div className="todoBtn" onClick={() => todoStatus(0, todo.id)}>Incomplete</div>
+                    </div>
+                ))}
+            </div>
+        </div>
     )
 }

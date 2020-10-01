@@ -10,7 +10,6 @@ export function login (data) {
     })
     .then(response => {
         localStorage.setItem('x-access-token', response.data.token);
-        localStorage.setItem('x-access-token-expiration', Date.now() + 2 * 60 * 60 * 100000);
         return response.data
     })
     .catch((err) => Promise.reject(err.response.data));
@@ -36,7 +35,7 @@ export function register (data) {
 
 export function isAuthenticated() {
     return localStorage.getItem('x-access-token') 
-    && localStorage.getItem('x-access-token-expiration') > Date.now()
+    
 }
 
 export function getUserInfo() {
@@ -148,7 +147,7 @@ export function updateCoupleRSVP (x, y) {
         })
         .then((res) => res.data)
         .catch((err) => Promise.reject('Request Not Authorized!'))
-}
+    }
 export function getAllUsers (data) {
     return axios.get(`${BASE_URL}/api/getAllUsers`, {
         params: { 'x-access-token': localStorage.getItem('x-access-token')}
@@ -156,3 +155,19 @@ export function getAllUsers (data) {
         .then((res) => res.data)
         .catch(err => Promise.reject('Request Not Authenticated!'))
     }
+export function getTodos (data) {
+    return axios.get(`${BASE_URL}/api/getTodos`, {
+        params: { 'x-access-token': localStorage.getItem('x-access-token')}
+        })
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }
+export function completedTodo (x, y) {
+    return axios.post(`${BASE_URL}/api/completedTodo`, {
+        'completed': x, 
+        'id': y,
+        'x-access-token': localStorage.getItem('x-access-token')
+        })
+        .then((res) => res.data)
+        .catch((err) => Promise.reject('Request Not Authorized!'))
+}

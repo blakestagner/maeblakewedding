@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { isAuthenticated, getUserInfo } from '../../autho/Repository';
+import { isAuthenticated} from '../../autho/Repository';
 import { Redirect } from 'react-router-dom';
 import './calendar.css';
 import add from '../../img/icons/add.svg';
@@ -7,24 +7,12 @@ import remove from '../../img/icons/remove.svg';
 import { CalenderContainer } from './CalenderContainer' 
 
 export function Calendar(props) {
-    const [userDetails, setUserDetails] = useState([]);
     const [openCalendar, setCalendar] = useState('for all');
     const [authenticated, setAuthenticated] = useState(true);
 
     useEffect(() => {
-        if(isAuthenticated())
-        getUserInfo()
-            .then((res) => {
-                setUserDetails(res)
-            })
-            .catch(err => {
-                setUserDetails({
-                    auth: false
-                })
-            })
-        else {
+        if(!isAuthenticated())
             setAuthenticated(false)
-        }
     }, [])
 
     const expandPanel = (x, e) => {
@@ -59,7 +47,7 @@ export function Calendar(props) {
                             className={openCalendar === 'wedding party' ? selected : inactive}>
                             Wedding Party</div>
                     </div>
-                    {(userDetails.wparty === 'b' || userDetails.wparty === 'a') ?
+                    {(props.userDetails.wparty === 'b' || props.userDetails.wparty === 'a') ?
                     <div className="calendarItems">
                         <div
                             onClick={() => setCalendar('groom')} 
@@ -68,7 +56,7 @@ export function Calendar(props) {
                     </div>
                         : null
                     }
-                    {(userDetails.wparty === 'g' || userDetails.wparty === 'a') ?
+                    {(props.userDetails.wparty === 'g' || props.userDetails.wparty === 'a') ?
                     <div className="calendarItems">
                         <div
                             onClick={() => setCalendar('bride')} 

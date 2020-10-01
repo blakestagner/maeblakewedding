@@ -31,6 +31,9 @@ class App extends React.Component {
   handleLogin(data) {
     this.setState({isLoggedIn: true, userDetails: data})
   }
+  componentDidUpdate() {
+    this.checkLoggedinStatus();
+  }
   checkLoggedinStatus() {
     if( isAuthenticated() )
     getUserInfo()
@@ -41,7 +44,9 @@ class App extends React.Component {
             })
         })
         .catch(err => {
-            console.log(err);
+          localStorage.removeItem('x-access-token');
+          this.setState({isLoggedIn: false})
+          window.location.reload(false);
             })
     else {}
   }
@@ -50,7 +55,9 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <ScrollToTop />
-          <Toolbar userDetails={this.state.userDetails}/>
+          <Toolbar 
+            userDetails={this.state.userDetails}
+            isLoggedIn={this.state.isLoggedIn}/>
           <Hero />
           <Switch>
             <React.Fragment>
@@ -123,4 +130,5 @@ class App extends React.Component {
     );
   }
 }
+
 export default App;

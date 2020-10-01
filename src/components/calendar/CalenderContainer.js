@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { isAuthenticated, calendarInfo, calendarPublic } from '../../autho/Repository';
 import './calendar.css';
 import location from '../../img/icons/location-white.svg';
@@ -8,29 +8,37 @@ import remove from '../../img/icons/remove.svg';
 import Loading from '../Loading'
 
 export function CalenderContainer(props){
-    const [events, setEvents] = React.useState({
+    const [events, setEvents] = useState({
         eventList: []
     })
     const doneLoadingRef = React.useRef()
-    React.useEffect((events) => {
+    useEffect((events) => {
+        let mounted = true;
         if( isAuthenticated() )
             calendarInfo()   
                 .then(res => {
-                    setEvents({...events, eventList: res})
+                    if(mounted) {
+                        setEvents({...events, eventList: res})
+                    }
                 })
                 .catch(err => {
                     console.log('error')
                 }) 
         else {
             calendarPublic()   
-                .then((eventList) => {
-                    setEvents({eventList: eventList})
+                .then((res) => {
+                    if(mounted) {
+                    setEvents({eventList: res})
+                    }
                 })
                 .catch(err => {
                     console.log('error')
                 })
         }
         doneLoadingRef.current.loadingStatus()
+        return function cleanup() {
+            mounted = false
+        }
     }, [])
     
     const expandPanel = (x, e) => {

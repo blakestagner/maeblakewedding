@@ -55,32 +55,40 @@ class LoginBox extends React.Component {
       submitLogin(e){
           e.preventDefault();
           const lgnMsg = document.getElementById('loginMessage')
+          this.logginginMessage()
           if (this.state.email === '') {
+            this.removeLogginginMessage()
             lgnMsg.innerHTML = 'You forgot to type in your email'
           } else if (this.state.password === '') {
+            this.removeLogginginMessage()
             lgnMsg.innerHTML = 'You forgot to type in your password'
           } else if (!this.state.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+            this.removeLogginginMessage()
             lgnMsg.innerHTML = 'You didnt enter a valid email'
         } else {
             login(this.state)
-            .then(() => this.logginginMessage())
             .then(res =>
               getUserInfo()
                 .then(res=> {
                   this.props.handleSuccessfulAuth(res)
                 })
                 .catch(err => {
+                  this.removeLogginginMessage()
                   console.log(err)
                 })
             )
-            .catch(err =>  lgnMsg.innerHTML = err)
+            .catch(err => { 
+              this.removeLogginginMessage() 
+              lgnMsg.innerHTML = err
+            })
           }
         setTimeout(() => lgnMsg.innerHTML = '', 3000 )
       }
       logginginMessage() {
         this.setState({loggingIn: true})
-        const loginBtn = document.getElementById('login-btn')
-        loginBtn.innerHTML = `Logging In Now`
+      }
+      removeLogginginMessage() {
+        this.setState({loggingIn: false})
       }
   render() {
     return (
@@ -116,7 +124,7 @@ class LoginBox extends React.Component {
                 className="login-btn" 
                 onClick={ this
                 .submitLogin
-                .bind(this)}>Login</button>
+                .bind(this)}>{this.state.loggingIn ? 'Logging in' : 'Login'}</button>
               {this.state.loggingIn ? <LoginAnimation /> : ''}
           
       </div>

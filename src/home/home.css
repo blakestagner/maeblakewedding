@@ -38,18 +38,6 @@
         position: relative;
         clip-path: ellipse(40% 50% at 40% 50%);
     }
-    .imgRight {
-        display: none;
-    }
-    .imgRightMobile {
-        background-image: url(../img/pics/side_img.jpg);
-        display: block;
-        height: 20vh;
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: relative;
-    }
 }
 .homeText {
     align-content: center;

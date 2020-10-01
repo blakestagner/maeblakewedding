@@ -9,7 +9,7 @@ export default class Toolbar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            menuIcon: menuWhite
+            menuIcon: menuWhite,
         }
         this.handleClickBeyondSidebar = this.handleClickBeyondSidebar.bind(this)
         this.mobileMenuToggle = this.mobileMenuToggle.bind(this)
@@ -58,6 +58,7 @@ export default class Toolbar extends React.Component {
                 this.setState({menuIcon: menuBlack})
                 }
             };  
+
         return (
         <div className="navBar" id="mainNav">
             <MobileMenu 
@@ -67,7 +68,7 @@ export default class Toolbar extends React.Component {
                     <div className='navBarTitle'>
                         <h1><Link to="/">Mae & Blake</Link></h1>
                     </div>
-                    {( isAuthenticated() ) ?
+                    {this.props.isLoggedIn ?
                         <ul id="mainMenuList">
                             {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
                                 <li className="menuList">
