@@ -31,9 +31,7 @@ class App extends React.Component {
   handleLogin(data) {
     this.setState({isLoggedIn: true, userDetails: data})
   }
-  componentDidUpdate() {
-    this.checkLoggedinStatus();
-  }
+
   checkLoggedinStatus() {
     if( isAuthenticated() )
     getUserInfo()

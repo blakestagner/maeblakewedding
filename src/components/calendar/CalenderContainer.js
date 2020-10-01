@@ -14,11 +14,12 @@ export function CalenderContainer(props){
     const doneLoadingRef = React.useRef()
     useEffect((events) => {
         let mounted = true;
-        if( isAuthenticated() )
+        if( isAuthenticated() && mounted)
             calendarInfo()   
                 .then(res => {
                     if(mounted) {
                         setEvents({...events, eventList: res})
+                        console.log('hi')
                     }
                 })
                 .catch(err => {

@@ -82,7 +82,7 @@ class LoginBox extends React.Component {
               lgnMsg.innerHTML = err
             })
           }
-        setTimeout(() => lgnMsg.innerHTML = '', 3000 )
+        setTimeout(() => lgnMsg.innerHTML = '', 3500 )
       }
       logginginMessage() {
         this.setState({loggingIn: true})
