@@ -5,7 +5,7 @@ const Loading =   React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         loadingStatus() {
-            loaded(loading => (true))
+            loaded(!loading)
         }
     }));
      return (

@@ -17,7 +17,7 @@ import Dashboard from './components/admin/Dashboard';
 import Authenticated from './autho/Authentication'
 
 export function App() {
-  const [isLoggedIn, setLoggedin] = useState(false)
+  const [isLoggedIn, setLoggedin] = useState(true)
   const [userDetails, setUserDetails] = useState([])
 
   useEffect(() => {

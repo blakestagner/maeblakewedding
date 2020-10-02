@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import './calendar.css';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
-import { CalenderContainer } from './CalenderContainer' 
+import { CalenderContainer } from './CalenderContainer';
 
 export function Calendar(props) {
     const [openCalendar, setCalendar] = useState('for all');
-
 
     const expandPanel = (x, e) => {
         let panel = document.getElementById(x)
@@ -19,13 +18,13 @@ export function Calendar(props) {
             e.target.src = remove
             }
         }
-
+    
     const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
 
     return (
         <div>
-            {props.isLoggedIn ? '' : <Redirect to="/" />} 
+            {props.isLoggedIn ? '' : <Redirect to="/login" />} 
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
                 <h1>Calendars</h1>
                 <div className="calendarBox">
@@ -64,10 +63,13 @@ export function Calendar(props) {
             <div className="row">
                 <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-lg-push-1">
                 {openCalendar === 'for all' &&
+                <div>
                     <CalenderContainer
                         expandPanel={expandPanel}
                         categoryName="Events For All"
-                        wparty="n"/>
+                        wparty="n"
+                        />
+                </div>
                 }
                 {openCalendar === 'wedding party' &&
                     <CalenderContainer 

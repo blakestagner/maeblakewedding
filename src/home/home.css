@@ -29,7 +29,7 @@
         display: none;
     }
     .imgLeftMobile {
-        background-image: url(../img/pics/side_img.jpg);
+        background-image: url(../img/pics/side_img.webp);
         display: block;
         height: 30vh;
         background-position: center top;
@@ -65,7 +65,7 @@
     }
   }
 .lds-default {
-    display: inline-block;
+    display: block;
     position: relative;
     width: 80px;
     height: 80px;

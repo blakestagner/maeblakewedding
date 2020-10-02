@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.css';
-import graphic from '../img/pics/side_img.jpg';
+import graphic from '../img/pics/side_img.webp';
 import { CalenderContainer } from '../components/calendar/CalenderContainer'
 import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
 import Loading from '../components/Loading'

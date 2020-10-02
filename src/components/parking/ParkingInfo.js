@@ -2,7 +2,7 @@ import React from 'react';
 import parking_map from '../../img/venue/PARKING MAP.pdf';
 import pdf from '../../img/icons/pdf.svg';
 import './parking.css';
-import Loading from '../Loading'
+import Loading from '../Loading';
 
 export function ParkingInfo(props) {
     const doneLoadingRef = React.useRef()

@@ -2,13 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Parking from '../components/parking/Parking';
 import RSVP from '../components/RSVP/RSVP';
-import graphic from '../img/pics/side_img.jpg';
+import graphic from '../img/pics/side_img.webp';
 
 export function Responses(props) {
 
     return (
         <div>
-            {props.isLoggedIn ? '' : <Redirect to="/" />}
+            {props.isLoggedIn ? '' : <Redirect to="/login" />}
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5">
                 <img src={graphic} className="imgLeft firstImg" alt="Mae and Blake"/>
                 <div className="imgLeftMobile firstImg"></div>

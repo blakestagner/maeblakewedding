@@ -1,7 +1,8 @@
 import React,  {useState, useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
-import { getAllUsers, getTodos, completedTodo } from '../../autho/Repository'
-import './dashboard.css'
+import { getAllUsers, getTodos, completedTodo } from '../../autho/Repository';
+import './dashboard.css';
+import Loading from '../Loading';
 
 export function Dashboard(props) {
     const [resType, setType] = useState('overview')
@@ -10,7 +11,7 @@ export function Dashboard(props) {
 
     return (
         <div>
-            {props.isLoggedIn ? '' : <Redirect to="/" />}
+            {props.isLoggedIn ? '' : <Redirect to="/login" />}
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
                 <h1>Mae & Blake Only</h1>
                 <div className="calendarBox">
@@ -40,6 +41,7 @@ export function Dashboard(props) {
 export default Dashboard;
 
 export function Overview(props) {
+    const [isLoading, doneLoading] = useState(true)
     const [allUsers, setAllUsers] = useState([])
     
     useEffect(() => {
@@ -47,6 +49,7 @@ export function Overview(props) {
         .then(res => {
             setAllUsers(res)
         })
+        .then(() => doneLoading(false))
         .catch(err => console.log(err))
 
     }, [])
@@ -94,6 +97,10 @@ export function Overview(props) {
                 </div>
     }
 
+    if(isLoading) {
+        return <Loading />
+    }
+
     return (
         <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
             <h1>Dashboard</h1>
@@ -121,6 +128,7 @@ export function Overview(props) {
 }
 
 export function Todo(props) {
+    const [isLoading, doneLoading] = useState(true)
     const [ourTodos, setTodos] = useState([])
 
     const todoStatus = (x, y) => {
@@ -137,6 +145,7 @@ export function Todo(props) {
     useEffect(() => {
         getTodos()
             .then(res => setTodos(res))
+            .then(() => doneLoading(false))
             .catch(err => console.log(err))
     }, [])
     
@@ -180,6 +189,9 @@ export function Todo(props) {
         return `${getMonthName(month)} ${day} ${year}`
     }
     
+    if(isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">

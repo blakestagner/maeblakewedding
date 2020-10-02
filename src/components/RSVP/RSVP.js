@@ -2,6 +2,7 @@ import React from 'react';
 import { getRSVP, updateRSVP, getPlusone, updatePlusone, checkPlusone, coupleId, getCoupleInfo, getCoupleRSVP, updateCoupleRSVP } from '../../autho/Repository';
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Loading from '../Loading'
 
 export default class RSVP extends React.Component {
     constructor() {
@@ -13,14 +14,16 @@ export default class RSVP extends React.Component {
             hasPlusone: '',
             plusone: '',
             coupleId: '',
-            updated: 'none'
+            updated: 'none',
+            loading: true
         };
     }
-    componentDidMount() {
+    componentDidMount() {   
         this.getRSVPInfo()
         this.checkHasPlusone()
         this.getCoupleId()
     }
+    
     getRSVPInfo() {
         getRSVP()
         .then(res => {
@@ -79,6 +82,7 @@ export default class RSVP extends React.Component {
         .then(res => {
             this.setState({coupleId: res[0].couple})
         })
+        .then(() => this.setState({loading: false}))
         .catch(err => {
             console.log(err)
         })
@@ -87,7 +91,11 @@ export default class RSVP extends React.Component {
         this.setState({updated: e})
         setTimeout(() => this.setState({updated: 'none'}), 800 )
     }
+    
     render() {
+        if(this.state.loading === true) {
+            return <Loading />
+        }
         return (
                 <div>
                 <h2>RSVP to the Wedding</h2>

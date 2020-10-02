@@ -8,10 +8,11 @@ import remove from '../../img/icons/remove.svg';
 import Loading from '../Loading'
 
 export function CalenderContainer(props){
+    const [isLoading, doneLoading] = useState(true)
     const [events, setEvents] = useState({
         eventList: []
     })
-    const doneLoadingRef = React.useRef()
+
     useEffect((events) => {
         let mounted = true;
         if( isAuthenticated() && mounted)
@@ -21,6 +22,7 @@ export function CalenderContainer(props){
                         setEvents({...events, eventList: res})
                     }
                 })
+                .then(() => doneLoading(false))
                 .catch(err => {
                     console.log('error')
                 }) 
@@ -31,14 +33,17 @@ export function CalenderContainer(props){
                     setEvents({eventList: res})
                     }
                 })
+                .then(() => doneLoading(false))
                 .catch(err => {
                     console.log('error')
                 })
         }
-        doneLoadingRef.current.loadingStatus()
+        
         return function cleanup() {
             mounted = false
+            
         }
+        
     }, [])
     
     const expandPanel = (x, e) => {
@@ -81,10 +86,12 @@ export function CalenderContainer(props){
                     return 'Null';
             }
         }
+    if(isLoading) {
+        return <Loading />
+    }
     return (
         <div>
             <h1>{props.categoryName}</h1>
-            <Loading ref={doneLoadingRef}/>
             <div className="cardMain">
                 {events.eventList.filter(eventCat => eventCat.wparty === props.wparty).map((eventCat) => (
                 <div className="eventList" key={eventCat.id}>    
