@@ -10,6 +10,7 @@ export function login (data) {
     })
     .then(response => {
         localStorage.setItem('x-access-token', response.data.token);
+        localStorage.setItem('x-access-token-expiration', Date.now() + 1000 * 60 * 60 * 24 * 30 );
         return response.data
     })
     .catch((err) => Promise.reject(err.response.data));
@@ -35,7 +36,7 @@ export function register (data) {
 
 export function isAuthenticated() {
     return localStorage.getItem('x-access-token') 
-    
+    && localStorage.getItem('x-access-token-expiration') > Date.now();
 }
 
 export function getUserInfo() {

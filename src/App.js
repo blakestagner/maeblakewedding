@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as  Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import './grid/grid.css';
@@ -7,55 +7,56 @@ import Hero from './hero/Hero';
 import Landing from './home/Landing';
 import { Responses } from './autho/Responses'
 import UserLogin from './register/UserLogin';
-import Profile from './components/profile/Profile';
 import Footer from './footer/Footer';
 import { Calendar } from './components/calendar/Calendar';
 import { ParkingHome } from './components/parking/ParkingHome';
 import RSVPHome from './components/RSVP/RSVPHome';
-import { isAuthenticated, getUserInfo } from './autho/Repository'
-import ScrollToTop from './components/ScrollToTop'
-import Dashboard from './components/admin/Dashboard'
+import { isAuthenticated, getUserInfo } from './autho/Repository';
+import ScrollToTop from './components/ScrollToTop';
+import Dashboard from './components/admin/Dashboard';
+import Authenticated from './autho/Authentication'
 
-class App extends React.Component {
-  constructor(){
-    super();
-      this.state = {
-        isLoggedIn: false,
-        userDetails: [],
-      }
-      this.handleLogin = this.handleLogin.bind(this)
-  }
-  componentDidMount() {
-    this.checkLoggedinStatus();
-  }
-  handleLogin(data) {
-    this.setState({isLoggedIn: true, userDetails: data})
-  }
+export function App() {
+  const [isLoggedIn, setLoggedin] = useState(false)
+  const [userDetails, setUserDetails] = useState([])
 
-  checkLoggedinStatus() {
-    if( isAuthenticated() )
+  useEffect(() => {
+    checkLoggedinStatus()
+  }, [])
+
+  const loggedIn = (data) => {
+    data === true ? setLoggedin(true) : setLoggedin(false);
+  }
+  const handleLogin = (data) => {
+    setLoggedin(true) 
+    setUserDetails(data)
+  }
+  const checkLoggedinStatus = () => {
+    if ( isAuthenticated() ){
     getUserInfo()
-        .then((userDetails) => {
-            this.setState({
-              isLoggedIn: true, 
-              userDetails: userDetails
-            })
+        .then((res) => {
+            setLoggedin(true)
+            setUserDetails(res)
         })
         .catch(err => {
           localStorage.removeItem('x-access-token');
-          this.setState({isLoggedIn: false})
-          window.location.reload(false);
+          setLoggedin(false)
             })
-    else {}
+    } else if ( localStorage.getItem('x-access-token-expiration') < Date.now()) {
+        localStorage.removeItem('x-access-token-expiration');
+        localStorage.removeItem('x-access-token');
+        setLoggedin(false)
+    } else {}
   }
-  render() {
     return (
       <div className="App">
         <Router>
           <ScrollToTop />
+          <Authenticated loggedIn={loggedIn} />
           <Toolbar 
-            userDetails={this.state.userDetails}
-            isLoggedIn={this.state.isLoggedIn}/>
+            userDetails={userDetails}
+            isLoggedIn={isLoggedIn}
+            loggedIn={loggedIn}/>
           <Hero />
           <Switch>
             <React.Fragment>
@@ -67,9 +68,9 @@ class App extends React.Component {
                   render={props => (
                     <UserLogin 
                       {...props}
-                      userDetails={this.state.userDetails} 
-                      isLoggedIn={this.state.isLoggedIn}
-                      handleLogin={this.handleLogin}/>
+                      userDetails={userDetails} 
+                      isLoggedIn={isLoggedIn}
+                      handleLogin={handleLogin}/>
                   )} 
                   />
                 <Route
@@ -78,26 +79,26 @@ class App extends React.Component {
                   render={props => (
                     <Calendar 
                       {...props}
-                      userDetails={this.state.userDetails} 
-                      isLoggedIn={this.state.isLoggedIn}/>
+                      userDetails={userDetails} 
+                      isLoggedIn={isLoggedIn}
+                      />
                   )} 
                 />
                 <Route  exact 
                   path="/parking" 
                   render={props => (
                     <ParkingHome {...props} 
-                    isLoggedIn={this.state.isLoggedIn}
-                    userDetails={this.state.userDetails} 
+                    isLoggedIn={isLoggedIn}
+                    userDetails={userDetails} 
                     />
                   )} 
                   />
-                <Route path="/profile" component={ Profile } />
                 <Route  exact 
                   path="/RSVP" 
                   render={props => (
                     <RSVPHome {...props} 
-                    isLoggedIn={this.state.isLoggedIn}
-                    userDetails={this.state.userDetails} 
+                    isLoggedIn={isLoggedIn}
+                    userDetails={userDetails}
                     />
                   )} 
                   />
@@ -105,8 +106,8 @@ class App extends React.Component {
                   path="/home" 
                   render={props => (
                     <Responses {...props} 
-                    isLoggedIn={this.state.isLoggedIn}
-                    userDetails={this.state.userDetails} 
+                    isLoggedIn={isLoggedIn}
+                    userDetails={userDetails}
                     />
                   )} 
                   />
@@ -114,8 +115,8 @@ class App extends React.Component {
                   path="/dashboard" 
                   render={props => (
                     <Dashboard {...props} 
-                    isLoggedIn={this.state.isLoggedIn}
-                    userDetails={this.state.userDetails} 
+                    isLoggedIn={isLoggedIn}
+                    userDetails={userDetails}
                     />
                   )} 
                   />
@@ -126,7 +127,6 @@ class App extends React.Component {
         <Footer />
       </div>
     );
-  }
 }
 
 export default App;

@@ -1,127 +1,122 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './toolbar.css';
-import { isAuthenticated} from '../autho/Repository';
 import menuBlack from './img/menu-black.svg';
 import menuWhite from './img/menu-white.svg';
 
-export default class Toolbar extends React.Component { 
-    constructor(props) {
-        super(props)
-        this.state = {
-            menuIcon: menuWhite,
-        }
-        this.handleClickBeyondSidebar = this.handleClickBeyondSidebar.bind(this)
-        this.mobileMenuToggle = this.mobileMenuToggle.bind(this)
-    }
-    logOut(){
+export default function Toolbar(props) { 
+    const [menuIcon, setMenuIcon] = React.useState(menuWhite)
+
+    const logOut = () => {
         localStorage.removeItem('x-access-token');
-        }
-    mobileMenuToggle() {
+    }
+
+    const mobileMenuToggle = () => {
         const mobileNav = document.querySelector('#mobileMenu')
         const contentElement = document.querySelector('#root')
         if (mobileNav.classList.contains('mmClosed')) {
-            this.handleClickBeyondSidebar(contentElement, mobileNav)
+            handleClickBeyondSidebar(contentElement, mobileNav)
             mobileNav.classList = 'mmOpen'
         } else { 
-            this.handleClickBeyondSidebar(contentElement, mobileNav) 
+            handleClickBeyondSidebar(contentElement, mobileNav) 
             mobileNav.classList = 'mmClosed'
         }
     }  
-    handleClickBeyondSidebar(x, y) {
+    const handleClickBeyondSidebar = (x, y) => {
         const child = document.querySelector('#mobileNavBarList').childNodes
         if(y.classList.value === 'mmOpen') {
-            x.removeEventListener("click", this.mobileMenuToggle)
+            x.removeEventListener("click", mobileMenuToggle)
             for (let i = 0; i < child.length; i++) {
-                child[i].removeEventListener("click", this.closeMobileMenu)
+                child[i].removeEventListener("click", closeMobileMenu)
             }
         } else {
-            x.addEventListener('click', this.mobileMenuToggle)
+            x.addEventListener('click', mobileMenuToggle)
             for (let i = 0; i < child.length; i++) {
-                child[i].addEventListener("click", this.closeMobileMenu)
+                child[i].addEventListener("click", closeMobileMenu)
             }
         }
     }
-    closeMobileMenu() {
+    const closeMobileMenu = () => {
         document.querySelector('#mobileMenu').classList = 'mmClosed'
     }
-    render() {
-        window.onscroll = () => {
-            const nav = document.querySelector('#mainNav');
+   
+    window.onscroll = () => {
+        const nav = document.querySelector('#mainNav');
 
-            if(window.scrollY <= 10) {
-                nav.className = 'navBar'
-                this.setState({menuIcon: menuWhite})
+        if(window.scrollY <= 10) {
+            nav.className = 'navBar'
+            setMenuIcon(menuWhite)
+        }
+        else {
+            nav.className = 'navBar scrollBar';
+            setMenuIcon(menuBlack)
             }
-            else {
-                nav.className = 'navBar scrollBar';
-                this.setState({menuIcon: menuBlack})
-                }
-            };  
+        };  
 
-        return (
-        <div className="navBar" id="mainNav">
-            <MobileMenu 
-                userDetails={this.props.userDetails}
-                onClick={this.mobileMenuToggle}/>
-                <div className='navBarContainer'>
-                    <div className='navBarTitle'>
-                        <h1><Link to="/">Mae & Blake</Link></h1>
-                    </div>
-                    {this.props.isLoggedIn ?
-                        <ul id="mainMenuList">
-                            {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
-                                <li className="menuList">
-                                    <Link to="/dashboard">Dashboard</Link>
-                                </li>
-                                : ''
-                            }
-                            <li className="menuList">
-                                <Link to="/home">Responses</Link>
-                            </li> 
-                            <li className="menuList">
-                                <Link to="/calendar">Calendar</Link>
-                            </li>
-                            <li className="menuList">
-                                <Link to="/parking">Parking</Link>
-                            </li>
-                            <li className="menuList">
-                                <Link to="/rsvp">RSVP</Link>
-                            </li>
-                            <li className="menuList" onClick={this.logOut}>
-                                <a href="/">Log out</a> 
-                            </li>
-                            <li>
-                                <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
-                            </li>
-                        </ul>
-                        
-                        : 
-                        <ul id="mainMenuList">
-                            <li className="menuList">
-                                <Link to="/login">Log in</Link>
-                            </li>
-                            <li>
-                                <img id='navManuIcon' alt="menu" src={ this.state.menuIcon } onClick={this.mobileMenuToggle} />
-                            </li>
-                        </ul>
-                    }
+    return (
+    <div className="navBar" id="mainNav">
+        <MobileMenu 
+            userDetails={props.userDetails}
+            onClick={mobileMenuToggle}
+            isLoggedIn={props.isLoggedIn}/>
+            <div className='navBarContainer'>
+                <div className='navBarTitle'>
+                    <h1><Link to="/">Mae & Blake</Link></h1>
                 </div>
+                {props.isLoggedIn ?
+                    <ul id="mainMenuList">
+                        {props.isLoggedIn  && props.userDetails.id === 1  ?
+                            <li className="menuList">
+                                <Link to="/dashboard">Dashboard</Link>
+                            </li>
+                            : ''
+                        }
+                        <li className="menuList">
+                            <Link to="/home">Responses</Link>
+                        </li> 
+                        <li className="menuList">
+                            <Link to="/calendar">Calendar</Link>
+                        </li>
+                        <li className="menuList">
+                            <Link to="/parking">Parking</Link>
+                        </li>
+                        <li className="menuList">
+                            <Link to="/rsvp">RSVP</Link>
+                        </li>
+                        <li className="menuList" onClick={logOut}>
+                            <a href="/">Log out</a>
+                        </li>
+                        <li>
+                            <img id='navManuIcon' alt="menu" src={ menuIcon } onClick={mobileMenuToggle} />
+                        </li>
+                    </ul>
+                    
+                    : 
+                    <ul id="mainMenuList">
+                        <li className="menuList">
+                            <Link to="/login">Log in</Link>
+                        </li>
+                        <li>
+                            <img id='navManuIcon' alt="menu" src={ menuIcon } onClick={mobileMenuToggle} />
+                        </li>
+                    </ul>
+                }
             </div>
-        )
-    }
+        </div>
+    )
+    
 }
-class MobileMenu extends React.Component {
-    logOut(){
+export function MobileMenu(props) {
+    const logOut = () => {
         localStorage.removeItem('x-access-token');
         }
-    render() {
+
         return (
             <div id="mobileMenu" className="mmClosed">
                 
-            {( isAuthenticated() ) ?
-                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={this.props.onClick}>
-                    {( isAuthenticated() && this.props.userDetails.id === 1 ) ?
+            { props.isLoggedIn  ?
+                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={props.onClick}>
+                    { props.userDetails.id === 1  ?
                         <li>
                             <Link to="/dashboard">Dashboard</Link>
                         </li>
@@ -139,12 +134,12 @@ class MobileMenu extends React.Component {
                     <li>
                         <Link to="/rsvp">RSVP</Link>
                     </li>
-                    <li onClick={this.logOut}>
+                    <li onClick={logOut}>
                         <a href="/">Log out</a> 
                     </li>
                 </ul>
                 : 
-                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={this.props.onClick}>
+                <ul className="mobileNavBarList" id="mobileNavBarList" onClick={props.onClick}>
                     <li>
                         <Link to="/login">Log in</Link>
                     </li>
@@ -152,5 +147,5 @@ class MobileMenu extends React.Component {
                 }
             </div>
         )
-    }
+    
 }

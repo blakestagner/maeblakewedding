@@ -19,7 +19,6 @@ export function CalenderContainer(props){
                 .then(res => {
                     if(mounted) {
                         setEvents({...events, eventList: res})
-                        console.log('hi')
                     }
                 })
                 .catch(err => {

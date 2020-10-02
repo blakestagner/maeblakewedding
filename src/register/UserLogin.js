@@ -38,8 +38,8 @@ handleSuccessfulAuth(data) {
   }
 }
 class LoginBox extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
        this.state = { 
            email: '', 
            password: '',

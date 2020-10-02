@@ -1,23 +1,16 @@
 import React,  {useState, useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
-import { isAuthenticated, getAllUsers, getTodos, completedTodo } from '../../autho/Repository'
+import { getAllUsers, getTodos, completedTodo } from '../../autho/Repository'
 import './dashboard.css'
 
 export function Dashboard(props) {
     const [resType, setType] = useState('overview')
-    const [authenticated, setAuthenticated] = useState(true);
     const selected = 'calendar-category-button selected'
     const inactive = 'calendar-category-button'
 
-    useEffect(() => {
-        if( !isAuthenticated() ) {
-            setAuthenticated(false)
-        } else {}
-    }, [] )
-
     return (
         <div>
-            {authenticated ? '' : <Redirect to="/" />}
+            {props.isLoggedIn ? '' : <Redirect to="/" />}
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
                 <h1>Mae & Blake Only</h1>
                 <div className="calendarBox">

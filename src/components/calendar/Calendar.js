@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import { isAuthenticated} from '../../autho/Repository';
+import React, {useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import './calendar.css';
 import add from '../../img/icons/add.svg';
@@ -8,12 +7,7 @@ import { CalenderContainer } from './CalenderContainer'
 
 export function Calendar(props) {
     const [openCalendar, setCalendar] = useState('for all');
-    const [authenticated, setAuthenticated] = useState(true);
 
-    useEffect(() => {
-        if(!isAuthenticated())
-            setAuthenticated(false)
-    }, [])
 
     const expandPanel = (x, e) => {
         let panel = document.getElementById(x)
@@ -31,7 +25,7 @@ export function Calendar(props) {
 
     return (
         <div>
-            {authenticated ? '' : <Redirect to="/" />} 
+            {props.isLoggedIn ? '' : <Redirect to="/" />} 
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4 calendarToolbar">
                 <h1>Calendars</h1>
                 <div className="calendarBox">

@@ -31,5 +31,5 @@ footer p {
     font-family: 'Playlist Script';
     font-style: normal;
     font-weight: normal;
-    src: local('Playlist_Script'), url('Playlist_Script.woff') format('woff');
+    src: local('Playlist_Script'), url('/Playlist_Script.woff') format('woff');
 }
