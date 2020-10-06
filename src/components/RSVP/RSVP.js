@@ -4,139 +4,132 @@ import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Loading from '../Loading'
 
-export default class RSVP extends React.Component {
-    constructor() {
-        super();
-        this.state = { 
-            userDetails: [], 
-            auth: true,
-            rsvp: '',
-            hasPlusone: '',
-            plusone: '',
-            coupleId: '',
-            updated: 'none',
-            loading: true
-        };
-    }
-    componentDidMount() {   
-        this.getRSVPInfo()
-        this.checkHasPlusone()
-        this.getCoupleId()
-    }
-    
-    getRSVPInfo() {
+export function RSVP(props) {
+    const [rsvp, setRsvp] = React.useState();
+    const [hasPlusone, setHasPlusone] = React.useState();
+    const [bringPlusone, setBringPlusone] = React.useState();
+    const [userCoupleId, setCoupleId] = React.useState();
+    const [updated, setUpdate ] = React.useState('none');
+    const [isLoading, doneLoading] = React.useState(true);
+
+    const getRSVPInfo = () => {
         getRSVP()
         .then(res => {
-            this.setState({rsvp: res[0].RSVP})
+            setRsvp(res[0].RSVP)
         })
         .catch(err => {
             console.log(err)
         })
     }
-    onCheckRSVP(e, x) {
+    const onCheckRSVP = (e, x) => {
         updateRSVP(e)
         .then(res => {
-            this.getRSVPInfo()
-            this.updateAnimate(x)
+            getRSVPInfo()
+        })
+        .then(() => {
+            updateAnimate(x)
         })
         .catch(err => {
             console.log(err)
         })
     }
-    checkHasPlusone() {
+    const checkHasPlusone = () => {
         checkPlusone()
         .then(res => {
-            this.setState({hasPlusone: res[0].hasPlusone})
+            setHasPlusone(res[0].hasPlusone)
         })
-
         .catch(err => {
             console.log(err)
         })
-        .then(() => {         
-            if(this.state.hasPlusone ? 'Yes' : 'No')  {
-                this.getPlusoneInfo()
-            } else ; 
+    }
+    const onCheckPlusone = (e, x) => {
+        updatePlusone(e)
+        .then(() => {
+            getPlusoneInfo()
+        })
+        .then(() => {
+            updateAnimate(x)
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
-    getPlusoneInfo() {
+    const getPlusoneInfo = () => {
         getPlusone()
         .then(res => {
-            this.setState({plusone: res[0].plusone})
+            setBringPlusone(res[0].plusone)
         })
         .catch(err => {
             console.log(err)
         })
     }
-    onCheckPlusone(e, x) {
-        updatePlusone(e)
-        .then(res => {
-            this.getPlusoneInfo()
-            this.updateAnimate(x)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
-    getCoupleId() {
+    const getCoupleId = () => {
         coupleId()
         .then(res => {
-            this.setState({coupleId: res[0].couple})
+            setCoupleId(res[0].couple)
         })
-        .then(() => this.setState({loading: false}))
+        .then(() => {
+            doneLoading(false)
+        })
         .catch(err => {
             console.log(err)
         })
     }
-    updateAnimate(e) {
-        this.setState({updated: e})
-        setTimeout(() => this.setState({updated: 'none'}), 800 )
+    const updateAnimate = (e) => {
+        setUpdate(e)
+        setTimeout(() => setUpdate('none'), 800 )
     }
+    React.useEffect(() => {
+        getRSVPInfo();
+        checkHasPlusone();
+        getPlusoneInfo();
+        getCoupleId()
+    }, [])
     
-    render() {
-        if(this.state.loading === true) {
-            return <Loading />
-        }
-        return (
-                <div>
-                <h2>RSVP to the Wedding</h2>
-                <h3>Will you be Attending the Wedding?</h3>
-                <div className="separator">
-                    <div className={this.state.updated === '1' ? 'form-container-updated' : 'form-container separator'}>
-                    {this.state.updated === '1' ? 
-                        <p className="update-message">Updated</p>
-                    :
-                        <div>
-                            <FormControlLabel
-                                classes={{label: 'checkBoxLabel'}}
-                                value="Yes"
-                                control={
-                                        <Checkbox 
-                                            checked={this.state.rsvp === 'Yes' ? true : false} 
-                                            color='primary'
-                                            onClick={() => {this.onCheckRSVP('Yes', '1')}} />}
-                                label="Yes"
-                                labelPlacement="start"
-                            />
-                            <FormControlLabel
-                                classes={{label: 'checkBoxLabel'}}
-                                value="No"
-                                control={
-                                        <Checkbox 
-                                            checked={this.state.rsvp === 'No' ? true : false} 
-                                            color='primary'
-                                            onClick={() => {this.onCheckRSVP('No', '1')}} />}
-                                label="No"
-                                labelPlacement="start"
-                            />
-                        </div>
-                    }
+    if(isLoading === true) {
+        return <Loading />
+    }
+    return (
+            <div>
+            <h2>RSVP to the Wedding</h2>
+            <h3>Will you be Attending the Wedding?</h3>
+            <div className="separator">
+                <div className={updated === '1' ? 'form-container-updated' : 'form-container separator'}>
+                {updated === '1' ? 
+                    <p className="update-message">Updated</p>
+                :
+                    <div>
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="Yes"
+                            control={
+                                    <Checkbox 
+                                        checked={rsvp === 'Yes' ? true : false} 
+                                        color='primary'
+                                        onClick={() => onCheckRSVP('Yes', '1')} />}
+                            label="Yes"
+                            labelPlacement="start"
+                        />
+                        <FormControlLabel
+                            classes={{label: 'checkBoxLabel'}}
+                            value="No"
+                            control={
+                                    <Checkbox 
+                                        checked={rsvp === 'No' ? true : false} 
+                                        color='primary'
+                                        onClick={() => onCheckRSVP('No', '1')} />}
+                            label="No"
+                            labelPlacement="start"
+                        />
                     </div>
+                }
                 </div>
-            {(this.state.hasPlusone === "Yes") ? 
+            </div>
+            {hasPlusone === "Yes" ? 
             <div className="separator">
                 <h3>Are you bringing a Plus One?</h3>
-                <div className={this.state.updated === '2' ? 'form-container-updated' : 'form-container'}>
-                {this.state.updated === '2' ? 
+                <div className={updated === '2' ? 'form-container-updated' : 'form-container'}>
+                {updated === '2' ? 
                     <p className="update-message">Updated</p>
                 :
                     <div>
@@ -145,9 +138,9 @@ export default class RSVP extends React.Component {
                             value="Yes"
                             control={
                                 <Checkbox 
-                                    checked={this.state.plusone === 'Yes' ? true : false} 
+                                    checked={bringPlusone === 'Yes' ? true : false} 
                                     color='primary'
-                                    onClick={() => {this.onCheckPlusone('Yes', '2')}} />}
+                                    onClick={() => onCheckPlusone('Yes', '2')} />}
                             label="Yes"
                             labelPlacement="start"
                         />
@@ -156,9 +149,9 @@ export default class RSVP extends React.Component {
                             value="No"
                             control={
                                 <Checkbox 
-                                    checked={this.state.plusone === 'No' ? true : false} 
+                                    checked={bringPlusone === 'No' ? true : false} 
                                     color='primary'
-                                    onClick={() => {this.onCheckPlusone('No', '2')}} />}
+                                    onClick={() => onCheckPlusone('No', '2')} />}
                             label="No"
                             labelPlacement="start"
                         />
@@ -168,14 +161,14 @@ export default class RSVP extends React.Component {
             </div>
             : ''
             }
-            {(this.state.coupleId > 0) ? 
-            <CoupleInfo coupleId={ this.state.coupleId }/>
+            {userCoupleId > 0 ? 
+                <CoupleInfo coupleId={ userCoupleId }/>
             : ''
             }
-        </div>
-        )
-    }
+    </div>
+    )
 }
+
 export function CoupleInfo(props){
     const [coupleState, setCoupleState] = React.useState({
         name: '',
@@ -249,3 +242,5 @@ export function CoupleInfo(props){
             </div>
         )
 }
+
+export default RSVP;

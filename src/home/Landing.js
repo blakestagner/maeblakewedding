@@ -36,11 +36,12 @@ function Home(props) {
                     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5 ">
                         
                     </div>
-                    <div className="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-lg-push-1">
+                    <div style={{maxWidth: '600px', margin: '0 auto'}}>
                         <ParkingInfo
                             isLoggedIn={props.isLoggedIn}/>
+                    </div>        
                         <ParkingOther />
-                    </div>
+                    
                 </div>
             </div>
         </div>

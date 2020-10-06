@@ -199,7 +199,7 @@ export function Todo(props) {
             <h3>Still Todo</h3>
             <div className='dash-container'>
                 {ourTodos.filter(todo => todo.completed === 0).map(todo => (
-                    <div key={todo.id}>
+                    <div key={todo.id} className="separator">
                         <div className="dash-info">
                             <p >{todo.title}</p>
                             <p><b>By: </b>{convertTime(todo.complete_by)}</p>
@@ -213,7 +213,7 @@ export function Todo(props) {
             <h3>Completed</h3>
             <div className='dash-container'>
                 {ourTodos.filter(todo => todo.completed === 1).map(todo => (
-                    <div key={todo.id}>
+                    <div key={todo.id} className="separator">
                         <div className="dash-info">
                             <p >{todo.title}</p>
                             <p><b>By: </b>{convertTime(todo.complete_by)}</p>
