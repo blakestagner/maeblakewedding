@@ -98,6 +98,9 @@ export default function Toolbar(props) {
                     : 
                     <ul id="mainMenuList">
                         <li className="menuList">
+                            <Link to="/photos">Photos</Link>
+                        </li>
+                        <li className="menuList">
                             <Link to="/login">Log in</Link>
                         </li>
                         <li>

@@ -4,15 +4,20 @@ import maering from './photos/Maering.jpg';
 import maering2 from './photos/Maering2.jpg';
 import Loading from '../components/Loading'
 
-function Instagram() {
-
+function Instagram(props) {
+    
     document.onscroll = () => {
-        const toolbar = document.querySelector('#insta-toolbar');
-        if(window.scrollY <= 50) {
-            toolbar.className = 'insta-toolbar'
+        const instaToolbar = document.querySelector('#insta-toolbar');
+        const firstPicture = document.getElementsByClassName('pv-top')[0]
+        const toolbarHeight = document.querySelector('#mainNav').offsetHeight
+        const heroHeight = document.getElementsByClassName('heroContainer')[0].offsetHeight;
+        if(window.scrollY <= heroHeight - toolbarHeight) {
+            instaToolbar.className = 'insta-toolbar';
+            firstPicture.style.marginTop = '0px';
         }
         else {
-            toolbar.className = 'insta-toolbar sticky';
+            instaToolbar.className = 'insta-toolbar sticky';
+            firstPicture.style.marginTop = '50px';
             }
         };
     return (
