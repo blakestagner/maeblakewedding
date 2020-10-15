@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './toolbar.css';
 import menuBlack from './img/menu-black.svg';
 import menuWhite from './img/menu-white.svg';
+import arrow from './img/arrow_back.svg';
 
 export default function Toolbar(props) { 
     const [menuIcon, setMenuIcon] = React.useState(menuWhite)
@@ -83,6 +84,9 @@ export default function Toolbar(props) {
                         <li className="menuList">
                             <Link to="/rsvp">RSVP</Link>
                         </li>
+                        <li className="menuList">
+                            <Link to="/photos">Photos</Link>
+                        </li>
                         <li className="menuList" onClick={logOut}>
                             <a href="/">Log out</a>
                         </li>
@@ -113,7 +117,10 @@ export function MobileMenu(props) {
 
         return (
             <div id="mobileMenu" className="mmClosed">
-                
+            <img 
+                src={arrow}
+                className="back-arrow" 
+                alt="close menu"/>
             { props.isLoggedIn  ?
                 <ul className="mobileNavBarList" id="mobileNavBarList" onClick={props.onClick}>
                     { props.userDetails.id === 1  ?
@@ -134,12 +141,18 @@ export function MobileMenu(props) {
                     <li>
                         <Link to="/rsvp">RSVP</Link>
                     </li>
+                    <li>
+                        <Link to="/photos">Photos</Link>
+                    </li>
                     <li onClick={logOut}>
                         <a href="/">Log out</a> 
                     </li>
                 </ul>
                 : 
                 <ul className="mobileNavBarList" id="mobileNavBarList" onClick={props.onClick}>
+                    <li>
+                        <Link to="/photos">Photos</Link>
+                    </li>
                     <li>
                         <Link to="/login">Log in</Link>
                     </li>

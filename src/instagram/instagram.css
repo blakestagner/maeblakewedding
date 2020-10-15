@@ -1,0 +1,83 @@
+.insta {
+    background-color: #000;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 600px;
+}
+.insta-toolbar {
+    display: flex;
+    padding: 10px;
+    background-color: #222930;
+    height: 24px;
+}
+.insta-icon {
+    padding-right: 15px;
+    height: 24px;
+    width: 24px;
+}
+.insta-header-text {
+    font-family: Billabong;
+    font-size: 24px;
+}
+.insta-icon-right {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+}
+.sticky {
+    position: fixed;
+    top: 50px;
+    width: 95vw;
+}
+@media only screen and (min-width: 600px) { 
+    .sticky {
+      top: 85px;
+      max-width: 580px;
+    } 
+  }
+.picture-view-container {
+
+}
+.pv-top {
+    display: flex;
+    padding: 10px;
+    height: 24px;
+}
+.pv-bottom {
+    display: flex;
+    padding: 10px;
+    height: 24px;
+}
+.profile-img {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    padding-right: 10px;
+}
+.insta-picture {
+    height: 100vw;
+    width: 100vw;
+    max-width: 600px;
+    max-height: 600px;
+    object-fit: cover
+}
+.insta-likes {
+    display: flex; 
+    padding: 0px 10px 10px; 
+    font-size: 12px;
+}
+.insta-post-title {
+    display: flex; 
+    padding: 0px 10px 10px; 
+    font-size: 12px;
+}
+.insta-post-title b {
+    padding-right: 5px;
+}
+@font-face {
+    font-family: 'Billabong';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Billabong'), url('/Billabong.woff') format('woff');
+    font-display: swap;
+}

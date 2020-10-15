@@ -14,7 +14,8 @@ import RSVPHome from './components/RSVP/RSVPHome';
 import { isAuthenticated, getUserInfo } from './autho/Repository';
 import ScrollToTop from './components/ScrollToTop';
 import Dashboard from './components/admin/Dashboard';
-import Authenticated from './autho/Authentication'
+import Authenticated from './autho/Authentication';
+import Instagram from './instagram/Instagram';
 
 export function App() {
   const [isLoggedIn, setLoggedin] = useState(true)
@@ -120,10 +121,20 @@ export function App() {
                     />
                   )} 
                   />
+                <Route  exact 
+                  path="/photos" 
+                  render={props => (
+                    <Instagram {...props} 
+                    isLoggedIn={isLoggedIn}
+                    userDetails={userDetails}
+                    />
+                  )} 
+                />
               </div>
             </React.Fragment>
           </Switch>
         </Router>
+        
         <Footer />
       </div>
     );
