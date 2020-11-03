@@ -7,7 +7,7 @@ import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
 import Loading from '../Loading'
 
-export function CalenderContainer(props){
+export function CalendarContainer(props){
     const [isLoading, doneLoading] = useState(true)
     const [events, setEvents] = useState({
         eventList: []

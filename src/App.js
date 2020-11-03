@@ -9,7 +9,7 @@ import { Responses } from './autho/Responses'
 import UserLogin from './register/UserLogin';
 import Footer from './footer/Footer';
 import { Calendar } from './components/calendar/Calendar';
-import { ParkingHome } from './components/parking/ParkingHome';
+import { Location } from './components/parking/Location';
 import RSVPHome from './components/RSVP/RSVPHome';
 import { isAuthenticated, getUserInfo } from './autho/Repository';
 import ScrollToTop from './components/ScrollToTop';
@@ -86,9 +86,9 @@ export function App() {
                   )} 
                 />
                 <Route  exact 
-                  path="/parking" 
+                  path="/location" 
                   render={props => (
-                    <ParkingHome {...props} 
+                    <Location {...props} 
                     isLoggedIn={isLoggedIn}
                     userDetails={userDetails} 
                     />
@@ -113,7 +113,7 @@ export function App() {
                   )} 
                   />
                 <Route  exact 
-                  path="/dashboard" 
+                  path="/admin" 
                   render={props => (
                     <Dashboard {...props} 
                     isLoggedIn={isLoggedIn}

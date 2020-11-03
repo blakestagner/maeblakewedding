@@ -1,7 +1,7 @@
 import React from 'react';
 import './home.css';
-import graphic from '../img/pics/side_img.webp';
-import { CalenderContainer } from '../components/calendar/CalenderContainer'
+import graphic from '../img/pics/side_img_2.jpg';
+import { CalendarContainer } from '../components/calendar/CalendarContainer'
 import { ParkingInfo, ParkingOther } from '../components/parking/ParkingInfo'
 import Loading from '../components/Loading'
 
@@ -25,7 +25,7 @@ function Home(props) {
                         <div className="row HomeText separator">
                             <h1>Calendar</h1>
                             <Loading ref={doneLoadingRef}/>
-                            <CalenderContainer
+                            <CalendarContainer
                                     wparty="n"/>
                         </div>
                     </div>
@@ -33,9 +33,6 @@ function Home(props) {
             </div>
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 homeText">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-5 ">
-                        
-                    </div>
                     <div style={{maxWidth: '600px', margin: '0 auto'}}>
                         <ParkingInfo
                             isLoggedIn={props.isLoggedIn}/>

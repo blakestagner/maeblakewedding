@@ -13,7 +13,7 @@
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
-  .scrollBar div div h1 a, .scrollBar div ul li a {
+  .scrollBar div div h2 a, .scrollBar div ul li a {
     color: #000;
     text-decoration: none;
   }
@@ -39,13 +39,16 @@
     display: flex;
     flex-basis: auto;
     margin-left: auto;
-    padding-right: 25px;
+    padding-right: 0px;
     padding-left: 0px;
   }
   .navBar ul li {
     display: flex;
     margin-left: 10px;
     margin-right: 10px;
+  }
+#logout a {
+    padding-left: 10px;
   }
   .navList {
     text-decoration: none;
@@ -112,4 +115,11 @@
   width: 25px;
   height: 25px;
   text-align: left;
+}
+#mobile_logout a {
+  position: absolute;
+  bottom: 20px;
+  border: solid 2px;
+  border-radius: 25px;
+  padding: 3px 5px;
 }

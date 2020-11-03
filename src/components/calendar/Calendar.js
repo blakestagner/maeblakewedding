@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import './calendar.css';
 import add from '../../img/icons/add.svg';
 import remove from '../../img/icons/remove.svg';
-import { CalenderContainer } from './CalenderContainer';
+import { CalendarContainer } from './CalendarContainer';
 
 export function Calendar(props) {
     const [openCalendar, setCalendar] = useState('for all');
@@ -64,7 +64,7 @@ export function Calendar(props) {
                 <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-lg-push-1">
                 {openCalendar === 'for all' &&
                 <div>
-                    <CalenderContainer
+                    <CalendarContainer
                         expandPanel={expandPanel}
                         categoryName="Events For All"
                         wparty="n"
@@ -72,21 +72,21 @@ export function Calendar(props) {
                 </div>
                 }
                 {openCalendar === 'wedding party' &&
-                    <CalenderContainer 
+                    <CalendarContainer 
                         expandPanel={expandPanel}
                         categoryName="Events For Wedding Party"
                         wparty="y"/>
                 }
                 {openCalendar === 'groom' &&
-                    <CalenderContainer 
+                    <CalendarContainer 
                         expandPanel={expandPanel}
-                        categoryName="Events For Wedding for the Groomsmen"
+                        categoryName="Events For the Groomsmen"
                         wparty="b"/>
                 }
                 {openCalendar === 'bride' &&
-                    <CalenderContainer 
+                    <CalendarContainer 
                         expandPanel={expandPanel}
-                        categoryName="Events For Wedding da Bridesmaids"
+                        categoryName="Events For the Bridesmaids"
                         wparty="g"/> 
                 }    
                 </div>

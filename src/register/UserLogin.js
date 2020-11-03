@@ -58,13 +58,13 @@ class LoginBox extends React.Component {
           this.logginginMessage()
           if (this.state.email === '') {
             this.removeLogginginMessage()
-            lgnMsg.innerHTML = 'You forgot to type in your email'
+            lgnMsg.innerHTML = 'You forgot to type in your phone number'
           } else if (this.state.password === '') {
             this.removeLogginginMessage()
             lgnMsg.innerHTML = 'You forgot to type in your password'
-          } else if (!this.state.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+          } else if (!this.state.email.match(/[0-9]/)) {
             this.removeLogginginMessage()
-            lgnMsg.innerHTML = 'You didnt enter a valid email'
+            lgnMsg.innerHTML = 'You didnt enter a valid phone number'
         } else {
             login(this.state)
             .then(res =>
@@ -101,7 +101,7 @@ class LoginBox extends React.Component {
                   fullWidth={true}
                   required={true}
                   id="email" 
-                  label="email"
+                  label="phone number"
                   name="email"
                   onChange={ this.handleInputChange }
                 />

@@ -5,26 +5,30 @@ import maering2 from './photos/Maering2.jpg';
 import Loading from '../components/Loading'
 
 function Instagram(props) {
-    
+
     document.onscroll = () => {
         const instaToolbar = document.querySelector('#insta-toolbar');
-        const firstPicture = document.getElementsByClassName('pv-top')[0]
-        const toolbarHeight = document.querySelector('#mainNav').offsetHeight
+        const firstPicture = document.getElementsByClassName('pv-top')[0];
+        const toolbarHeight = document.querySelector('#mainNav').offsetHeight;
         const heroHeight = document.getElementsByClassName('heroContainer')[0].offsetHeight;
-        if(window.scrollY <= heroHeight - toolbarHeight) {
-            instaToolbar.className = 'insta-toolbar';
-            firstPicture.style.marginTop = '0px';
-        }
-        else {
-            instaToolbar.className = 'insta-toolbar sticky';
-            firstPicture.style.marginTop = '50px';
+        if(instaToolbar !== null) {
+            if(window.scrollY <= heroHeight - toolbarHeight) {
+                instaToolbar.className = 'insta-toolbar';
+                firstPicture.style.marginTop = '0px';
             }
-        };
+            else {
+                instaToolbar.className = 'insta-toolbar sticky';
+                instaToolbar.style.top = `${toolbarHeight}px`;
+                firstPicture.style.marginTop = '44px';
+                }
+            } else;
+        }
     return (
         <div className="insta">
             <div
                 className="insta-toolbar" 
-                id="insta-toolbar">
+                id="insta-toolbar"
+                style={{top: '0px'}}>
                 <svg 
                     aria-label="icon" 
                     className="insta-icon" 
@@ -63,6 +67,7 @@ function InstaPictureContainer() {
                 img={maering2}
                 title="Yessss" 
                 likes="Too many to Count, ERROR"/>
+                
         </div>
     )
 }

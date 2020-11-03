@@ -29,11 +29,15 @@ export function Dashboard(props) {
                     </div>
                 </div>
             </div>
-            {resType === 'overview' ? 
-                <Overview />
-            :
-                <Todo />
-            }
+            <div className="row">
+                <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+                {resType === 'overview' ? 
+                    <Overview />
+                :
+                    <Todo />
+                }
+                </div>
+            </div>
         </div>
     )
 }
@@ -102,10 +106,10 @@ export function Overview(props) {
     }
 
     return (
-        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+        <div>
             <h1>Dashboard</h1>
             <h3>Total RSVP'd: {totalCount()}</h3>
-            <div className="form-container dashboard" style={{padding: '5px 50px'}}>
+            <div className="form-container dashboard" style={{padding: '5px 25px'}}>
                     <div><b className="dash-title">RSVP'd </b>{getRSVPCount()}</div>
                     <div><b className="dash-title">Parking </b>{getParkingCount()}</div>
                     <div><b className="dash-title">Plusone </b>{getPlusoneCount()}</div>
@@ -194,7 +198,7 @@ export function Todo(props) {
     }
 
     return (
-        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+        <div >
             <h1>Todo</h1>
             <h3>Still Todo</h3>
             <div className='dash-container'>

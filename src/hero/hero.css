@@ -1,6 +1,6 @@
 .heroImg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/downtown-tacoma.webp");
-  height: 50vh;
+  height: 250px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,7 +14,7 @@
 }
 .loggedinImg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./img/loggedIn.jpg");
-  height: 20vh;
+  height: 150px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

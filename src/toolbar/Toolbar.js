@@ -22,7 +22,7 @@ export default function Toolbar(props) {
             handleClickBeyondSidebar(contentElement, mobileNav) 
             mobileNav.classList = 'mmClosed'
         }
-    }  
+    }
     const handleClickBeyondSidebar = (x, y) => {
         const child = document.querySelector('#mobileNavBarList').childNodes
         if(y.classList.value === 'mmOpen') {
@@ -43,7 +43,6 @@ export default function Toolbar(props) {
    
     window.onscroll = () => {
         const nav = document.querySelector('#mainNav');
-
         if(window.scrollY <= 10) {
             nav.className = 'navBar'
             setMenuIcon(menuWhite)
@@ -62,32 +61,35 @@ export default function Toolbar(props) {
             isLoggedIn={props.isLoggedIn}/>
             <div className='navBarContainer'>
                 <div className='navBarTitle'>
-                    <h1><Link to="/">Mae & Blake</Link></h1>
+                    <h2><Link to="/">Mae & Blake</Link></h2>
                 </div>
                 {props.isLoggedIn ?
                     <ul id="mainMenuList">
                         {props.isLoggedIn  && props.userDetails.id === 1  ?
                             <li className="menuList">
-                                <Link to="/dashboard">Dashboard</Link>
+                                <Link to="/admin">Admin</Link>
                             </li>
                             : ''
                         }
                         <li className="menuList">
                             <Link to="/home">Responses</Link>
-                        </li> 
-                        <li className="menuList">
-                            <Link to="/calendar">Calendar</Link>
-                        </li>
-                        <li className="menuList">
-                            <Link to="/parking">Parking</Link>
                         </li>
                         <li className="menuList">
                             <Link to="/rsvp">RSVP</Link>
                         </li>
                         <li className="menuList">
+                            <Link to="/location">Location</Link>
+                        </li> 
+                        <li className="menuList">
+                            <Link to="/calendar">Calendar</Link>
+                        </li>
+                        <li className="menuList">
                             <Link to="/photos">Photos</Link>
                         </li>
-                        <li className="menuList" onClick={logOut}>
+                        <li 
+                            id="logout"
+                            className="menuList" 
+                            onClick={logOut}>
                             <a href="/">Log out</a>
                         </li>
                         <li>
@@ -128,26 +130,28 @@ export function MobileMenu(props) {
                 <ul className="mobileNavBarList" id="mobileNavBarList" onClick={props.onClick}>
                     { props.userDetails.id === 1  ?
                         <li>
-                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to="/admin">Admin</Link>
                         </li>
                         : ''
                     }
                     <li>
                         <Link to="/home">Responses</Link>
-                    </li> 
-                    <li>
-                        <Link to="/calendar" >Calendar</Link>
-                    </li>
-                    <li>
-                        <Link to="/parking">Parking</Link>
                     </li>
                     <li>
                         <Link to="/rsvp">RSVP</Link>
                     </li>
                     <li>
+                        <Link to="/location">Location</Link>
+                    </li>
+                    <li>
+                        <Link to="/calendar" >Calendar</Link>
+                    </li>
+                    <li>
                         <Link to="/photos">Photos</Link>
                     </li>
-                    <li onClick={logOut}>
+                    <li 
+                        onClick={logOut}
+                        id="mobile_logout">
                         <a href="/">Log out</a> 
                     </li>
                 </ul>
