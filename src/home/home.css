@@ -139,12 +139,69 @@
     top: 52px;
     left: 62px;
   }
-  @keyframes lds-default {
-    0%, 20%, 80%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.5);
-    }
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
   }
-  
+  50% {
+    transform: scale(1.5);
+  }
+}
+.blake-left {
+  float: left;
+  margin-left: -15px;
+  margin-top: 50px;
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+  /*clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);*/
+}
+.mae-right {
+  float: right;
+  margin-right: -15px;
+  margin-top: 50px;
+  clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+  /*clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);*/
+}
+@media only screen and (max-width: 1225px) {
+  .blake-left {
+    height: 450px;
+  }
+  .mae-right {
+    height: 450px;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  .blake-left {
+    height: 400px;
+  }
+  .mae-right {
+    height: 400px;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  .blake-left {
+    height: 350px;
+    margin-top: 110px;
+  }
+  .mae-right {
+    height: 350px;
+    margin-top: 110px;
+  }
+}
+@media only screen and (max-width: 1030px) {
+  .blake-left {
+    height: 300px;
+    margin-top: 150px;
+  }
+  .mae-right {
+    height: 300px;
+    margin-top: 150px;
+  }
+}
+@media only screen and (max-width: 975px) {
+  .blake-left {
+    display: none;
+  }
+  .mae-right {
+    display: none;
+  }
+}
