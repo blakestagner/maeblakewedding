@@ -205,3 +205,6 @@
     display: none;
   }
 }
+.landing-container > div {
+  margin-bottom: 100px;
+}
