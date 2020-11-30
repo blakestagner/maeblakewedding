@@ -15,14 +15,16 @@ export function CalendarContainer(props){
 
     useEffect((events) => {
         let mounted = true;
+        const sorted = (response) => {
+            return response.sort((a, b) => 
+                numberDate(a.date, a.time) - numberDate(b.date, b.time)
+            )
+        }
         if( isAuthenticated() && mounted)
             calendarInfo()   
                 .then(res => {
                     if(mounted) {
-                        let sorted = res.sort((a, b) => 
-                            numberDate(a.date, a.time) - numberDate(b.date, b.time)
-                            );
-                        setEvents({...events, eventList: sorted})
+                        setEvents({...events, eventList: sorted(res)})
                     }
                 })
                 .then(() => doneLoading(false))
@@ -33,10 +35,7 @@ export function CalendarContainer(props){
             calendarPublic()   
                 .then((res) => {
                     if(mounted) {
-                        let sorted = res.sort((a, b) => 
-                            numberDate(a.date, a.time) - numberDate(b.date, b.time)
-                            );
-                        setEvents({...events, eventList: sorted})
+                        setEvents({...events, eventList: sorted(res)})
                     }
                 })
                 .then(() => doneLoading(false))
