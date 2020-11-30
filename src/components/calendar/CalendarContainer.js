@@ -22,7 +22,6 @@ export function CalendarContainer(props){
                         let sorted = res.sort((a, b) => 
                             numberDate(a.date, a.time) - numberDate(b.date, b.time)
                             );
-                        console.log(sorted);
                         setEvents({...events, eventList: sorted})
                     }
                 })
@@ -34,7 +33,10 @@ export function CalendarContainer(props){
             calendarPublic()   
                 .then((res) => {
                     if(mounted) {
-                    setEvents({eventList: res})
+                        let sorted = res.sort((a, b) => 
+                            numberDate(a.date, a.time) - numberDate(b.date, b.time)
+                            );
+                        setEvents({...events, eventList: sorted})
                     }
                 })
                 .then(() => doneLoading(false))
@@ -96,7 +98,6 @@ export function CalendarContainer(props){
         let month = d.split('-')[1];
         let year = d.split('-')[0];
         let newTime = (year * 10000000) + (month*100000) + (day*1000) + (time);
-        console.log(newTime)
         return newTime;
     }
 
