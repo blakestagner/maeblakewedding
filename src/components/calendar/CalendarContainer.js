@@ -19,7 +19,11 @@ export function CalendarContainer(props){
             calendarInfo()   
                 .then(res => {
                     if(mounted) {
-                        setEvents({...events, eventList: res})
+                        let sorted = res.sort((a, b) => 
+                            numberDate(a.date, a.time) - numberDate(b.date, b.time)
+                            );
+                        console.log(sorted);
+                        setEvents({...events, eventList: sorted})
                     }
                 })
                 .then(() => doneLoading(false))
@@ -85,6 +89,17 @@ export function CalendarContainer(props){
                     return 'Null';
             }
         }
+
+    const numberDate = (d, t) => {
+        let time = parseInt(t.split(':')[0]) * 10 ;
+        let day = d.split('-')[2].split('T')[0];
+        let month = d.split('-')[1];
+        let year = d.split('-')[0];
+        let newTime = (year * 10000000) + (month*100000) + (day*1000) + (time);
+        console.log(newTime)
+        return newTime;
+    }
+
     if(isLoading) {
         return <Loading />
     }
@@ -92,7 +107,8 @@ export function CalendarContainer(props){
         <div>
             <h1>{props.categoryName}</h1>
             <div className="cardMain">
-                {events.eventList.filter(eventCat => eventCat.wparty === props.wparty).map((eventCat) => (
+                {events.eventList.filter(eventCat => eventCat.wparty === props.wparty)
+                    .map((eventCat) => (
                 <div className="eventList" key={eventCat.id}>    
                     <div className="calendarMain">
                         <img src={ add } className="add" alt="plus-minus" onClick={(e) => {expandPanel(`panel-${eventCat.id}`, e)}} />
