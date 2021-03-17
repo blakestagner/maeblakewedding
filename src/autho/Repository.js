@@ -172,3 +172,17 @@ export function completedTodo (x, y) {
         .then((res) => res.data)
         .catch((err) => Promise.reject('Request Not Authorized!'))
 }
+export function uploadUserImage(data) {
+    return axios.post(`${BASE_URL}/api/upload-user-img`, data, {
+        onUploadProgress: ProgressEvent => {
+            console.log(ProgressEvent.loaded / ProgressEvent.total*100)
+      }, 
+    })
+    .then(res => res)
+    .catch(err => err.data)
+}
+export function getStagnergram (data) {
+    return axios.get(`${BASE_URL}/api/getStagnergram`)
+        .then((res) => res.data)
+        .catch(err => Promise.reject('Request Not Authenticated!'))
+    }

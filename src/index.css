@@ -4,11 +4,9 @@
 }
 body {
   margin: -50px 0 -8px;
-  font-family: "Avenir Next W01", "Avenir Next", "Avenir", 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
-  font-display: swap;
 }
 a:-webkit-any-link {
   color: inherit;

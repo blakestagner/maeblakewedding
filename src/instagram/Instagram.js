@@ -1,28 +1,37 @@
-import React, {useState} from 'react';
+import  React, { useState, useEffect, useRef } from 'react';
 import './instagram.css';
 import maering from './photos/Maering.jpg';
-import maering2 from './photos/Maering2.jpg';
-import Loading from '../components/Loading'
+import Loading from '../components/Loading';
+import FileUpload from './imgUpload/FileUpload';
+import { getStagnergram } from '../autho/Repository';
 
 function Instagram(props) {
+    const [isLoading, doneLoading] = useState(true);
+    const [newUpload, setUpload] = useState(0);
+    const [posts, setPosts] = useState(null);
+    const toggleImageUploadRef = useRef();
 
-    document.onscroll = () => {
-        const instaToolbar = document.querySelector('#insta-toolbar');
-        const firstPicture = document.getElementsByClassName('pv-top')[0];
-        const toolbarHeight = document.querySelector('#mainNav').offsetHeight;
-        const heroHeight = document.getElementsByClassName('heroContainer')[0].offsetHeight;
-        if(instaToolbar !== null) {
-            if(window.scrollY <= heroHeight - toolbarHeight) {
-                instaToolbar.className = 'insta-toolbar';
-                firstPicture.style.marginTop = '0px';
-            }
-            else {
-                instaToolbar.className = 'insta-toolbar sticky';
-                instaToolbar.style.top = `${toolbarHeight}px`;
-                firstPicture.style.marginTop = '44px';
-                }
-            } else;
-        }
+
+    const uploadNewImg = () => {
+        setUpload(1)
+        toggleImageUploadRef.current.toggleImageUpload()
+    }
+
+    useEffect(() => {
+        stagnergram()
+    }, [])
+
+    const stagnergram = () => {
+        setPosts(null)
+        getStagnergram()
+            .then(res => {
+                setPosts(res.sort((a, b) => 
+                    a.id < b.id ? 1 : -1
+                ))
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
         <div className="insta">
             <div
@@ -34,6 +43,7 @@ function Instagram(props) {
                     className="insta-icon" 
                     fill="#fff" 
                     viewBox="0 0 48 48" 
+                    onClick={() => uploadNewImg()}
                     >
                     <path 
                         clipRule="evenodd" 
@@ -52,22 +62,61 @@ function Instagram(props) {
                     </path>
                 </svg>
             </div>
-            <InstaPictureContainer />
+            {posts === null ? <Loading /> :
+                <InstaPictureContainer 
+                    posts={posts}/>
+            }
+            <FileUpload
+                update={() => stagnergram()}
+                ref={toggleImageUploadRef}
+                show={newUpload}
+                type="human"/>
         </div>
     )
 }
-function InstaPictureContainer() {
+function InstaPictureContainer(props) {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(()=> {
+        if(props.posts !== null) {
+            setLoading(false)
+        } else {
+            setLoading(true)
+        }
+    }, [props.posts])
+
+
+    const numberFormat = (num) => {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    const titleLibrary = () => {
+        const titleLibrary = [
+            'Getting Married', 
+            'Get out muh Face', 
+            'If you liked it then you shoulda put a ring on it']
+
+        return titleLibrary[Math.floor(Math.random() * 3)]
+    }
+
+
+    if(loading === true) {
+        return (
+            <div className="picture-view-container">
+                <Loading />
+            </div>
+        )
+    }
     return (
         <div className="picture-view-container">
-            <PictureView 
-                img={maering}
-                title="Getting Married" 
-                likes="trillion"/>
-            <PictureView
-                img={maering2}
-                title="Yessss" 
-                likes="Too many to Count, ERROR"/>
-                
+            { props.posts.map((obj, i) => (
+                <PictureView 
+                    key={i}
+                    Loading="lazy"
+                    img={obj.url}
+                    title={titleLibrary()} 
+                    likes={numberFormat(Math.floor(Math.random() * Math.floor(100000)))}/>
+            )) }
         </div>
     )
 }
@@ -98,6 +147,27 @@ function PictureView(props) {
     )
 }
 function InstaTop() {
+    document.onscroll = () => {
+        const instaToolbar = document.querySelector('#insta-toolbar');
+        const firstPicture = document.getElementsByClassName('pv-top')[0];
+        const toolbarHeight = document.querySelector('#mainNav').offsetHeight;
+        const heroHeight = document.getElementsByClassName('heroContainer')[0].offsetHeight;
+        if(instaToolbar !== null) {
+            if(window.scrollY <= heroHeight - toolbarHeight) {
+                instaToolbar.className = 'insta-toolbar';
+                firstPicture.style.marginTop = '0px';
+            }
+            else if( firstPicture === undefined) {
+                instaToolbar.className = 'insta-toolbar sticky';
+                instaToolbar.style.top = `${toolbarHeight}px`;
+                }
+            } else {
+                instaToolbar.className = 'insta-toolbar sticky';
+                instaToolbar.style.top = `${toolbarHeight}px`;
+                firstPicture.style.marginTop = '44px';
+            }
+        }
+
     return (
         <div className="pv-top">
             <img 

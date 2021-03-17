@@ -11,11 +11,12 @@
     height: 24px;
     max-width: 580px;
     width: 95vw;
+    justify-content: space-between;
 }
 .insta-icon {
-    padding-right: 15px;
     height: 24px;
     width: 24px;
+    cursor: pointer;
 }
 .insta-header-text {
     font-family: Billabong;
@@ -24,7 +25,6 @@
 .insta-icon-right {
     width: 24px;
     height: 24px;
-    margin-left: auto;
 }
 .sticky {
     position: fixed;
@@ -64,6 +64,17 @@
 }
 .insta-post-title b {
     padding-right: 5px;
+}
+.pv-bottom > .insta-icon:first-child {
+    padding: 0 5px 0 0;
+}
+.pv-bottom > .insta-icon {
+    padding: 0 5px;
+}
+.pv-bottom > .insta-icon-right {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
 }
 @font-face {
     font-family: 'Billabong';

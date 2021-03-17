@@ -37,6 +37,7 @@ function Home(props) {
                     </div>
                 </div>
             </div>
+            {/* 
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 homeText">
                 <div className="row">
                     <div>
@@ -55,7 +56,7 @@ function Home(props) {
                             <ParkingOther />
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </div>
     )
 }
